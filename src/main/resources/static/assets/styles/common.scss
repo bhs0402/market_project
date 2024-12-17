@@ -116,7 +116,8 @@ ol, ul {
   &.--color-disabled {
     background-color: rgb(221, 221, 221);
     color: rgb(255, 255, 255);
-    cursor: default;
+    cursor: none;
+    pointer-events: none;
   }
 
   &.--color-primary {

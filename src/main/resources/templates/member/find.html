@@ -146,26 +146,35 @@
 </div>
 <main id="main">
     <div class="title">
-        <span class="title-text">아이디 찾기</span>
+        <span class="title-text" th:text="${type} == 'id' ? '아이디 찾기' : '비밀번호 찾기'"></span>
     </div>
-    <div class="login-container">
+    <div class="find-container">
         <div class="btn-container">
             <button type="button" class="contact">휴대폰 인증</button>
             <button type="button" class="email">이메일 인증</button>
         </div>
-        <form id="login-form">
-            <div class="login-wrapper">
-                <div class="label-container">
+        <form id="find-form">
+            <div class="find-wrapper">
+                <div class="label-container name">
                     <label class="label">
                         <span>이름</span>
-                        <input type="text" class="input-id" name="memberId" placeholder="이름을 입력해주세요">
+                        <input type="text" class="input-name" name="name" placeholder="이름을 입력해주세요">
                     </label>
+                    <span class="-warning"></span>
+                </div>
+                <div class="label-container id">
+                    <label class="label id">
+                        <span>아이디</span>
+                        <input type="text" class="input-id" name="memberId" placeholder="아이디를 입력해주세요">
+                    </label>
+                    <span class="-warning"></span>
                 </div>
                 <div class="label-container">
                     <label class="label">
                         <span>이메일</span>
-                        <input type="password" class="input-password" name="password" placeholder="이메일을 입력해주세요" autocomplete="off">
+                        <input type="text" class="input-email" name="email" placeholder="이메일을 입력해주세요" autocomplete="off">
                     </label>
+                    <span class="-warning"></span>
                 </div>
             </div>
             <div class="button-container">
@@ -176,6 +185,23 @@
         </form>
     </div>
 </main>
+<div class="result-container">
+    <div class="result-page">
+        <div class="content-box">
+            <p class="first" th:if="${type} == 'id'">
+                <span class="email">ghdtjq0402@naver.com</span>
+                으로 <br> 아이디 정보가 담긴 메일이 발송되었어요.
+            </p>
+            <p class="first" th:if="${type} == 'pw'">
+                <span class="email">ghdtjq0402@naver.com</span>
+                으로 <br> 비밀번호 재설정 메일이 발송되었어요.
+            </p>
+            <p class="second">
+                5분 후에도 메일이 오지 않는다면 <br> 스팸함을 확인해 주세요.
+            </p>
+        </div>
+    </div>
+</div>
 <footer id="footer">
     <div class="notice">
         <div class="container">

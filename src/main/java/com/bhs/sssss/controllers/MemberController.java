@@ -107,10 +107,33 @@ public class MemberController {
     }
 
     @RequestMapping(value = "find", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getFind() {
+    public ModelAndView getFind(@RequestParam(value = "type")String type) {
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("type", type);
         modelAndView.setViewName("member/find");
         return modelAndView;
+    }
+
+    @RequestMapping(value = "/recover-password", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getRecoverPassword(@RequestParam(value = "userEmail", required = false) String userEmail,
+                                           @RequestParam(value = "key", required = false) String key) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("userEmail", userEmail);
+        modelAndView.addObject("key", key);
+        modelAndView.setViewName("member/recoverPassword");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/recover-password", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postRecoverPassword(HttpServletRequest request,
+                                      @RequestParam(value = "name", required = false) String name,
+                                      @RequestParam(value = "memberId", required = false) String id,
+                                      @RequestParam(value = "email", required = false) String email) throws MessagingException {
+        Result result = this.memberService.provokeRecoverPassword(request, name, id, email);
+        JSONObject response = new JSONObject();
+        response.put(Result.NAME, result.nameToLower());
+        return response.toString();
     }
 
 }

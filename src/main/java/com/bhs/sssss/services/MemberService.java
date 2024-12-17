@@ -197,6 +197,60 @@ public class MemberService {
         return CommonResult.SUCCESS;
     }
 
+    @Transactional
+    public Result provokeRecoverPassword(HttpServletRequest request, String name, String id, String email) throws MessagingException {
+        if(name == null && id == null) {
+            return CommonResult.FAILURE;
+        }
+        if(name == null){
+            if(id.length() < 6 || id.length() > 16 ||
+                    email == null || email.length() < 8 || email.length() > 50) {
+                return CommonResult.FAILURE;
+            }
+        }
+        if(id == null){
+            if(name.isEmpty() ||
+                    email == null || email.length() < 8 || email.length() > 50) {
+                return CommonResult.FAILURE;
+            }
+        }
+
+        MemberEntity user = this.memberMapper.selectUserByEmail(email);
+        if(user == null || user.getDeletedAt() != null) {
+            return CommonResult.FAILURE;
+        }
+        EmailTokenEntity emailToken = new EmailTokenEntity();
+        emailToken.setUserEmail(user.getEmail());
+        emailToken.setKey(CryptoUtils.hashSha512(String.format("%s%s%f%f",
+                user.getEmail(),
+                Math.random(),
+                Math.random(),
+                Math.random())));
+        emailToken.setCreatedAt(LocalDateTime.now());
+        emailToken.setExpiresAt(LocalDateTime.now().plusHours(1));
+        emailToken.setUsed(false);
+        if(this.emailTokenMapper.insertEmailToken(emailToken) == 0) {
+            throw new TransactionalException();
+        }
+        String validationLink = String.format("%s://%s:%d/member/recover-password?userEmail=%s&key=%s",
+                request.getScheme(),
+                request.getServerName(),
+                request.getServerPort(),
+                emailToken.getUserEmail(),
+                emailToken.getKey());
+        Context context = new Context();
+        context.setVariable("validationLink", validationLink);
+        String mailText = this.templateEngine.process("email/recoverPassword", context);
+        MimeMessage mimeMessage = this.mailSender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
+        mimeMessageHelper.setFrom("ghdtjq0118@gmail.com");
+        mimeMessageHelper.setTo(emailToken.getUserEmail());
+        mimeMessageHelper.setSubject("[마켓컬리] 비밀번호 재설정 인증 링크");
+        mimeMessageHelper.setText(mailText, true);
+        this.mailSender.send(mimeMessage);
+        return CommonResult.SUCCESS;
+    }
+
 }
 
 

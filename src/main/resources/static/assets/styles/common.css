@@ -111,7 +111,8 @@ ol, ul {
 .--obj-button.--color-disabled {
   background-color: rgb(221, 221, 221);
   color: rgb(255, 255, 255);
-  cursor: default;
+  cursor: none;
+  pointer-events: none;
 }
 .--obj-button.--color-primary {
   background-color: #5f0080;
