@@ -113,6 +113,12 @@ ol, ul {
     padding: 0.425rem;
   }
 
+  &.--color-disabled {
+    background-color: rgb(221, 221, 221);
+    color: rgb(255, 255, 255);
+    cursor: default;
+  }
+
   &.--color-primary {
     background-color: $color_primary;
     color: #ffffff;

@@ -15,4 +15,5 @@ public class EmailTokenEntity {
     private LocalDateTime createdAt;
     private LocalDateTime expiresAt;
     private boolean isUsed;
+    private boolean isVerified;
 }

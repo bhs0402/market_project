@@ -1,9 +1,11 @@
 package com.bhs.sssss.controllers;
 
+import com.bhs.sssss.entities.EmailTokenEntity;
 import com.bhs.sssss.entities.MemberEntity;
 import com.bhs.sssss.results.CommonResult;
 import com.bhs.sssss.results.Result;
 import com.bhs.sssss.services.MemberService;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.json.JSONObject;
@@ -65,6 +67,13 @@ public class MemberController {
         return response.toString();
     }
 
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public ModelAndView getLogout(HttpSession session) {
+        session.setAttribute("member", null);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect:/main");
+        return modelAndView;
+    }
 
     @RequestMapping(value = "/duplication-check", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
@@ -77,11 +86,30 @@ public class MemberController {
         return response.toString();
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public ModelAndView getLogout(HttpSession session) {
-        session.setAttribute("member", null);
+
+    @RequestMapping(value = "/validate-email", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String postValidateEmailToken(HttpServletRequest request,
+                                        @RequestParam(value = "email") String email) throws MessagingException {
+        Result result = this.memberService.validateEmailToken(request, email);
+        JSONObject response = new JSONObject();
+        response.put(Result.NAME, result.nameToLower());
+        return response.toString();
+    }
+
+    @RequestMapping(value = "/validate-email-token", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getValidateEmailToken(EmailTokenEntity emailToken) {
+        Result result = this.memberService.getValidateEmailToken(emailToken);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("redirect:/main");
+        modelAndView.addObject(Result.NAME, result.nameToLower());
+        modelAndView.setViewName("member/validateEmailToken");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "find", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getFind() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("member/find");
         return modelAndView;
     }
 

@@ -13,4 +13,8 @@ public interface MemberMapper {
     MemberEntity selectUserByEmail(@Param("email") String email);
 
     int insertMember(MemberEntity member);
+
+    int updateMember(MemberEntity member);
+
+
 }

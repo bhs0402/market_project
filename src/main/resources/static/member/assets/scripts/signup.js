@@ -68,6 +68,52 @@ $emailChoiceButton.forEach((x) => x.onclick = () => {
 
 //endregion
 
+//region 이메일 인증
+
+const $validateEmailButton = document.getElementById('email-button');
+$validateEmailButton.onclick = () => {
+
+    const url = new URL(location.href);
+    url.pathname = `member/validate-email`;
+
+    const formData = new FormData();
+    formData.append('email', $signupForm['email'].value);
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState !== XMLHttpRequest.DONE){
+            return;
+        }
+        if (xhr.status < 200 || xhr.status >= 300) {
+            Dialog.show({
+                content: `요청을 전송하는 도중 오류가 발생하였습니다.<br>잠시 후 다시 시도해 주세요.`,
+                buttons: [{
+                    text: '확인',
+                    onclick: ($dialog) => Dialog.hide($dialog)
+                }]
+            });
+            return;
+        }
+        const response = JSON.parse(xhr.responseText);
+        if (response['result'] === 'success') {
+            $isValid[4].innerText = "메일을 전송하였습니다.";
+            $isValid[4].style.display = 'block';
+            $warn[4].style.display = 'none';
+            document.getElementById('email-button').style.color = 'rgb(204, 204, 204)';
+            document.getElementById('email-button').style.borderColor = 'rgb(204, 204, 204)';
+            document.getElementById('email-button').style.pointerEvents = 'none';
+        } else {
+            $warn[4].innerText = '메일을 전송하지 못했습니다. 다시 시도해 주세요.';
+            $isValid[4].style.display = 'none';
+            $warn[4].style.display = 'block';
+        }
+
+    };
+    xhr.open('POST', url.toString());
+    xhr.send(formData);
+};
+
+//endregion
+
 //region 주소 검색 기능 -> 주소 검색 버튼 눌렀을 때 팝업창
 $findAddressButton.onclick = () => {
     findAddress();
@@ -193,8 +239,6 @@ $signupForm['name'].addEventListener('keyup', () => {
     }
 });
 
-//TODO 이메일 인증
-// https://velog.io/@handmk/Springboot-%EB%A9%94%EC%9D%BC%EC%9D%B8%EC%A6%9D-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%EA%B5%AC%ED%98%84
 //이메일
 $signupForm['emailId'].addEventListener('keyup', () => {
     const emailId = $signupForm['emailId'].value;
@@ -312,7 +356,13 @@ const emailDuplicationCheck = () => {
                 return;
             }
             if (xhr.status < 200 || xhr.status >= 300) {
-                '오류';
+                Dialog.show({
+                    content: `요청을 전송하는 도중 오류가 발생하였습니다.<br>잠시 후 다시 시도해 주세요.`,
+                    buttons: [{
+                        text: '확인',
+                        onclick: ($dialog) => Dialog.hide($dialog)
+                    }]
+                });
                 return;
             }
             const response = JSON.parse(xhr.responseText);
@@ -328,7 +378,12 @@ const emailDuplicationCheck = () => {
                 $isValid[4].style.display = 'none';
                 $warn[4].style.display = 'block';
             } else {
-                alert('오류');
+                Dialog.show({
+                    content: '알 수 없는 오류가 발생했습니다. 잠시 후 다시 시도해 주세요',
+                    buttons: [{
+                        text: '확인', onclick: ($dialog) => Dialog.hide($dialog)
+                    }]
+                });
             }
         };
         xhr.open('POST', './duplication-check');
@@ -458,6 +513,10 @@ $signupForm.onsubmit = (e) => {
                 $signupForm['memberId'].focus();
             }],
             failure_duplicate_id: ['아이디 중복 체크를 해주세요.', ($dialog) => {
+                Dialog.hide($dialog);
+                $signupForm['memberId'].focus();
+            }],
+            failure_duplicate_contact: ['연락처 중복 체크를 해주세요.', ($dialog) => {
                 Dialog.hide($dialog);
                 $signupForm['memberId'].focus();
             }],

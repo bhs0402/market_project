@@ -1,7 +1,5 @@
-//TODO 배너 슬라이드 형식으로 바꾸기
 
-//https://www.kurly.com/shop/event/kurlyEvent.php?htmid=event/2024/1118/holiday_market&eventTab=tab1
-//슬라이드 배너
+//배너
 let currentSlide = 0;
 const slides = document.querySelectorAll('#main > .banner-container > .slide-wrapper > .slide');
 const slideCount = slides.length;

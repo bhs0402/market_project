@@ -108,6 +108,11 @@ ol, ul {
   font-size: 0.75rem;
   padding: 0.425rem;
 }
+.--obj-button.--color-disabled {
+  background-color: rgb(221, 221, 221);
+  color: rgb(255, 255, 255);
+  cursor: default;
+}
 .--obj-button.--color-primary {
   background-color: #5f0080;
   color: #ffffff;
