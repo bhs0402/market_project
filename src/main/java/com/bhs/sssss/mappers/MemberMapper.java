@@ -12,6 +12,8 @@ public interface MemberMapper {
 
     MemberEntity selectUserByEmail(@Param("email") String email);
 
+    MemberEntity selectUserByNameAndEmail(@Param("userName") String userName, @Param("email") String email);
+
     int insertMember(MemberEntity member);
 
     int updateMember(MemberEntity member);

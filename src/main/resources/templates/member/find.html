@@ -187,18 +187,23 @@
 </main>
 <div class="result-container">
     <div class="result-page">
-        <div class="content-box">
-            <p class="first" th:if="${type} == 'id'">
-                <span class="email">ghdtjq0402@naver.com</span>
-                으로 <br> 아이디 정보가 담긴 메일이 발송되었어요.
-            </p>
+        <div class="content-box" rel="pw">
             <p class="first" th:if="${type} == 'pw'">
-                <span class="email">ghdtjq0402@naver.com</span>
+                <span class="email"></span>
                 으로 <br> 비밀번호 재설정 메일이 발송되었어요.
             </p>
             <p class="second">
                 5분 후에도 메일이 오지 않는다면 <br> 스팸함을 확인해 주세요.
             </p>
+        </div>
+        <div class="content-box" rel="id">
+            <p class="first" th:if="${type} == 'id'">
+                <span class="name"></span>
+                님의 <br> 아이디는 다음과 같습니다.
+            </p>
+            <b class="second id">
+
+            </b>
         </div>
     </div>
 </div>

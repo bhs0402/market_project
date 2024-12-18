@@ -8,6 +8,7 @@ import com.bhs.sssss.mappers.MemberMapper;
 import com.bhs.sssss.results.CommonResult;
 import com.bhs.sssss.results.Result;
 import com.bhs.sssss.results.member.LoginResult;
+import com.bhs.sssss.results.member.ResolveRecoverPasswordResult;
 import com.bhs.sssss.results.member.SignupResult;
 import com.bhs.sssss.results.member.ValidateEmailTokenResult;
 import com.bhs.sssss.utils.CryptoUtils;
@@ -41,6 +42,17 @@ public class MemberService {
         this.templateEngine = templateEngine;
     }
 
+    public String getRecoverId(String userName, String email){
+        if(userName == null || email == null){
+            return "failure";
+        }
+        MemberEntity member = this.memberMapper.selectUserByNameAndEmail(userName, email);
+        return member.getId();
+    }
+
+    public MemberEntity selectMemberByEmail(String userEmail) {
+        return this.memberMapper.selectUserByEmail(userEmail);
+    }
 
     public Result duplicationCheck(String contact, String memberId, String email) {
         if (this.memberMapper.selectUserByContact(contact) != null) {
@@ -62,7 +74,7 @@ public class MemberService {
     public Result login(MemberEntity member) {
         if(member == null ||
            member.getId() == null || member.getId().length() < 6 || member.getId().length() > 16 ||
-           member.getPassword() == null || member.getPassword().length() < 6 || member.getPassword().length() > 16 ) {
+           member.getPassword() == null || member.getPassword().length() < 10 || member.getPassword().length() > 16 ) {
             return CommonResult.FAILURE;
         }
         MemberEntity dbMember = memberMapper.selectUserById(member.getId());
@@ -101,7 +113,7 @@ public class MemberService {
         if (member == null ||
             member.getId() == null || member.getId().length() < 6 || member.getId().length() > 16 ||
             member.getEmail() == null || member.getEmail().length() < 8  || member.getEmail().length() > 50 ||
-            member.getPassword() == null || member.getPassword().length() < 6 || member.getPassword().length() > 16 ||
+            member.getPassword() == null || member.getPassword().length() < 10 || member.getPassword().length() > 16 ||
             member.getContact() == null || member.getContact().length() < 10 || member.getContact().length() > 12) {
             return CommonResult.FAILURE;
         }
@@ -198,21 +210,11 @@ public class MemberService {
     }
 
     @Transactional
-    public Result provokeRecoverPassword(HttpServletRequest request, String name, String id, String email) throws MessagingException {
-        if(name == null && id == null) {
+    public Result provokeRecoverPassword(HttpServletRequest request, String id, String email) throws MessagingException {
+
+        if(id == null || id.length() < 6 || id.length() > 16 ||
+                email == null || email.length() < 8 || email.length() > 50) {
             return CommonResult.FAILURE;
-        }
-        if(name == null){
-            if(id.length() < 6 || id.length() > 16 ||
-                    email == null || email.length() < 8 || email.length() > 50) {
-                return CommonResult.FAILURE;
-            }
-        }
-        if(id == null){
-            if(name.isEmpty() ||
-                    email == null || email.length() < 8 || email.length() > 50) {
-                return CommonResult.FAILURE;
-            }
         }
 
         MemberEntity user = this.memberMapper.selectUserByEmail(email);
@@ -240,14 +242,44 @@ public class MemberService {
                 emailToken.getKey());
         Context context = new Context();
         context.setVariable("validationLink", validationLink);
+        context.setVariable("name", user.getUserName());
         String mailText = this.templateEngine.process("email/recoverPassword", context);
         MimeMessage mimeMessage = this.mailSender.createMimeMessage();
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
         mimeMessageHelper.setFrom("ghdtjq0118@gmail.com");
         mimeMessageHelper.setTo(emailToken.getUserEmail());
-        mimeMessageHelper.setSubject("[마켓컬리] 비밀번호 재설정 인증 링크");
+        mimeMessageHelper.setSubject("[마켓컬리] 비밀번호 재설정 링크");
         mimeMessageHelper.setText(mailText, true);
         this.mailSender.send(mimeMessage);
+        return CommonResult.SUCCESS;
+    }
+
+    @Transactional
+    public Result resolveRecoverPassword(EmailTokenEntity emailToken, String password) {
+        if(emailToken == null ||
+                emailToken.getUserEmail() == null || emailToken.getUserEmail().length() < 8 || emailToken.getUserEmail().length() > 50 ||
+                emailToken.getKey() == null || emailToken.getKey().length() != 128 ||
+                password == null || password.length() < 10 || password.length() > 16) {
+            return CommonResult.FAILURE;
+        }
+        EmailTokenEntity dbEmailToken = this.emailTokenMapper.selectEmailTokenByEmailAndKey(emailToken.getUserEmail(), emailToken.getKey());
+        if(dbEmailToken == null || dbEmailToken.isUsed()) {
+            return CommonResult.FAILURE;
+        }
+        if(dbEmailToken.getExpiresAt().isBefore(LocalDateTime.now())) {
+            return ResolveRecoverPasswordResult.FAILURE_EXPIRED;
+        }
+        dbEmailToken.setUsed(true);
+        dbEmailToken.setVerified(true);
+        if(this.emailTokenMapper.updateEmailToken(dbEmailToken) == 0) {
+            throw new TransactionalException();
+        }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        MemberEntity member = this.memberMapper.selectUserByEmail(emailToken.getUserEmail());
+        member.setPassword(encoder.encode(password));
+        if(this.memberMapper.updateMember(member) == 0) {
+            throw new TransactionalException();
+        }
         return CommonResult.SUCCESS;
     }
 

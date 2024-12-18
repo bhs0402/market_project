@@ -114,6 +114,21 @@ public class MemberController {
         return modelAndView;
     }
 
+    @RequestMapping(value = "/recover-id", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String getRecoverId(@RequestParam(value = "userName", required = false) String userName,
+                               @RequestParam(value = "email", required = false) String email) {
+        String id = this.memberService.getRecoverId(userName, email);
+        JSONObject response = new JSONObject();
+        if(id.equals("failure")){
+            response.put("result", "failure");
+        } else {
+            response.put("result", "success");
+            response.put("id", id);
+        }
+        return response.toString();
+    }
+
     @RequestMapping(value = "/recover-password", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getRecoverPassword(@RequestParam(value = "userEmail", required = false) String userEmail,
                                            @RequestParam(value = "key", required = false) String key) {
@@ -127,12 +142,22 @@ public class MemberController {
     @RequestMapping(value = "/recover-password", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String postRecoverPassword(HttpServletRequest request,
-                                      @RequestParam(value = "name", required = false) String name,
                                       @RequestParam(value = "memberId", required = false) String id,
                                       @RequestParam(value = "email", required = false) String email) throws MessagingException {
-        Result result = this.memberService.provokeRecoverPassword(request, name, id, email);
+        Result result = this.memberService.provokeRecoverPassword(request, id, email);
         JSONObject response = new JSONObject();
         response.put(Result.NAME, result.nameToLower());
+        return response.toString();
+    }
+
+    @RequestMapping(value = "/recover-password", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchRecoverPassword(EmailTokenEntity emailToken,
+                                       @RequestParam(value = "password", required = false) String password){
+        Result result = this.memberService.resolveRecoverPassword(emailToken, password);
+        JSONObject response = new JSONObject();
+        response.put(Result.NAME, result.nameToLower());
+        response.put("name", this.memberService.selectMemberByEmail(emailToken.getUserEmail()).getUserName());
         return response.toString();
     }
 
