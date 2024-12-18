@@ -8,9 +8,9 @@
     <title>컬리 - 마켓컬리</title>
     <link rel="shortcut icon" th:href="@{'/assets/images/favicon.ico'}">
     <link rel="stylesheet" type="text/css" th:href="@{'/assets/styles/common.css'}">
-    <link rel="stylesheet" type="text/css" th:href="@{'/assets/styles/index.unsigned.css'}">
-    <script type="text/javascript" th:src="@{'/assets/scripts/common.js'}"></script>
-    <script defer type="text/javascript" th:src="@{'/assets/scripts/index.unsigned.js'}"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{'/assets/styles/index.css'}">
+    <script defer type="text/javascript" th:src="@{'/assets/scripts/common.js'}"></script>
+    <script defer type="text/javascript" th:src="@{'/assets/scripts/index.js'}"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
@@ -30,7 +30,7 @@
                 </a>
                 <div class="menu member">
                     <a href="#" class="item">주문내역</a>
-                    <a class="item">개인정보 수정</a>
+                    <a th:href="@{/mypage/info}" class="item">개인정보 수정</a>
                     <a th:href="@{/member/logout}" class="item" id="logout">로그아웃</a>
                 </div>
             </div>

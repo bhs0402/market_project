@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class HomeController {
+@RequestMapping(value = "/mypage")
+public class MypageController {
 
-    @RequestMapping(value = "/main", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
-    public ModelAndView getIndex(@SessionAttribute(value = "member", required = false)MemberEntity member) {
+    @RequestMapping(value = "/info", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getInfo(@SessionAttribute(value = "member")MemberEntity member) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("member", member);
-        modelAndView.setViewName("main/index");
+        modelAndView.setViewName("mypage/info");
         return modelAndView;
     }
-
 }

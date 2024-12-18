@@ -1,0 +1,68 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+#main {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  -webkit-box-pack: center;
+  justify-content: center;
+  padding: 3.125rem 0 5rem;
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+  min-width: 65.625rem;
+  background-color: rgb(242, 245, 248);
+
+  > .left {
+    overflow: hidden;
+    width: 23.438rem;
+    border-radius: 1rem;
+    padding-bottom: 0;
+    background-color: rgb(242, 245, 248);
+
+    > div {
+      background-color: rgb(255, 255, 255);
+    }
+
+    > .top-info-section {
+      margin-bottom: 0.5rem;
+      padding: 1.5rem 1.25rem 1.25rem;
+
+      > .text-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        min-width: calc(100% - 100px);
+
+        > .hello {
+          min-width: 4.75rem;
+          width: 4.75rem;
+          height: 1.75rem;
+          margin-top: 0.1875rem;
+
+          > svg {
+            width: 100%;
+            height: 100%;
+            transform: translate3d(0, 0, 0);
+            content-visibility: visible;
+            overflow: hidden;
+          }
+        }
+
+        > .name {
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+  }
+
+  > .right {
+    overflow: hidden;
+    width: 40.625rem;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1rem;
+  }
+}
