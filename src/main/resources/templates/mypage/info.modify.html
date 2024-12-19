@@ -11,8 +11,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <script defer type="text/javascript" th:src="@{'/assets/scripts/common.js'}"></script>
-    <script defer type="text/javascript" th:src="@{'/mypage/assets/scripts/info.js'}"></script>
-    <title>컬리 - 마켓컬리</title>
+    <script defer type="text/javascript" th:src="@{'/mypage/assets/scripts/info.modify.js'}"></script>
     <script th:if="${member == null}">
         alert('올바르지 않은 접근입니다.');
         if(history.length > 1){
@@ -21,6 +20,7 @@
             window.close();
         }
     </script>
+    <title>컬리 - 마켓컬리</title>
 </head>
 <body th:if="${member != null}">
 <div class="top">
@@ -238,9 +238,7 @@
         </div>
         <div class="content-container">
             <div class="content-box">
-                <h4 class="subtitle">비밀번호 재확인</h4>
-                <p class="desc">회원님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한번 확인해주세요.</p>
-                <form action="#" id="confirm-form">
+                <form action="#" id="modify-form">
                     <div class="input-container">
                         <div class="input-box">
                             <div class="name-box">
@@ -255,19 +253,64 @@
                         </div>
                         <div class="input-box">
                             <div class="name-box">
-                                <label for="password" class="label">비밀번호</label>
+                                <label for="password" class="label">새 비밀번호</label>
                             </div>
                             <div class="input-box2">
                                 <label for="password" class="label">
-                                    <input autocomplete="off" type="password" id="password" class="password" name="password" placeholder="현재 비밀번호를 입력해주세요">
+                                    <input autocomplete="off" type="password" id="password" class="password" name="password" placeholder="새 비밀번호를 입력해주세요">
                                 </label>
-                                <span class="-warning"></span>
+                            </div>
+                            <div class="empty-box"></div>
+                        </div>
+                        <div class="input-box">
+                            <div class="name-box">
+                                <label for="password-check" class="label">새 비밀번호 확인</label>
+                            </div>
+                            <div class="input-box2">
+                                <label for="password-check" class="label">
+                                    <input autocomplete="off" type="password" id="password-check" class="password-check" name="password-check" placeholder="새 비밀번호를 다시 입력해주세요">
+                                </label>
+                            </div>
+                            <div class="empty-box"></div>
+                        </div>
+                        <div class="input-box">
+                            <div class="name-box">
+                                <label for="name" class="label">이름</label>
+                            </div>
+                            <div class="input-box2">
+                                <label for="name" class="label">
+                                    <input type="text" id="name" class="name" name="name" th:value="${member.getUserName()}">
+                                </label>
+                            </div>
+                            <div class="empty-box"></div>
+                        </div>
+                        <div class="input-box">
+                            <div class="name-box">
+                                <label for="email" class="label">이메일</label>
+                            </div>
+                            <div class="input-box2">
+                                <label for="email" class="label">
+                                    <input readonly type="text" id="email" class="email" name="email" th:value="${member.getEmail()}">
+                                </label>
+                            </div>
+                            <div class="empty-box"></div>
+                        </div>
+                        <div class="input-box">
+                            <div class="name-box">
+                                <label for="contact" class="label">연락처</label>
+                            </div>
+                            <div class="input-box2">
+                                <label for="contact" class="label">
+                                    <input readonly type="text" id="contact" class="contact" name="contact" th:value="${member.getContact()}">
+                                </label>
                             </div>
                             <div class="empty-box"></div>
                         </div>
                     </div>
-                    <div class="button-container">
-                        <button type="submit" class="button --obj-button --color-primary">확인</button>
+
+                    <div class="button-container modify">
+                        <button type="button" class="withdraw-button --obj-button --color-light-primary">탈퇴하기</button>
+                        <button type="submit" class="modify-button --obj-button --color-primary">회원정보수정</button>
                     </div>
                 </form>
             </div>
