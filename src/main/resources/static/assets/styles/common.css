@@ -237,11 +237,11 @@ body > .top > .top1 > .top-right > .bar {
   margin: 0 0.75rem;
   background-color: rgb(217, 217, 217);
 }
-body > .top > .top1 > .banner {
+body > .top > .top1 > .login-container {
   height: 6.25rem;
   padding-top: 2.25rem;
 }
-body > .top > .top1 > .banner > .logo-wrapper {
+body > .top > .top1 > .login-container > .logo-wrapper {
   align-items: center;
   display: flex;
   flex-direction: row;
@@ -249,11 +249,11 @@ body > .top > .top1 > .banner > .logo-wrapper {
   justify-content: flex-start;
   height: 3.9rem;
 }
-body > .top > .top1 > .banner > .logo-wrapper > .-spring {
+body > .top > .top1 > .login-container > .logo-wrapper > .-spring {
   flex-grow: 1;
   flex-shrink: 1;
 }
-body > .top > .top1 > .banner > .logo-wrapper > .logo_text {
+body > .top > .top1 > .login-container > .logo-wrapper > .logo_text {
   font-weight: 500;
   color: rgb(95, 0, 128);
   flex-shrink: 0;
@@ -263,7 +263,7 @@ body > .top > .top1 > .banner > .logo-wrapper > .logo_text {
   letter-spacing: normal;
   cursor: pointer;
 }
-body > .top > .top1 > .banner > .logo-wrapper > .search-box {
+body > .top > .top1 > .login-container > .logo-wrapper > .search-box {
   top: 50%;
   left: 50%;
   margin-top: 1rem;
@@ -280,14 +280,14 @@ body > .top > .top1 > .banner > .logo-wrapper > .search-box {
   background-color: rgb(255, 255, 255);
   box-shadow: rgb(247, 247, 247) 0 0 0;
 }
-body > .top > .top1 > .banner > .logo-wrapper > .search-box > .input {
+body > .top > .top1 > .login-container > .logo-wrapper > .search-box > .input {
   width: 18.75rem;
   background-color: inherit;
   border: none;
   outline: none;
   font-size: 1rem;
 }
-body > .top > .top1 > .banner > .logo-wrapper > .search-box > .submit {
+body > .top > .top1 > .login-container > .logo-wrapper > .search-box > .submit {
   cursor: pointer;
   position: relative;
   width: 1.875rem;
@@ -556,19 +556,15 @@ body > .top > .header > .header-wrapper > .icon-container.fixed {
 }
 .icon-container > .icon1:hover > .submenu > .button-container {
   display: flex;
+  flex-direction: row;
   -webkit-box-pack: justify;
-  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+  gap: 0.375rem;
   flex-wrap: wrap;
   padding-top: 0.6875rem;
 }
 .icon-container > .icon1:hover > .submenu > .button-container > .signup {
-  box-sizing: border-box;
-  white-space: nowrap;
-  display: block;
-  padding: 0 0.625rem;
-  text-align: center;
-  align-items: center;
-  overflow: hidden;
   width: 5rem;
   height: 2.25rem;
   border-radius: 0.1875rem;
@@ -576,6 +572,8 @@ body > .top > .header > .header-wrapper > .icon-container.fixed {
   border: 0.0625rem solid #5f0080;
 }
 .icon-container > .icon1:hover > .submenu > .button-container > .signup > ._text {
+  width: 5rem;
+  height: 2.25rem;
   font-size: 0.75rem;
   font-weight: 500;
 }
@@ -697,12 +695,13 @@ body > .top > .header > .header-wrapper > .icon-container.fixed {
   padding: 2.5rem 1.875rem;
   text-align: center;
   letter-spacing: -0.031rem;
+  line-height: normal;
 }
 .---dialog > ._button-container {
   align-items: center;
   display: flex;
   flex-direction: row;
-  gap: 0;
+  gap: 4rem;
   justify-content: center;
   background-color: #ffffff;
   color: #212121;

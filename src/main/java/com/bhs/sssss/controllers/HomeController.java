@@ -13,6 +13,7 @@ public class HomeController {
 
     @RequestMapping(value = "/main", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getIndex(@SessionAttribute(value = "member", required = false)MemberEntity member) {
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("member", member);
         modelAndView.setViewName("main/index");

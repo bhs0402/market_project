@@ -278,7 +278,8 @@ body{
               padding-top: 2.5rem;
               border-top: 0.0625rem solid rgb(244, 244, 244);
 
-              > button {
+              > button,
+              > a > button{
                 width: 7.5rem;
                 height: 2.75rem;
                 margin: 0 0.1875rem;

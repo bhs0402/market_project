@@ -2,21 +2,27 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" th:href="@{'/assets/images/favicon.ico'}">
     <link rel="stylesheet" type="text/css" th:href="@{'/assets/styles/common.css'}">
-    <link rel="stylesheet" type="text/css" th:href="@{'/member/assets/styles/login.css'}">
+    <link rel="stylesheet" type="text/css" th:href="@{'/mypage/assets/styles/leave.css'}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script defer type="text/javascript" th:src="@{'/assets/scripts/common.js'}"></script>
-    <script defer type="text/javascript" th:src="@{'/member/assets/scripts/login.js'}"></script>
-    <title>회원가입 - 컬리</title>
+    <script defer type="text/javascript" th:src="@{'/mypage/assets/scripts/leave.js'}"></script>
+    <title>컬리 - 마켓컬리</title>
+    <script th:if="${member == null}">
+        alert('올바르지 않은 접근입니다.');
+        if (history.length > 1) {
+            history.back();
+        } else {
+            window.close();
+        }
+    </script>
 </head>
-<body>
+<body th:if="${member != null}">
 <div class="top">
     <div class="top1">
         <div class="top-right">
@@ -145,58 +151,48 @@
         </div>
     </nav>
 </div>
-<main id="main">
-    <div class="title">
-        <span class="title-text">로그인</span>
-    </div>
-    <div class="login-container">
-        <form id="login-form">
-            <div class="login-wrapper">
-                <div class="label-container">
-                    <label class="label">
-                        <input type="text" class="input-id" name="memberId" placeholder="아이디를 입력해주세요">
-                    </label>
-                </div>
-                <div class="label-container">
-                    <label class="label">
-                        <input type="password" class="input-password" name="password" placeholder="비밀번호를 입력해주세요" autocomplete="off">
-                    </label>
-                </div>
-            </div>
-            <div class="find-wrapper">
-                <a th:href="@{/member/find(type='id')}" class="find-id">아이디 찾기</a>
-                <span class="bar"></span>
-                <a th:href="@{/member/find(type='pw')}" class="find-password">비밀번호 찾기</a>
-            </div>
-            <div class="button-container">
-                <button class="login --obj-button --color-primary" type="submit">
-                    <span class="text">로그인</span>
-                </button>
-                <button class="signup --obj-button --color-light-primary" type="button">
-                    <a class="text link" th:href="@{/member/signup}">회원가입</a>
-                </button>
-            </div>
-        </form>
-    </div>
-</main>
-<footer id="footer">
-    <div class="notice">
-        <div class="container">
-            <div class="left">
-                <p class="title">고객행복센터</p>
-                <strong class="contact">1644-0000
-                    <span class="text">월~토요일 오전 7시 - 오후 6시</span>
-                </strong>
 
-            </div>
-            <div class="right">
-                <ul class="menu"></ul>
-                <div class="info-box">d</div>
-                <ul class="icon-menu"></ul>
+<main id="main">
+    <div class="title">회원탈퇴안내</div>
+    <div class="notice-container">
+        <div class="left">
+            <label class="label">회원탈퇴안내</label>
+        </div>
+        <div class="right">
+            <div class="text">고객님께서 회원 탈퇴를 원하신다니 저희 쇼핑몰의 서비스가 많이 부족하고 미흡했나 봅니다. 불편하셨던 점이나 불만사항을 알려주시면 적극 반영해서 고객님의 불편함을 해결해 드리도록 노력하겠습니다.
+                <strong class="highlight">정말로 탈퇴 하시려면 아래에 현재 비밀번호를 입력해 주세요.</strong>
             </div>
         </div>
     </div>
-    <div class="desc">이 사이트는 팀 프로젝트로 클론 코딩한 사이트이며 실제 서비스를 제공하지 않습니다.</div>
-</footer>
+    <form id="leave-form">
+        <div class="password-box">
+            <div class="left">
+                <label for="password" class="text">비밀번호 입력</label>
+            </div>
+            <div class="right">
+                <label for="password" class="password-label">
+                    <input type="password" class="password" name="password" id="password" placeholder="현재 비밀번호를 입력해주세요">
+                </label>
+            </div>
+            <div class="empty-box"></div>
+        </div>
+        <div class="button-container">
+            <a href="/mypage/info">
+                <button class="cancel-button --obj-button --color-light-primary" type="button">취소</button>
+            </a>
+            <button class="leave-button --obj-button --color-primary" type="submit">탈퇴</button>
+        </div>
+    </form>
+</main>
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+

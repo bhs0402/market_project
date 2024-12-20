@@ -17,6 +17,4 @@ public interface MemberMapper {
     int insertMember(MemberEntity member);
 
     int updateMember(MemberEntity member);
-
-
 }

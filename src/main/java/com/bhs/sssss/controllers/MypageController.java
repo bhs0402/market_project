@@ -4,11 +4,15 @@ import com.bhs.sssss.entities.MemberEntity;
 import com.bhs.sssss.results.CommonResult;
 import com.bhs.sssss.results.Result;
 import com.bhs.sssss.services.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -60,8 +64,32 @@ public class MypageController {
 
     @RequestMapping(value = "/info/modify", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String patchInfoModify(MemberEntity member) {
+    public String patchInfoModify(HttpSession session, MemberEntity member) {
+        Result result = this.memberService.updateInfoModify(member);
+        JSONObject response = new JSONObject();
+        response.put(Result.NAME, result.nameToLower());
+        session.setAttribute("member", null);
 
-        return null;
+        return response.toString();
     }
+
+    @RequestMapping(value = "/leave", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getLeave(@SessionAttribute(value = "member", required = false) MemberEntity member) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("member", member);
+        modelAndView.setViewName("mypage/leave");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/leave", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchLeave(@SessionAttribute(value = "member", required = false) MemberEntity member,
+                             @RequestParam(value = "password", required = false) String password) {
+        Result result = this.memberService.leaveMember(member, password);
+        JSONObject response = new JSONObject();
+        response.put(Result.NAME, result.nameToLower());
+        return response.toString();
+    }
+
+
 }
