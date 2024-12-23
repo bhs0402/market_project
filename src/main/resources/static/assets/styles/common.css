@@ -357,6 +357,123 @@ body > .top > .header > .header-wrapper > .category:hover > span:last-of-type {
   color: #5f0080;
   cursor: pointer;
 }
+body > .top > .header > .header-wrapper > .category > .category-container {
+  display: none;
+}
+body > .top > .header > .header-wrapper > .category:hover > .category-container {
+  display: flex;
+}
+body > .top > .header > .header-wrapper > .category > .category-container {
+  max-height: calc(-3.4375rem + 95vh);
+  min-height: 12.5rem;
+  position: absolute;
+  display: none;
+  top: 2.875rem;
+  padding-top: 0.625rem;
+}
+body > .top > .header > .header-wrapper > .category > .category-container > .category-menu {
+  position: relative;
+  z-index: 321;
+  width: 15.4375rem;
+  border: 0.0625rem solid rgb(221, 221, 221);
+  background-color: rgb(255, 255, 255);
+}
+body > .top > .header > .header-wrapper > .category > .category-container > .category-menu > .menu {
+  font: inherit;
+  overflow-y: auto;
+  width: 15.4375rem;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+body > .top > .header > .header-wrapper > .category > .category-container > .category-menu > .menu > .item {
+  padding: 0.4375rem 0 0.563rem 0.875rem;
+}
+body > .top > .header > .header-wrapper > .category > .category-container > .category-menu > .menu > .item:hover {
+  background-color: rgb(247, 247, 247);
+}
+body > .top > .header > .header-wrapper > .category > .category-container > .category-menu > .menu > .item:hover > .img-cover > img {
+  color: #5f0080;
+  font-weight: 500;
+}
+body > .top > .header > .header-wrapper > .category > .category-container > .category-menu > .menu > .item:hover > .img-cover > span {
+  color: #5f0080;
+  font-weight: 500;
+}
+body > .top > .header > .header-wrapper > .category > .category-container > .category-menu > .menu > .item:hover > .submenu {
+  opacity: 1;
+  animation: 0.5s linear 0s 1 normal none running anim2;
+}
+@keyframes anim2 {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 16.63rem;
+  }
+}
+body > .top > .header > .header-wrapper > .category > .category-container > .category-menu > .menu > .item > .img-cover {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+body > .top > .header > .header-wrapper > .category > .category-container > .category-menu > .menu > .item > .img-cover > img {
+  flex: 0 1 0;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+body > .top > .header > .header-wrapper > .category > .category-container > .category-menu > .menu > .item > .img-cover > span {
+  flex: 1 1 0;
+  padding: 0.0625rem 1.25rem 0 0.625rem;
+  color: rgb(51, 51, 51);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.375rem;
+}
+body > .top > .header > .header-wrapper > .category > .category-container > .category-menu > .menu > .item > .submenu {
+  opacity: 0;
+  background-color: rgb(243, 243, 243);
+  width: 16.63rem;
+  height: 100%;
+  position: absolute;
+  overflow: auto;
+  top: -0.02rem;
+  left: 15.5625rem;
+  z-index: 322;
+}
+body > .top > .header > .header-wrapper > .category > .category-container > .category-menu > .menu > .item > .submenu > .subitem {
+  cursor: pointer;
+}
+body > .top > .header > .header-wrapper > .category > .category-container > .category-menu > .menu > .item > .submenu > .subitem > .text-box {
+  padding: 0.6875rem 1.25rem 0.6875rem 1.125rem;
+  display: flex;
+  width: 100%;
+  -webkit-box-align: center;
+  align-items: center;
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: rgb(51, 51, 51);
+  line-height: 1.375rem;
+  box-sizing: border-box;
+}
+body > .top > .header > .header-wrapper > .category > .category-container > .category-menu > .menu > .item > .submenu > .subitem > .text-box:hover {
+  color: #5f0080;
+}
+body > .top > .header > .header-wrapper > .category > .category-container > .category-menu > .menu > .item > .submenu > .subitem > .text-box:hover > .text {
+  font-weight: 500;
+  border-bottom: 0.0625rem solid rgb(95, 0, 128);
+}
+body > .top > .header > .header-wrapper > .category > .category-container > .category-menu > .menu > .item > .submenu > .subitem > .text-box > .text {
+  line-height: 1.125rem;
+}
+@keyframes anim {
+  0% {
+    width: 15.5625rem;
+  }
+  100% {
+    width: 16.75rem;
+  }
+}
 body > .top > .header > .header-wrapper > ul {
   align-items: center;
   display: flex;

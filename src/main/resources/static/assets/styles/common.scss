@@ -49,7 +49,7 @@ input {
   cursor: text;
 }
 
-h1, h2, h3, h4, h5, h6, p{
+h1, h2, h3, h4, h5, h6, p {
   font: inherit;
   margin-block: 0;
   margin-inline: 0;
@@ -214,12 +214,13 @@ body {
             display: none;
           }
 
-          &:hover{
-            > .menu{
+          &:hover {
+            > .menu {
               &.member {
                 right: 5.25rem;
                 width: 6rem;
               }
+
               display: block;
               position: absolute;
               right: 0;
@@ -358,6 +359,152 @@ body {
             color: #5f0080;
             cursor: pointer;
           }
+
+          > .category-container{
+            display: none;
+          }
+
+          &:hover {
+            > .category-container {
+              display: flex;
+            }
+          }
+
+          > .category-container {
+            max-height: calc(-3.4375rem + 95vh);
+            min-height: 12.5rem;
+            position: absolute;
+            display: none;
+            top: 2.875rem;
+            padding-top: 0.625rem;
+
+            > .category-menu {
+              position: relative;
+              z-index: 321;
+              width: 15.4375rem;
+              border: 0.0625rem solid rgb(221, 221, 221);
+              background-color: rgb(255, 255, 255);
+              //animation: 0.2s linear 0s 1 normal none running anim;
+
+              > .menu {
+                font: inherit;
+                overflow-y: auto;
+                width: 15.4375rem;
+                height: 100%;
+                background-color: rgb(255, 255, 255);
+                cursor: pointer;
+
+                > .item {
+                  padding: 0.4375rem 0 0.563rem 0.875rem;
+
+                  &:hover {
+                    background-color: rgb(247, 247, 247);
+
+                    > .img-cover {
+                      > img {
+                        color: #5f0080;
+                        font-weight: 500;
+                      }
+
+                      > span {
+                        color: #5f0080;
+                        font-weight: 500;
+                      }
+                    }
+
+                    > .submenu {
+                      opacity: 1;
+                      animation: 0.5s linear 0s 1 normal none running anim2;
+
+                      @keyframes anim2 {
+                        0% {
+                          width: 0;
+                        }
+                        100% {
+                          width: 16.63rem;
+                        }
+                      }
+                    }
+                  }
+
+                  > .img-cover {
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: flex-start;
+
+                    > img {
+                      flex: 0 1 0;
+                      width: 1.5rem;
+                      height: 1.5rem;
+
+                    }
+
+                    > span {
+                      flex: 1 1 0;
+                      padding: 0.0625rem 1.25rem 0 0.625rem;
+                      color: rgb(51, 51, 51);
+                      font-size: 0.875rem;
+                      font-weight: 400;
+                      line-height: 1.375rem;
+                    }
+                  }
+
+                  > .submenu {
+                    opacity: 0;
+                    background-color: rgb(243, 243, 243);
+                    width: 16.63rem;
+                    height: 100%;
+                    position: absolute;
+                    overflow: auto;
+                    top: -0.02rem;
+                    left: 15.5625rem;
+                    z-index: 322;
+
+
+                    > .subitem {
+                      cursor: pointer;
+
+                      > .text-box {
+                        padding: 0.6875rem 1.25rem 0.6875rem 1.125rem;
+                        display: flex;
+                        width: 100%;
+                        -webkit-box-align: center;
+                        align-items: center;
+                        font-weight: 400;
+                        font-size: 0.875rem;
+                        color: rgb(51, 51, 51);
+                        line-height: 1.375rem;
+                        box-sizing: border-box;
+
+                        &:hover {
+                          color: #5f0080;
+
+                          > .text {
+                            font-weight: 500;
+                            border-bottom: 0.0625rem solid rgb(95, 0, 128);
+                          }
+                        }
+
+                        > .text {
+                          line-height: 1.125rem;
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+
+            @keyframes anim {
+              0% {
+                width: 15.5625rem;
+              }
+              100% {
+                width: 16.75rem;
+              }
+            }
+          }
+
         }
 
         > ul {
@@ -752,6 +899,7 @@ body {
           font-size: 1.25rem;
           line-height: 1.8125rem;
         }
+
         > .contact {
           display: block;
           padding-bottom: 1.25rem;
