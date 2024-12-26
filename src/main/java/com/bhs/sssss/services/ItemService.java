@@ -7,6 +7,8 @@ import com.bhs.sssss.mappers.SubCategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.PrivateKey;
+
 @Service
 public class ItemService {
     private final CategoryMapper categoryMapper;
@@ -22,7 +24,8 @@ public class ItemService {
         return this.categoryMapper.selectCategories();
     }
 
-    public SubCategoryEntity[] getSubCategories() {
-        return this.subCategoryMapper.selectSubCategories();
+    public SubCategoryEntity[] getSubCategoriesById(String categoryId) {
+        String parentId = categoryId;
+        return this.subCategoryMapper.selectSubCategoriesByParentId(parentId);
     }
 }

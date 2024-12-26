@@ -379,12 +379,13 @@ body {
             padding-top: 0.625rem;
 
             > .category-menu {
+              user-select: none;
               position: relative;
               z-index: 321;
               width: 15.4375rem;
               border: 0.0625rem solid rgb(221, 221, 221);
               background-color: rgb(255, 255, 255);
-              //animation: 0.2s linear 0s 1 normal none running anim;
+
 
               > .menu {
                 font: inherit;
@@ -393,12 +394,14 @@ body {
                 height: 100%;
                 background-color: rgb(255, 255, 255);
                 cursor: pointer;
+                box-sizing: border-box;
 
                 > .item {
                   padding: 0.4375rem 0 0.563rem 0.875rem;
 
-                  &:hover {
+                  &.hover {
                     background-color: rgb(247, 247, 247);
+
 
                     > .img-cover {
                       > img {
@@ -413,15 +416,17 @@ body {
                     }
 
                     > .submenu {
+                      display: block;
+                      position: absolute;
                       opacity: 1;
-                      animation: 0.5s linear 0s 1 normal none running anim2;
+                      animation: 0.3s linear 0s 1 normal none running anim;
 
-                      @keyframes anim2 {
+                      @keyframes anim {
                         0% {
-                          width: 0;
+                          opacity: 0;
                         }
                         100% {
-                          width: 16.63rem;
+                          opacity: 1;
                         }
                       }
                     }
@@ -450,19 +455,21 @@ body {
                   }
 
                   > .submenu {
+                    display: block;
                     opacity: 0;
                     background-color: rgb(243, 243, 243);
                     width: 16.63rem;
                     height: 100%;
                     position: absolute;
                     overflow: auto;
-                    top: -0.02rem;
-                    left: 15.5625rem;
+                    top: -0.03223rem;
+                    left: 15.525rem;
                     z-index: 322;
-
+                    box-sizing: border-box;
 
                     > .subitem {
                       cursor: pointer;
+                      display: block;
 
                       > .text-box {
                         padding: 0.6875rem 1.25rem 0.6875rem 1.125rem;
@@ -492,15 +499,6 @@ body {
                     }
                   }
                 }
-              }
-            }
-
-            @keyframes anim {
-              0% {
-                width: 15.5625rem;
-              }
-              100% {
-                width: 16.75rem;
               }
             }
           }

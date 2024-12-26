@@ -23,3 +23,27 @@ document.addEventListener('DOMContentLoaded', () => {
     showSlide(currentSlide);
     setInterval(nextSlide, 3000); // 3초마다 자동 슬라이드
 });
+
+new Swiper('.swiper', {
+    slidesPerView: 4,
+    slidesPerGroup: 4,
+    speed: 500,
+
+
+    navigation: {
+        prevEl: '.prev',
+        nextEl: '.next',
+    },
+});
+
+new Swiper('.swiper2', {
+    slidesPerView: 4,
+    slidesPerGroup: 4,
+    speed: 500,
+
+
+    navigation: {
+        prevEl: '.prev2',
+        nextEl: '.next2',
+    },
+});

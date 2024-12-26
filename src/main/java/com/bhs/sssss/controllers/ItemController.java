@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -35,10 +36,10 @@ public class ItemController {
 
     @RequestMapping(value = "/sub-categories", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String getSubCategories() {
+    public String getSubCategories(@RequestParam(value = "categoryId", required = true) String categoryId ) {
         JSONObject response = new JSONObject();
         if(this.itemService.getCategories() != null) {
-            response.put("subCategories", this.itemService.getSubCategories());
+            response.put("subCategories", this.itemService.getSubCategoriesById(categoryId));
         } else {
             response.put("result", "failure");
         }

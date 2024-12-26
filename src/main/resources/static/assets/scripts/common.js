@@ -116,8 +116,9 @@ class Dialog {
 
 
 const $category = document.querySelector('#nav > .header-wrapper > .category');
+const $categoryMenu = $category.querySelector(':scope > .category-container > .category-menu');
 const $menu = $category.querySelector(':scope > .category-container > .category-menu > .menu');
-
+const $submenu = $menu.querySelector(':scope > .item > .submenu');
 
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = (string, type) => {
@@ -135,7 +136,6 @@ const $menu = $category.querySelector(':scope > .category-container > .category-
                     <ul class="menu">
                             <li class="item">
                                 <div class="img-cover">
-                                
                                     <img src="${category['categoryImg']}" alt="${category['categoryName']}" class="image">
                                     <span class="category-name">${category['categoryName']}</span>
                                     <label>
@@ -155,45 +155,49 @@ const $menu = $category.querySelector(':scope > .category-container > .category-
 
 
 
+setTimeout(() => {
+    const $items = Array.from(document.querySelectorAll('.category-container > .category-menu > .menu > .item'));
+    $items.forEach((x) => x.addEventListener('mouseleave', () => x.classList.remove('hover')));
+    $items.forEach((x) => x.addEventListener('mouseenter', () => {
+        x.classList.add('hover');
 
-const $items = Array.from($menu.querySelectorAll(':scope > .item'));
-console.log($items);
+        const categoryId = x.querySelector(':scope > .img-cover > label > .categoryId').value;
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState !== XMLHttpRequest.DONE){
+                return;
+            }
+            if (xhr.status < 200 || xhr.status >= 300) {
+                alert('오류');
+                return;
+            }
+            const response = JSON.parse(xhr.responseText);
+            $submenu.innerHTML = '';
+            for(const subCategory of response['subCategories']){
+                const $subitem = new DOMParser().parseFromString(`
+                    <ul class="submenu">
+                        <li class="subitem">
+                            <div class="text-box">
+                                 <span class="text">${subCategory['subCategoryName']}</span>
+                                 <label>
+                                    <input class="subCategoryId" type="hidden" name="subCategoryId" value="${subCategory['subCategoryId']}">
+                                 </label>
+                            </div>
+                        </li>
+                    </ul>
+                    `, 'text/html').querySelector('.subitem');
+                $submenu.append($subitem);
+            }
+            x.append($submenu);
 
-const $submenu = $menu.querySelector(':scope > .item > .submenu');
+        };
+        xhr.open('GET', `/item/sub-categories?categoryId=${categoryId}`);
+        xhr.send();
 
-// $item.forEach((x) => x.onmouseup = () => {
-//     const xhr = new XMLHttpRequest();
-//     xhr.onreadystatechange = () => {
-//         if (xhr.readyState !== XMLHttpRequest.DONE){
-//             return;
-//         }
-//         if (xhr.status < 200 || xhr.status >= 300) {
-//             alert('오류');
-//             return;
-//         }
-//         const $categoryId = x.querySelector(':scope > .img-cover > .categoryId');
-//         const response = JSON.parse(xhr.responseText);
-//         for(const subCategory of response['subCategories']){
-//             if($categoryId.value === subCategory['parentId']){
-//                 const $subItem = new DOMParser().parseFromString(`
-//                 <li class="item">
-//                     <ul class="submenu">
-//                         <li class="subitem">
-//                             <div class="text-box">
-//                                 <span class="text">${subCategory['subCategoryName']}</span>
-//                             </div>
-//                         </li>
-//                     </ul>
-//                 </li>
-//             `, "text/html").querySelector('.subitem');
-//                 $submenu.append($subItem);
-//             }
-//             x.append($submenu);
-//         }
-//     };
-//     xhr.open('GET', '/item/sub-categories');
-//     xhr.send();
-// });
+    }));
+}, 100);
+
+
 
 
 

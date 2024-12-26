@@ -1,10 +1,6 @@
 package com.bhs.sssss.controllers;
 
-import com.bhs.sssss.entities.CategoryEntity;
 import com.bhs.sssss.entities.MemberEntity;
-import com.bhs.sssss.services.ItemService;
-import com.bhs.sssss.services.MemberService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
