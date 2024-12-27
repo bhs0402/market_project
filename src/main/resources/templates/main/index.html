@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{'/assets/styles/index.css'}">
     <script defer type="text/javascript" th:src="@{'/assets/scripts/common.js'}"></script>
     <script defer type="text/javascript" th:src="@{'/assets/scripts/index.js'}"></script>
+    <script defer type="text/javascript" th:src="@{'/assets/scripts/itemBox.js'}"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
@@ -48,18 +49,16 @@
         </div>
     </div>
 
-    <div th:replace="~{/fragments/itembox1 :: itembox1Fragment}"></div>
+    <div th:replace="~{/fragments/itembox1 :: itembox1Fragment (items=${items})}"></div>
 
-    <div th:replace="~{/fragments/itembox2 :: itembox2Fragment}"></div>
+    <div th:replace="~{/fragments/itembox2 :: itembox2Fragment (items=${items})}"></div>
 
-    <div th:replace="~{/fragments/itembox3 :: itembox3Fragment}"></div>
+    <div th:replace="~{/fragments/itembox3 :: itembox3Fragment (items=${items})}"></div>
 
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
-    <div class="box"></div>
+    <div th:each="item : ${items}" class="box">
+        <p th:text="${item.getItemTitle()}"></p>
+    </div>
+
 </main>
 
 <div th:replace="~{/fragments/footer :: footerFragment}"></div>
