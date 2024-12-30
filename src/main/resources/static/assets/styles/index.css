@@ -602,23 +602,50 @@
   object-fit: cover;
   z-index: 99;
 }
-#main > .box {
-  width: 25rem;
-  min-width: 25rem;
-  max-width: 25rem;
-  height: 25rem;
-  min-height: 25rem;
-  max-height: 25rem;
-  background-color: #5f0080;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 2rem;
-  color: #ffffff;
-  font-size: 1.5rem;
+#main > .add {
+  width: 65.625rem;
+  margin: 0 auto;
+  padding: 2.5rem 0;
+}
+#main > .add > .link {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  height: 8.75rem;
+}
+#main > .add > .link > span {
+  box-sizing: border-box;
+  display: block;
+  overflow: hidden;
+  width: initial;
+  height: initial;
+  background: none;
+  opacity: 1;
+  border: 0;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  inset: 0;
+}
+#main > .add > .link > span > .img {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  padding: 0;
+  border: none;
+  margin: auto;
+  display: block;
+  width: 0;
+  height: 0;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+  object-fit: cover;
 }
 
 #footer {
-  background-color: rgb(247, 247, 247);
+  margin-top: 2.5rem;
 }
 
 button {

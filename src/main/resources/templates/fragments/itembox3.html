@@ -11,14 +11,14 @@
 <div th:fragment="itembox3Fragment (items)" class="second-container">
     <div class="title-container">
         <a href="#" class="link">
-            <span class="title">🏆 실시간 인기 랭킹 🏆</span>
+            <span class="title">⚡ 장보기 특가 랭킹 ⚡</span>
         </a>
-        <p class="subtitle">가장 인기 있는 상품만 모아보세요!</p>
+        <p class="subtitle">24시간 한정 최대 혜택 놓치지 마세요!</p>
     </div>
     <div class="slide-container">
         <div class="swiper3 swiper-initialized swiper-horizontal swiper-pointer-events">
             <div class="swiper-wrapper wrapper2">
-                <div th:each="item, count : ${items}" th:if="${item.getIndex()} > 40 and ${item.getIndex()} < 61" class="swiper-slide slide2">
+                <div th:each="item, count : ${items}" th:if="${item.getIndex()} > 61 and ${item.getIndex()} < 82" class="swiper-slide slide2">
                     <a href="#" class="link">
                         <div class="img-wrapper">
                             <div class="img-box">
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                             <div class="product-info2">
-                                <div class="rank" th:text="${count.count}-40"></div>
+                                <div class="rank" th:text="${count.count}-61"></div>
                                 <div class="content">
                                     <div class="title" th:text="${item.getItemTitle()}">
                                     </div>

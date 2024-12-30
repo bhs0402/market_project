@@ -49,15 +49,20 @@
         </div>
     </div>
 
-    <div th:replace="~{/fragments/itembox1 :: itembox1Fragment (items=${items})}"></div>
+    <div th:replace="~{/fragments/itembox1 :: itembox1Fragment (items=${items}, title='👑올해 마지막 컬리픽특가!', subtitle='놓치지 말고 담아가세요')}"></div>
 
     <div th:replace="~{/fragments/itembox2 :: itembox2Fragment (items=${items})}"></div>
 
+    <div class="add">
+        <a href="#" class="link">
+            <span><img alt="" src="https://product-image.kurly.com/hdims/resize/%3E1050x%3E140/quality/85/src/banner/random-band/pc/img/f1464942-8cad-4513-9756-1d0692c622d5.jpg" decoding="async" data-nimg="fill" class="img"></span>
+        </a>
+    </div>
+
+    <div th:replace="~{/fragments/itembox1 :: itembox1Fragment (items=${items}, title='✨놓치면 후회할 가격', subtitle='')}"></div>
+
     <div th:replace="~{/fragments/itembox3 :: itembox3Fragment (items=${items})}"></div>
 
-    <div th:each="item : ${items}" class="box">
-        <p th:text="${item.getItemTitle()}"></p>
-    </div>
 
 </main>
 

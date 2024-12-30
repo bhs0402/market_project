@@ -24,9 +24,14 @@ new Swiper('.swiper2', {
 
 new Swiper('.swiper3', {
     slidesPerView: 5,
-    slidesPerGroup: 5,
     speed: 500,
     spaceBetween: 23.5,
+    loop: true,
+
+    autoplay: {
+        delay: 900,
+        disableOnInteraction: false,
+    },
 
     navigation: {
         prevEl: '.prev3',

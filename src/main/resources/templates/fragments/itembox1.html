@@ -15,12 +15,12 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 </head>
 <body>
-    <div th:fragment="itembox1Fragment (items)" class="first-container">
+    <div th:fragment="itembox1Fragment (items, title, subtitle)" class="first-container">
         <div class="title-container">
             <a href="#" class="link">
-                <span class="title">👑올해 마지막 컬리픽특가!</span>
+                <span class="title" th:text="${title}"></span>
             </a>
-            <p class="subtitle">놓치지 말고 담아가세요</p>
+            <p class="subtitle" th:text="${subtitle}"></p>
         </div>
         <div class="slide-container">
             <div class="swiper swiper-initialized swiper-horizontal swiper-pointer-events">
@@ -36,7 +36,7 @@
                                         <div class="sticker-wrapper">
                                             <div class="sticker-box">
                                                 <div class="sticker-box2">
-                                                <span><img alt="" th:src="@{${item.getSticker()}}" decoding="async" data-nimg="fill" class="sticker-image">
+                                                <span><img th:if="${subtitle} == '놓치지 말고 담아가세요'" alt="" th:src="@{${item.getSticker()}}" decoding="async" data-nimg="fill" class="sticker-image">
                                                 </span>
                                                 </div>
                                             </div>

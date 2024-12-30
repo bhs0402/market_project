@@ -6,6 +6,8 @@ import com.bhs.sssss.entities.SubCategoryEntity;
 import com.bhs.sssss.mappers.CategoryMapper;
 import com.bhs.sssss.mappers.ItemMapper;
 import com.bhs.sssss.mappers.SubCategoryMapper;
+import com.bhs.sssss.vos.PageVo;
+import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +37,16 @@ public class ItemService {
 
     public ItemEntity[] getItems() {
         return this.itemMapper.selectItems();
+    }
+
+    public Pair<PageVo, ItemEntity[]> getItemsByLimit(int page){
+        page = Math.max(1, page);
+        int totalCount = this.itemMapper.selectItemCount();
+        PageVo pageVo = new PageVo(page, totalCount);
+        ItemEntity[] articles = this.itemMapper.selectItemsByLimit(
+                pageVo.countPerPage,
+                pageVo.offsetCount
+        );
+        return Pair.of(pageVo, articles);
     }
 }
