@@ -28,12 +28,37 @@ public class CollectionGroupController {
     @RequestMapping(value = "market-best", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getMarketBest(@SessionAttribute(value = "member", required = false) MemberEntity member,
                                       @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
-        Pair<PageVo, ItemEntity[]> pair = this.itemService.getItemsByLimit(page);
+        Pair<PageVo, ItemEntity[]> pair = this.itemService.getItemsBySticker(page);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("pageVo", pair.getLeft());
         modelAndView.addObject("items", pair.getRight());
         modelAndView.addObject("member", member);
         modelAndView.setViewName("/collection-groups/market-best");
+        return modelAndView;
+    }
+
+
+    @RequestMapping(value = "market-newproduct", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getMarketNewProduct(@SessionAttribute(value = "member", required = false) MemberEntity member,
+                                      @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
+        Pair<PageVo, ItemEntity[]> pair = this.itemService.getItemsByNew(page);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("pageVo", pair.getLeft());
+        modelAndView.addObject("items", pair.getRight());
+        modelAndView.addObject("member", member);
+        modelAndView.setViewName("/collection-groups/market-newproduct");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "market-sales", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getMarketSales(@SessionAttribute(value = "member", required = false) MemberEntity member,
+                                            @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
+        Pair<PageVo, ItemEntity[]> pair = this.itemService.getItemsByDiscount(page);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("pageVo", pair.getLeft());
+        modelAndView.addObject("items", pair.getRight());
+        modelAndView.addObject("member", member);
+        modelAndView.setViewName("/collection-groups/market-sales");
         return modelAndView;
     }
 }

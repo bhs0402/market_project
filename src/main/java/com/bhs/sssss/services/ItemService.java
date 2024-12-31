@@ -39,14 +39,36 @@ public class ItemService {
         return this.itemMapper.selectItems();
     }
 
-    public Pair<PageVo, ItemEntity[]> getItemsByLimit(int page){
+    public Pair<PageVo, ItemEntity[]> getItemsByNew(int page){
         page = Math.max(1, page);
         int totalCount = this.itemMapper.selectItemCount();
         PageVo pageVo = new PageVo(page, totalCount);
-        ItemEntity[] articles = this.itemMapper.selectItemsByLimit(
+        ItemEntity[] items = this.itemMapper.selectItemsByNew(
                 pageVo.countPerPage,
                 pageVo.offsetCount
         );
-        return Pair.of(pageVo, articles);
+        return Pair.of(pageVo, items);
+    }
+
+    public Pair<PageVo, ItemEntity[]> getItemsBySticker(int page){
+        page = Math.max(1, page);
+        int totalCount = this.itemMapper.selectItemCount1();
+        PageVo pageVo = new PageVo(page, totalCount);
+        ItemEntity[] items = this.itemMapper.selectItemsBySticker(
+                pageVo.countPerPage,
+                pageVo.offsetCount
+        );
+        return Pair.of(pageVo, items);
+    }
+
+    public Pair<PageVo, ItemEntity[]> getItemsByDiscount(int page){
+        page = Math.max(1, page);
+        int totalCount = this.itemMapper.selectItemCount2();
+        PageVo pageVo = new PageVo(page, totalCount);
+        ItemEntity[] items = this.itemMapper.selectItemsByDiscount(
+                pageVo.countPerPage,
+                pageVo.offsetCount
+        );
+        return Pair.of(pageVo, items);
     }
 }

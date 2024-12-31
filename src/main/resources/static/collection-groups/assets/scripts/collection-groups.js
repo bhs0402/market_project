@@ -26,3 +26,4 @@ $filterBox.forEach((x) => {
         }
     };
 });
+

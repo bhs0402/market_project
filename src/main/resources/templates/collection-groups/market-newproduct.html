@@ -23,16 +23,15 @@
 <main class="-spring" id="main" th:if="${member == null || !member.isAdmin()}">
 
     <div class="top">
-        <h3 class="title">베스트</h3>
+        <h3 class="title">신상품</h3>
         <ul class="menu">
-            <li class="item"><a class="text">TOP300</a></li>
-            <li class="item"><a class="text">간편식사</a></li>
-            <li class="item"><a class="text">신선코너</a></li>
-            <li class="item"><a class="text">컬리정육점</a></li>
-            <li class="item"><a class="text">컬리에만있는</a></li>
-            <li class="item"><a class="text">인기급상승</a></li>
-            <li class="item"><a class="text">생활필수품</a></li>
-            <li class="item"><a class="text">직원추천상품</a></li>
+            <li class="item"><a class="text">인기신상랭킹</a></li>
+            <li class="item"><a class="text">입점특가</a></li>
+            <li class="item"><a class="text">요즘간식</a></li>
+            <li class="item"><a class="text">간편한끼</a></li>
+            <li class="item"><a class="text">주방·리빙</a></li>
+            <li class="item"><a class="text">뷰티</a></li>
+            <li class="item"><a class="text">패션·잡화</a></li>
         </ul>
     </div>
     <div class="container">
@@ -420,20 +419,20 @@
                     </a>
                 </div>
                 <div class="page-container">
-                    <a class="move-first" th:href="@{'/collection-groups/market-best' (page=1)}">
+                    <a class="move-first" th:href="@{'/collection-groups/market-newproduct' (page=1)}">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAHUlEQVR42mNgAIPi/8X/kWkwA8SE0UQIMJAsCKMBBzk27fqtkcYAAAAASUVORK5CYII=" alt="처음 페이지로 이동하기 아이콘">
                     </a>
-                    <a class="move-prev" th:href="@{'/collection-groups/market-best' (page=${pageVo.requestPage == 1 ? 1 : pageVo.requestPage - 1})}">
+                    <a class="move-prev" th:href="@{'/collection-groups/market-newproduct' (page=${pageVo.requestPage == 1 ? 1 : pageVo.requestPage - 1})}">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGElEQVR42mNgAIPi/8X/4QwwE5PBQJADAAKSG3cyVhtXAAAAAElFTkSuQmCC" alt="이전 페이지로 이동하기 아이콘">
                     </a>
                     <a th:each="page : ${#numbers.sequence(pageVo.displayMinPage, pageVo.displayMaxPage)}"
                        th:text="${page}"
-                       th:href="@{'/collection-groups/market-best' (page=${page})}"
+                       th:href="@{'/collection-groups/market-newproduct' (page=${page})}"
                        th:classappend="${page == pageVo.requestPage ? 'active' : 'normal'}"></a>
-                    <a class="move-next" th:href="@{'/collection-groups/market-best' (page=${pageVo.requestPage == pageVo.movableMaxPage ? pageVo.requestPage : pageVo.requestPage+1})}">
+                    <a class="move-next" th:href="@{'/collection-groups/market-newproduct' (page=${pageVo.requestPage == pageVo.movableMaxPage ? pageVo.requestPage : pageVo.requestPage+1})}">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGUlEQVR42mMo/l/8nwECQEwCHEwGhAlRBgA2mht3SwgzrwAAAABJRU5ErkJggg==" alt="다음 페이지로 이동하기 아이콘">
                     </a>
-                    <a class="move-last" th:href="@{'/collection-groups/market-best' (page=${pageVo.movableMaxPage})}">
+                    <a class="move-last" th:href="@{'/collection-groups/market-newproduct' (page=${pageVo.movableMaxPage})}">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAIElEQVR42mMo/l/8n4GBgQFGQ5kgDowmQZCwAMImhDkAb0k27Zcisn8AAAAASUVORK5CYII=" alt="마지막 페이지로 이동하기 아이콘">
                     </a>
                 </div>

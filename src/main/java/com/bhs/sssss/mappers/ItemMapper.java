@@ -9,8 +9,18 @@ public interface ItemMapper {
 
     ItemEntity[] selectItems();
 
-    ItemEntity[] selectItemsByLimit(@Param("limitCount") int limitCount,
-                             @Param("offsetCount") int offsetCount);
+    ItemEntity[] selectItemsByNew(@Param("limitCount") int limitCount,
+                                       @Param("offsetCount") int offsetCount);
+
+    ItemEntity[] selectItemsBySticker(@Param("limitCount") int limitCount,
+                                    @Param("offsetCount") int offsetCount);
+
+    ItemEntity[] selectItemsByDiscount(@Param("limitCount") int limitCount,
+                                    @Param("offsetCount") int offsetCount);
 
     int selectItemCount();
+
+    int selectItemCount1();
+
+    int selectItemCount2();
 }

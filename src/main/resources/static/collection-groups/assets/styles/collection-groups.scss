@@ -538,6 +538,11 @@
             &:first-of-type {
               border-left: 0.0625rem solid rgb(221, 221, 221);
             }
+
+            &.active {
+              background-color: rgb(247, 247, 247);
+              color: #5f0080;
+            }
           }
         }
       }

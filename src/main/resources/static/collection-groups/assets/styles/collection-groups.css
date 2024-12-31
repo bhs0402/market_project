@@ -471,5 +471,9 @@
 #main > .container > .content-box > .item-box > .page-container > a:first-of-type {
   border-left: 0.0625rem solid rgb(221, 221, 221);
 }
+#main > .container > .content-box > .item-box > .page-container > a.active {
+  background-color: rgb(247, 247, 247);
+  color: #5f0080;
+}
 
 /*# sourceMappingURL=collection-groups.css.map */
