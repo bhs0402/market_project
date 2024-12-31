@@ -530,6 +530,10 @@ body {
                   color: #5f0080;
                   border-bottom: 0.0625rem solid rgb(95, 0, 128);
                 }
+
+                &.active {
+                  color: #5f0080;
+                }
               }
             }
           }
@@ -551,6 +555,10 @@ body {
               &:hover {
                 color: #5f0080;
                 border-bottom: 0.0625rem solid rgb(95, 0, 128);
+              }
+
+              &.active {
+                color: #5f0080;
               }
             }
           }

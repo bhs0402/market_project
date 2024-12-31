@@ -61,4 +61,5 @@ public class CollectionGroupController {
         modelAndView.setViewName("/collection-groups/market-sales");
         return modelAndView;
     }
+
 }

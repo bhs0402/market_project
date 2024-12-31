@@ -514,6 +514,9 @@ body > .top > .header > .header-wrapper > ul.fixed > .item > .text:hover {
   color: #5f0080;
   border-bottom: 0.0625rem solid rgb(95, 0, 128);
 }
+body > .top > .header > .header-wrapper > ul.fixed > .item > .text.active {
+  color: #5f0080;
+}
 body > .top > .header > .header-wrapper > ul > .item {
   align-items: center;
   display: flex;
@@ -539,6 +542,9 @@ body > .top > .header > .header-wrapper > ul > .item > .text {
 body > .top > .header > .header-wrapper > ul > .item > .text:hover {
   color: #5f0080;
   border-bottom: 0.0625rem solid rgb(95, 0, 128);
+}
+body > .top > .header > .header-wrapper > ul > .item > .text.active {
+  color: #5f0080;
 }
 body > .top > .header > .header-wrapper > div > .notice {
   height: 1.25rem;
