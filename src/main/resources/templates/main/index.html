@@ -21,7 +21,7 @@
 <body>
 <div th:replace="~{/fragments/header :: headerFragment}"></div>
 
-<main class="-spring" id="main" th:if="${member == null || !member.isAdmin()}">
+<main class="-spring" id="main">
     <div class="banner-container">
         <div class="slide-wrapper">
             <div class="slide">
@@ -63,8 +63,8 @@
 
     <div th:replace="~{/fragments/itembox3 :: itembox3Fragment (items=${items})}"></div>
 
-
 </main>
+
 
 <div th:replace="~{/fragments/footer :: footerFragment}"></div>
 </body>
