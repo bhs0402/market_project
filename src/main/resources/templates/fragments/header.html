@@ -126,10 +126,12 @@
                 </div>
             </div>
             <div class="fixed-search">
-                <label>
-                    <input id="fixed_search" placeholder="검색어를 입력해주세요" required="" class="fixed-input" value="">
-                    <button aria-label="submit" class="search-button"></button>
-                </label>
+                <form action="/collection-groups/search" method="get">
+                    <label>
+                        <input id="fixed_search" placeholder="검색어를 입력해주세요" required="" class="fixed-input" name="keyword" value="">
+                        <button aria-label="submit" class="search-button"></button>
+                    </label>
+                </form>
             </div>
             <div class="icon-container">
                 <div class="icon1">
