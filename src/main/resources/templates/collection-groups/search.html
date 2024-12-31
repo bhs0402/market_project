@@ -23,19 +23,13 @@
 <main class="-spring" id="main" th:if="${member == null || !member.isAdmin()}">
 
     <div class="top">
-        <h3 class="title">신상품</h3>
-        <ul class="menu">
-            <li class="item"><a class="text">인기신상랭킹</a></li>
-            <li class="item"><a class="text">입점특가</a></li>
-            <li class="item"><a class="text">요즘간식</a></li>
-            <li class="item"><a class="text">간편한끼</a></li>
-            <li class="item"><a class="text">주방·리빙</a></li>
-            <li class="item"><a class="text">뷰티</a></li>
-            <li class="item"><a class="text">패션·잡화</a></li>
-        </ul>
+        <div class="title search">
+            <span th:text="|'${param.keyword}'|"></span>
+            <span>에 대한 검색결과</span>
+        </div>
     </div>
     <div class="container">
-        <div class="content-box">
+        <div class="content-box" th:if="${items.length != 0}">
             <div class="filter">
                 <div class="top-area">
                     <span class="text">필터</span>
@@ -424,26 +418,35 @@
                     </a>
                 </div>
                 <div class="page-container">
-                    <a class="move-first" th:href="@{'/collection-groups/market-newproduct' (page=1)}">
+                    <a class="move-first" th:href="@{'/collection-groups/search' (page=1)}">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAHUlEQVR42mNgAIPi/8X/kWkwA8SE0UQIMJAsCKMBBzk27fqtkcYAAAAASUVORK5CYII=" alt="처음 페이지로 이동하기 아이콘">
                     </a>
-                    <a class="move-prev" th:href="@{'/collection-groups/market-newproduct' (page=${pageVo.requestPage == 1 ? 1 : pageVo.requestPage - 1})}">
+                    <a class="move-prev" th:href="@{'/collection-groups/search' (page=${pageVo.requestPage == 1 ? 1 : pageVo.requestPage - 1})}">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGElEQVR42mNgAIPi/8X/4QwwE5PBQJADAAKSG3cyVhtXAAAAAElFTkSuQmCC" alt="이전 페이지로 이동하기 아이콘">
                     </a>
                     <a th:each="page : ${#numbers.sequence(pageVo.displayMinPage, pageVo.displayMaxPage)}"
                        th:text="${page}"
-                       th:href="@{'/collection-groups/market-newproduct' (page=${page})}"
+                       th:href="@{'/collection-groups/search' (page=${page})}"
                        th:classappend="${page == pageVo.requestPage ? 'active' : 'normal'}"></a>
-                    <a class="move-next" th:href="@{'/collection-groups/market-newproduct' (page=${pageVo.requestPage == pageVo.movableMaxPage ? pageVo.requestPage : pageVo.requestPage+1})}">
+                    <a class="move-next" th:href="@{'/collection-groups/search' (page=${pageVo.requestPage == pageVo.movableMaxPage ? pageVo.requestPage : pageVo.requestPage+1})}">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGUlEQVR42mMo/l/8nwECQEwCHEwGhAlRBgA2mht3SwgzrwAAAABJRU5ErkJggg==" alt="다음 페이지로 이동하기 아이콘">
                     </a>
-                    <a class="move-last" th:href="@{'/collection-groups/market-newproduct' (page=${pageVo.movableMaxPage})}">
+                    <a class="move-last" th:href="@{'/collection-groups/search' (page=${pageVo.movableMaxPage})}">
                         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAIElEQVR42mMo/l/8n4GBgQFGQ5kgDowmQZCwAMImhDkAb0k27Zcisn8AAAAASUVORK5CYII=" alt="마지막 페이지로 이동하기 아이콘">
                     </a>
                 </div>
             </div>
         </div>
+        <div class="nothing" th:if="${items.length == 0}">
+            <div class="notice">
+                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_368_6766)"><path d="M22.0732 43.1463C33.7116 43.1463 43.1463 33.7116 43.1463 22.0732C43.1463 10.4348 33.7116 1 22.0732 1C10.4348 1 1 10.4348 1 22.0732C1 33.7116 10.4348 43.1463 22.0732 43.1463Z" stroke="#e2e2e2" stroke-width="2" stroke-linecap="round"></path><path d="M47.8293 47.8291L37.2927 37.2925" stroke="#e2e2e2" stroke-width="2" stroke-linecap="round"></path></g><defs><clipPath id="clip0_368_6766"><rect width="48" height="48" fill="#fff"></rect></clipPath></defs>
+                </svg>
+                <span class="text">검색된 상품이 없습니다.<br>다른 검색어를 입력해 주세요.</span>
+            </div>
+        </div>
     </div>
+
 
 </main>
 

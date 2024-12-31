@@ -25,7 +25,7 @@ public class CollectionGroupController {
     }
 
 
-    @RequestMapping(value = "market-best", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    @RequestMapping(value = "/market-best", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getMarketBest(@SessionAttribute(value = "member", required = false) MemberEntity member,
                                       @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
         Pair<PageVo, ItemEntity[]> pair = this.itemService.getItemsBySticker(page);
@@ -38,7 +38,7 @@ public class CollectionGroupController {
     }
 
 
-    @RequestMapping(value = "market-newproduct", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    @RequestMapping(value = "/market-newproduct", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getMarketNewProduct(@SessionAttribute(value = "member", required = false) MemberEntity member,
                                       @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
         Pair<PageVo, ItemEntity[]> pair = this.itemService.getItemsByNew(page);
@@ -50,7 +50,7 @@ public class CollectionGroupController {
         return modelAndView;
     }
 
-    @RequestMapping(value = "market-sales", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    @RequestMapping(value = "/market-sales", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getMarketSales(@SessionAttribute(value = "member", required = false) MemberEntity member,
                                             @RequestParam(value = "page", required = false, defaultValue = "1") int page) {
         Pair<PageVo, ItemEntity[]> pair = this.itemService.getItemsByDiscount(page);
@@ -59,6 +59,19 @@ public class CollectionGroupController {
         modelAndView.addObject("items", pair.getRight());
         modelAndView.addObject("member", member);
         modelAndView.setViewName("/collection-groups/market-sales");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getSearch(@SessionAttribute(value = "member", required = false) MemberEntity member,
+                                  @RequestParam(value = "page", required = false, defaultValue = "1") int page,
+                                  @RequestParam(value = "keyword", required = false) String keyword) {
+        Pair<PageVo, ItemEntity[]> pair = this.itemService.getItemsByKeyword(page, keyword);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("pageVo", pair.getLeft());
+        modelAndView.addObject("items", pair.getRight());
+        modelAndView.addObject("member", member);
+        modelAndView.setViewName("/collection-groups/search");
         return modelAndView;
     }
 

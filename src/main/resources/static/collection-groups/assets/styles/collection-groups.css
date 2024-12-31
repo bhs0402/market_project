@@ -21,6 +21,13 @@
   letter-spacing: -0.0625rem;
   text-align: center;
 }
+#main > .top > .title.search {
+  font-weight: 400;
+}
+#main > .top > .title.search > span:first-of-type {
+  color: #5f0080;
+  font-size: 1.85rem;
+}
 #main > .top > .menu {
   display: grid;
   grid-template-columns: repeat(4, 180px);
@@ -474,6 +481,28 @@
 #main > .container > .content-box > .item-box > .page-container > a.active {
   background-color: rgb(247, 247, 247);
   color: #5f0080;
+}
+#main > .container > .nothing {
+  width: 100%;
+}
+#main > .container > .nothing > .notice {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 30rem;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  margin: auto;
+  padding: 3rem 0;
+}
+#main > .container > .nothing > .notice > .text {
+  text-align: center;
+  font-size: 1rem;
+  color: rgb(181, 181, 181);
+  margin-top: 1rem;
+  line-height: normal;
 }
 
 /*# sourceMappingURL=collection-groups.css.map */

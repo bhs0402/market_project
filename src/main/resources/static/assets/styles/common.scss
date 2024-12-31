@@ -269,7 +269,7 @@ body {
             cursor: pointer;
           }
 
-          > .search-box {
+          > #search-form > .search-box {
             top: 50%;
             left: 50%;
             margin-top: 1rem;
@@ -287,7 +287,7 @@ body {
             box-shadow: rgb(247, 247, 247) 0 0 0;
 
 
-            > .input {
+            > .keyword {
               width: 18.75rem;
               background-color: inherit;
               border: none;

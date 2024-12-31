@@ -45,6 +45,14 @@
           AND `discount_rate` IS NOT NULL
     </select>
 
+    <select id="selectItemCountByKeyword"
+            resultType="_int">
+        SELECT COUNT(0)
+        FROM `kurly`.`items`
+        WHERE `deleted_at` IS NULL
+          AND `item_title` LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
     <select id="selectItemsByNew"
             resultType="com.bhs.sssss.entities.ItemEntity">
         SELECT `index`         AS `index`,
@@ -103,6 +111,27 @@
         FROM `kurly`.`items`
         WHERE `deleted_at` IS NULL
           AND `discount_rate` IS NOT NULL
+        ORDER BY `index` DESC
+        LIMIT #{limitCount} OFFSET #{offsetCount}
+    </select>
+
+    <select id="selectItemsByKeyword"
+            resultType="com.bhs.sssss.entities.ItemEntity">
+        SELECT `index`         AS `index`,
+               `item_id`       AS `itemId`,
+               `item_title`    AS `itemTitle`,
+               `sub_title`     AS `subTitle`,
+               `item_image`    AS `itemImage`,
+               `sticker`       AS `sticker`,
+               `discount_rate` AS `discountRate`,
+               `price`         AS `price`,
+               `sales_price`   AS `salesPrice`,
+               `item_category` AS `itemCategory`,
+               `created_at`    AS `createdAt`,
+               `deleted_at`    AS `deletedAt`
+        FROM `kurly`.`items`
+        WHERE `deleted_at` IS NULL
+          AND `item_title` LIKE CONCAT('%', #{keyword}, '%')
         ORDER BY `index` DESC
         LIMIT #{limitCount} OFFSET #{offsetCount}
     </select>

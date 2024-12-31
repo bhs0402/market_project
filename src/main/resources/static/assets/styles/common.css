@@ -263,7 +263,7 @@ body > .top > .top1 > .login-container > .logo-wrapper > .logo_text {
   letter-spacing: normal;
   cursor: pointer;
 }
-body > .top > .top1 > .login-container > .logo-wrapper > .search-box {
+body > .top > .top1 > .login-container > .logo-wrapper > #search-form > .search-box {
   top: 50%;
   left: 50%;
   margin-top: 1rem;
@@ -280,14 +280,14 @@ body > .top > .top1 > .login-container > .logo-wrapper > .search-box {
   background-color: rgb(255, 255, 255);
   box-shadow: rgb(247, 247, 247) 0 0 0;
 }
-body > .top > .top1 > .login-container > .logo-wrapper > .search-box > .input {
+body > .top > .top1 > .login-container > .logo-wrapper > #search-form > .search-box > .keyword {
   width: 18.75rem;
   background-color: inherit;
   border: none;
   outline: none;
   font-size: 1rem;
 }
-body > .top > .top1 > .login-container > .logo-wrapper > .search-box > .submit {
+body > .top > .top1 > .login-container > .logo-wrapper > #search-form > .search-box > .submit {
   cursor: pointer;
   position: relative;
   width: 1.875rem;

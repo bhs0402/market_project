@@ -71,4 +71,18 @@ public class ItemService {
         );
         return Pair.of(pageVo, items);
     }
+
+    public Pair<PageVo, ItemEntity[]> getItemsByKeyword(int page, String keyword){
+        page = Math.max(1, page);
+        int totalCount = this.itemMapper.selectItemCountByKeyword(keyword);
+        PageVo pageVo = new PageVo(page, totalCount);
+        ItemEntity[] items = this.itemMapper.selectItemsByKeyword(
+                keyword,
+                pageVo.countPerPage,
+                pageVo.offsetCount
+        );
+        return Pair.of(pageVo, items);
+    }
+
+
 }
