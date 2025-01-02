@@ -9,7 +9,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 public class SessionInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("SessionInterceptor.preHandle 실행 됨");
+        System.out.println("SessionInterceptor.preHandle 실행 됨1");
         HttpSession session = request.getSession();
         Object memberObj = session.getAttribute("member");
         if(memberObj == null || !(memberObj instanceof MemberEntity)) {

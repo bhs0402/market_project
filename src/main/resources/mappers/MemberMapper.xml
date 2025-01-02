@@ -114,6 +114,31 @@
         LIMIT 1
     </select>
 
+    <select id="selectMembersCount" resultType="_int">
+        SELECT COUNT(0)
+        FROM `kurly`.`members`
+    </select>
+
+    <select id="selectMembers"
+            resultType="com.bhs.sssss.entities.MemberEntity">
+        SELECT `id`           AS `id`,
+               `password`     AS `password`,
+               `user_name`    AS `userName`,
+               `email`        AS `email`,
+               `contact`      AS `contact`,
+               `address`      AS `address`,
+               `gender`       AS `gender`,
+               `birth`        AS `birth`,
+               `created_at`   AS `createdAt`,
+               `updated_at`   AS `updatedAt`,
+               `deleted_at`   AS `deletedAt`,
+               `is_admin`     AS `isAdmin`,
+               `is_suspended` AS `isSuspended`,
+               `is_verified`  AS `isVerified`
+        FROM `kurly`.`members`
+        LIMIT #{limitCount} OFFSET #{offsetCount}
+    </select>
+
     <insert id="insertMember"
             parameterType="com.bhs.sssss.entities.MemberEntity">
         INSERT INTO `kurly`.`members` (`id`, `password`, `user_name`, `email`, `contact`, `address`, `gender`, `birth`, `created_at`, `updated_at`, `deleted_at`, `is_admin`, `is_suspended`, `is_verified`)

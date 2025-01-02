@@ -6,6 +6,12 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MemberMapper {
+    int selectMembersCount();
+
+    MemberEntity[] selectMembers(
+                                 @Param("limitCount") int limitCount,
+                                 @Param("offsetCount") int offsetCount);
+
     MemberEntity selectUserByContact(@Param("contact") String contact);
 
     MemberEntity selectUserById(@Param("id") String id);

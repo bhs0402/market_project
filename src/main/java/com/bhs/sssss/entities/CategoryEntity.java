@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(of = {"categoryId"})
 public class CategoryEntity {
-    String categoryId;
-    String categoryName;
-    String categoryImg;
+    private String categoryId;
+    private String categoryName;
+    private String categoryImg;
 }

@@ -314,10 +314,6 @@ public class MemberService {
             throw new TransactionalException();
         }
 
-//        Authentication authentication = authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(dbMember.getUserName(), dbMember.getPassword()));
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-
         return CommonResult.SUCCESS;
     }
 

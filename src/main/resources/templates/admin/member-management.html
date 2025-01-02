@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{'/assets/styles/common.css'}">
     <link rel="stylesheet" type="text/css" th:href="@{'/admin/assets/styles/admin.css'}">
     <script defer type="text/javascript" th:src="@{'/assets/scripts/common.js'}"></script>
-    <script defer type="text/javascript" th:src="@{'/admin/assets/scripts/admin.js'}"></script>
+    <script defer type="text/javascript" th:src="@{'/admin/assets/scripts/member-management.js'}"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
@@ -61,7 +61,7 @@
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="28" height="28" fill="none"></rect><path d="M6 5C6 3.89543 6.89543 3 8 3H25C26.1046 3 27 3.89543 27 5V21C27 23.7614 24.7614 26 22 26H8C6.89543 26 6 25.1046 6 24V5Z" fill="#fff" stroke="#333" stroke-width="1.5"></path><path d="M10 9H22" stroke="#333" stroke-width="1.5" stroke-linecap="round"></path><path d="M10 13H18" stroke="#333" stroke-width="1.5" stroke-linecap="round"></path><path d="M10.5 19H16.5" stroke="#333" stroke-width="1.5" stroke-linecap="round"></path><path d="M18.1147 19H1V22C1 24.2091 2.79086 26 5 26H22L20.9008 25.7162C18.0662 24.9843 16.7336 21.7314 18.2399 19.2211C18.2983 19.1238 18.2281 19 18.1147 19Z" fill="#fff" stroke="#333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                     <div class="text">
-                        <a th:href="@{/admin/member-management}">멤버 관리</a>
+                        <span>멤버 관리</span>
                     </div>
                 </button>
                 <button class="menu">
@@ -98,42 +98,58 @@
 
     <div class="right">
         <div class="title">
-            <h2 class="text">관리자 페이지</h2>
+            <h2 class="text">멤버 관리</h2>
         </div>
         <div class="content-container">
             <div class="content-box">
-                <h4 class="subtitle">비밀번호 재확인</h4>
-                <p class="desc">관리자 기능을 사용하기 위해 비밀번호를 다시 한번 확인해주세요.</p>
-                <form action="#" id="confirm-form">
-                    <div class="input-container">
-                        <div class="input-box">
-                            <div class="name-box">
-                                <label for="userId" class="label">아이디</label>
-                            </div>
-                            <div class="input-box2">
-                                <label for="userId" class="label">
-                                    <input readonly type="text" id="userId" class="userId" name="userId" th:value="${member.getId()}">
-                                </label>
-                            </div>
-                            <div class="empty-box"></div>
-                        </div>
-                        <div class="input-box">
-                            <div class="name-box">
-                                <label for="password" class="label">비밀번호</label>
-                            </div>
-                            <div class="input-box2">
-                                <label for="password" class="label">
-                                    <input autocomplete="off" type="password" id="password" class="password" name="password" placeholder="현재 비밀번호를 입력해주세요">
-                                </label>
-                                <span class="-warning"></span>
-                            </div>
-                            <div class="empty-box"></div>
-                        </div>
+                <h4 class="subtitle">멤버 조회</h4>
+                <p class="desc">멤버 정보를 조회합니다.</p>
+                <div class="member-container">
+                    <div class="member-list">
+                        <table class="member-table">
+                            <thead class="thead">
+                                <tr>
+                                    <th scope="col">번호</th>
+                                    <th scope="col">이름</th>
+                                    <th scope="col">아이디</th>
+                                    <th scope="col">이메일</th>
+                                    <th scope="col">상세정보</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="user, count: ${members}">
+                                    <td th:text="${count.count} + (${pageVo.requestPage - 1} * 20)"></td>
+                                    <td th:text="${user.getUserName()}"></td>
+                                    <td th:text="${user.getId()}"></td>
+                                    <td th:text="${user.getEmail()}"></td>
+                                    <td class="detail">
+                                        <a th:href="@{/admin/member-detail (id=${user.getId()})}">
+                                            <button class="--obj-button --color-light-primary detail-button">더보기</button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="button-container">
-                        <button type="submit" class="button --obj-button --color-primary">확인</button>
+                    <div class="page-container">
+                        <a class="move-first" th:href="@{'/admin/member-management' (page=1)}">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAHUlEQVR42mNgAIPi/8X/kWkwA8SE0UQIMJAsCKMBBzk27fqtkcYAAAAASUVORK5CYII=" alt="처음 페이지로 이동하기 아이콘">
+                        </a>
+                        <a class="move-prev" th:href="@{'/admin/member-management' (page=${pageVo.requestPage == 1 ? 1 : pageVo.requestPage - 1})}">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGElEQVR42mNgAIPi/8X/4QwwE5PBQJADAAKSG3cyVhtXAAAAAElFTkSuQmCC" alt="이전 페이지로 이동하기 아이콘">
+                        </a>
+                        <a th:each="page : ${#numbers.sequence(pageVo.displayMinPage, pageVo.displayMaxPage)}"
+                           th:text="${page}"
+                           th:href="@{'/admin/member-management' (page=${page})}"
+                           th:classappend="${page == pageVo.requestPage ? 'active' : 'normal'}"></a>
+                        <a class="move-next" th:href="@{'/admin/member-management' (page=${pageVo.requestPage == pageVo.movableMaxPage ? pageVo.requestPage : pageVo.requestPage+1})}">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAHCAQAAABqrk9lAAAAGUlEQVR42mMo/l/8nwECQEwCHEwGhAlRBgA2mht3SwgzrwAAAABJRU5ErkJggg==" alt="다음 페이지로 이동하기 아이콘">
+                        </a>
+                        <a class="move-last" th:href="@{'/admin/member-management' (page=${pageVo.movableMaxPage})}">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAHCAQAAABwkq/rAAAAIElEQVR42mMo/l/8n4GBgQFGQ5kgDowmQZCwAMImhDkAb0k27Zcisn8AAAAASUVORK5CYII=" alt="마지막 페이지로 이동하기 아이콘">
+                        </a>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
