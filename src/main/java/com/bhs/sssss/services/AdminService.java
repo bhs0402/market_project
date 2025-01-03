@@ -50,7 +50,22 @@ public class AdminService {
         return Pair.of(memberPageVo, members);
     }
 
+    public Pair<MemberPageVo, MemberEntity[]> getMembersBySearch(int page, String keyword){
+        page = Math.max(1, page);
+        if(keyword == null) {
+            keyword = "";
+        }
+        int totalCount = this.memberMapper.selectMembersCountBySearch(keyword);
+        MemberPageVo memberPageVo = new MemberPageVo(page, totalCount);
+        MemberEntity[] members = this.memberMapper.selectMembersBySearch(
+                keyword,
+                memberPageVo.countPerPage,
+                memberPageVo.offsetCount
+        );
+        return Pair.of(memberPageVo, members);
+    }
+
     public MemberEntity getMemberById(String id){
-        return this.memberMapper.selectUserById(id);
+        return this.memberMapper.selectUserByIdIncludeDeleted(id);
     }
 }

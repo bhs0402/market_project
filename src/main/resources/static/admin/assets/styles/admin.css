@@ -185,26 +185,55 @@ body {
   border-bottom: 0.0625rem solid rgb(221, 221, 221);
 }
 #main > .right > .content-container > .content-box > .member-container > .member-list > .member-table {
-  border: 0.0625rem solid rgb(21, 21, 21);
+  border: 0.0625rem solid rgb(96, 96, 96);
   border-collapse: collapse;
   width: 100%;
+}
+#main > .right > .content-container > .content-box > .member-container > .member-list > .member-table.detail {
+  margin-right: auto;
+  margin-left: auto;
+  width: 25rem;
 }
 #main > .right > .content-container > .content-box > .member-container > .member-list > .member-table > .thead > tr > th {
   font-size: 0.8rem;
   background-color: rgb(231, 231, 231);
   height: 1.25rem;
-  border: 0.0625rem solid rgb(21, 21, 21);
+  border: 0.0625rem solid rgb(96, 96, 96);
 }
-#main > .right > .content-container > .content-box > .member-container > .member-list > .member-table > tbody > tr > td {
+#main > .right > .content-container > .content-box > .member-container > .member-list > .member-table > tbody > tr > td, #main > .right > .content-container > .content-box > .member-container > .member-list > .member-table > tbody > tr th {
   font-size: 0.8rem;
   text-align: center;
   height: 1.25rem;
-  border: 0.0625rem solid rgb(21, 21, 21);
+  border: 0.0625rem solid rgb(96, 96, 96);
 }
-#main > .right > .content-container > .content-box > .member-container > .member-list > .member-table > tbody > tr > td > a > button {
+#main > .right > .content-container > .content-box > .member-container > .member-list > .member-table > tbody > tr > td > a > button, #main > .right > .content-container > .content-box > .member-container > .member-list > .member-table > tbody > tr th > a > button {
   width: 100%;
   height: 1.25rem;
   border: none;
+}
+#main > .right > .content-container > .content-box > .member-container > .member-list > #search-form {
+  margin: 0.75rem auto 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.125rem;
+}
+#main > .right > .content-container > .content-box > .member-container > .member-list > #search-form > label {
+  padding-left: 0.875rem;
+  border: 0.0625rem solid rgb(168, 168, 168);
+  border-radius: 0.125rem;
+}
+#main > .right > .content-container > .content-box > .member-container > .member-list > #search-form > label > .keyword {
+  font-size: 0.8rem;
+  width: 15rem;
+  height: 2.125rem;
+}
+#main > .right > .content-container > .content-box > .member-container > .member-list > #search-form > button {
+  font-size: 0.8rem;
+  height: 2.175rem;
+  width: 3.875rem;
 }
 #main > .right > .content-container > .content-box > .member-container > .page-container {
   display: flex;

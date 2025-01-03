@@ -8,13 +8,20 @@ import org.apache.ibatis.annotations.Param;
 public interface MemberMapper {
     int selectMembersCount();
 
-    MemberEntity[] selectMembers(
-                                 @Param("limitCount") int limitCount,
+    int selectMembersCountBySearch(@Param("keyword") String keyword);
+
+    MemberEntity[] selectMembers(@Param("limitCount") int limitCount,
                                  @Param("offsetCount") int offsetCount);
+
+    MemberEntity[] selectMembersBySearch(@Param("keyword") String keyword,
+                                         @Param("limitCount") int limitCount,
+                                         @Param("offsetCount") int offsetCount);
 
     MemberEntity selectUserByContact(@Param("contact") String contact);
 
     MemberEntity selectUserById(@Param("id") String id);
+
+    MemberEntity selectUserByIdIncludeDeleted(@Param("id") String id);
 
     MemberEntity selectUserByEmail(@Param("email") String email);
 

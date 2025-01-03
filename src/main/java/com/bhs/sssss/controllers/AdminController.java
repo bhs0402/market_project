@@ -36,12 +36,19 @@ public class AdminController {
     @RequestMapping(value = "/member-management", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getMemberManagement(@SessionAttribute(value = "member", required = false) MemberEntity member,
                                             @RequestParam(value = "page", required = false, defaultValue = "1") int page,
-                                            @RequestParam(value = "Keyword", required = false) String keyword) {
-        Pair<MemberPageVo, MemberEntity[]> pair = this.adminService.getMembers(page);
+                                            @RequestParam(value = "keyword", required = false) String keyword) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("pageVo", pair.getLeft());
-        modelAndView.addObject("members", pair.getRight());
-        System.out.println(Arrays.toString(pair.getRight()));
+        if(keyword == null){
+            Pair<MemberPageVo, MemberEntity[]> pair = this.adminService.getMembers(page);
+            modelAndView.addObject("pageVo", pair.getLeft());
+            modelAndView.addObject("members", pair.getRight());
+        } else {
+            Pair<MemberPageVo, MemberEntity[]> pair = this.adminService.getMembersBySearch(page, keyword);
+            modelAndView.addObject("pageVo", pair.getLeft());
+            modelAndView.addObject("members", pair.getRight());
+            modelAndView.addObject("keyword", keyword);
+        }
+
         modelAndView.addObject("member", member);
         modelAndView.setViewName("/admin/member-management");
         return modelAndView;

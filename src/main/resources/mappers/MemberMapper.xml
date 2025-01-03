@@ -119,6 +119,14 @@
         FROM `kurly`.`members`
     </select>
 
+    <select id="selectMembersCountBySearch" resultType="_int">
+        SELECT COUNT(0)
+        FROM `kurly`.`members`
+        WHERE `user_name` LIKE CONCAT('%', #{keyword}, '%')
+           OR `id` LIKE CONCAT('%', #{keyword}, '%')
+           OR `email` LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
     <select id="selectMembers"
             resultType="com.bhs.sssss.entities.MemberEntity">
         SELECT `id`           AS `id`,
@@ -138,6 +146,51 @@
         FROM `kurly`.`members`
         LIMIT #{limitCount} OFFSET #{offsetCount}
     </select>
+
+    <select id="selectMembersBySearch"
+            resultType="com.bhs.sssss.entities.MemberEntity">
+        SELECT `id`           AS `id`,
+               `password`     AS `password`,
+               `user_name`    AS `userName`,
+               `email`        AS `email`,
+               `contact`      AS `contact`,
+               `address`      AS `address`,
+               `gender`       AS `gender`,
+               `birth`        AS `birth`,
+               `created_at`   AS `createdAt`,
+               `updated_at`   AS `updatedAt`,
+               `deleted_at`   AS `deletedAt`,
+               `is_admin`     AS `isAdmin`,
+               `is_suspended` AS `isSuspended`,
+               `is_verified`  AS `isVerified`
+        FROM `kurly`.`members`
+        WHERE `user_name` LIKE CONCAT('%', #{keyword}, '%')
+           OR `id` LIKE CONCAT('%', #{keyword}, '%')
+           OR `email` LIKE CONCAT('%', #{keyword}, '%')
+        LIMIT #{limitCount} OFFSET #{offsetCount}
+    </select>
+
+    <select id="selectUserByIdIncludeDeleted"
+            resultType="com.bhs.sssss.entities.MemberEntity">
+        SELECT `id` AS `id`,
+               `password` AS `password`,
+               `user_name` AS `userName`,
+               `email` AS `email`,
+               `contact` AS `contact`,
+               `address` AS `address`,
+               `gender` AS `gender`,
+               `birth` AS `birth`,
+               `created_at` AS `createdAt`,
+               `updated_at` AS `updatedAt`,
+               `deleted_at` AS `deletedAt`,
+               `is_admin` AS `isAdmin`,
+               `is_suspended` AS `isSuspended`,
+               `is_verified` AS `isVerified`
+        FROM `kurly`.`members`
+        WHERE `id` = #{id}
+        LIMIT 1
+    </select>
+
 
     <insert id="insertMember"
             parameterType="com.bhs.sssss.entities.MemberEntity">

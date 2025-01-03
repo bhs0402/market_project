@@ -105,50 +105,52 @@
                 <h4 class="subtitle">상세 정보</h4>
                 <p class="desc">상세 정보를 조회합니다.</p>
                 <div class="member-container">
-                    <table class="member-table">
-                        <tbody>
-                        <tr>
-                            <th>이름</th>
-                            <td th:text="${user.getUserName()}"></td>
-                        </tr>
-                        <tr>
-                            <th>아이디</th>
-                            <td th:text="${user.getId()}"></td>
-                        </tr>
-                        <tr>
-                            <th>이메일</th>
-                            <td th:text="${user.getEmail()}"></td>
-                        </tr>
-                        <tr>
-                            <th>연락처</th>
-                            <td th:text="${user.getContact()}"></td>
-                        </tr>
-                        <tr>
-                            <th>주소</th>
-                            <td th:text="${user.getAddress()}"></td>
-                        </tr>
-                        <tr>
-                            <th>성별</th>
-                            <td th:text="${user.getGender()}"></td>
-                        </tr>
-                        <tr>
-                            <th>생년월일</th>
-                            <td th:text="${user.getBirth()}"></td>
-                        </tr>
-                        <tr>
-                            <th>가입일</th>
-                            <td th:text="${user.getCreatedAt()}"></td>
-                        </tr>
-                        <tr>
-                            <th>탈퇴여부(날짜)</th>
-                            <td th:text="${user.getDeletedAt()} == null ? 'X' : 'O'"></td>
-                        </tr>
-                        <tr>
-                            <th>활동 정지</th>
-                            <td th:text="${user.isSuspended()}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div class="member-list">
+                        <table class="member-table detail">
+                            <tbody>
+                            <tr>
+                                <th>이름</th>
+                                <td th:text="${user.getUserName()}"></td>
+                            </tr>
+                            <tr>
+                                <th>아이디</th>
+                                <td th:text="${user.getId()}"></td>
+                            </tr>
+                            <tr>
+                                <th>이메일</th>
+                                <td th:text="${user.getEmail()}"></td>
+                            </tr>
+                            <tr>
+                                <th>연락처</th>
+                                <td th:text="${user.getContact()}"></td>
+                            </tr>
+                            <tr>
+                                <th>주소</th>
+                                <td th:text="${user.getAddress()}"></td>
+                            </tr>
+                            <tr>
+                                <th>성별</th>
+                                <td th:text="${user.getGender()}"></td>
+                            </tr>
+                            <tr>
+                                <th>생년월일</th>
+                                <td th:text="${user.getBirth()}"></td>
+                            </tr>
+                            <tr>
+                                <th>가입일</th>
+                                <td th:text="${#temporals.format(user.getCreatedAt(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+                            </tr>
+                            <tr>
+                                <th>탈퇴여부(날짜)</th>
+                                <td th:text="${user.getDeletedAt()} == null ? 'X' : ${#temporals.format(user.getDeletedAt(), 'yyyy-MM-dd HH:mm:ss')}"></td>
+                            </tr>
+                            <tr>
+                                <th>활동 정지</th>
+                                <td th:text="${user.isSuspended()}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
