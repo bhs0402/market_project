@@ -91,5 +91,12 @@ public class MypageController {
         return response.toString();
     }
 
+    @RequestMapping(value = "/pick", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
+    public ModelAndView getPick(@SessionAttribute(value = "member", required = false) MemberEntity member) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("member", member);
+        modelAndView.setViewName("mypage/pick");
+        return modelAndView;
+    }
 
 }

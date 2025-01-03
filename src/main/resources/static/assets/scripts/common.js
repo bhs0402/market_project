@@ -198,8 +198,14 @@ setTimeout(() => {
 }, 100);
 
 
+const $pickButton = document.getElementById('pick-button');
+const $cartButton = document.getElementById('cart-button');
 
-
+$pickButton.onclick = () => {
+    const url = new URL(location.href);
+    url.pathname = '/mypage/pick';
+    location.href = url.toString();
+}
 
 
 

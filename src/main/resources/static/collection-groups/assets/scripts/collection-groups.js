@@ -35,3 +35,9 @@ $menuList.forEach((x) => {
         x.classList.add('active');
     }
 });
+
+const $cartInButton = document.querySelectorAll('#main > .container > .content-box > .item-box > .item-container > .item > .button-wrapper > .button');
+
+$cartInButton.forEach((x) => x.onclick = () => {
+    alert('장바구니 담기 구현해야됨');
+});

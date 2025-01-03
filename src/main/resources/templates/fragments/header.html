@@ -59,25 +59,30 @@
         <div class="icon-container">
             <div class="icon1">
                 <div class="submenu">
-                    <p>
+                    <p th:if="${member == null}">
                         <strong class="highlight">배송지를 등록</strong> 하고 <br>
                         <span class="text">구매 가능한 상품을 확인하세요!</span>
+                    </p>
+                    <p th:if="${member != null}" class="re">
+                        <span class="text" th:text="${member.getAddress()}"></span> <br>
+                        <strong class="highlight">샛별배송</strong>
                     </p>
                     <div class="button-container">
                         <button th:if="${member == null}" class="signup --obj-button --color-light-primary">
                             <a th:href="@{/member/login}" class="_text">로그인</a>
                         </button>
-                        <button class="address --obj-button --color-primary">
+                        <button th:if="${member == null}" class="address --obj-button --color-primary">
                             <span class="_text">
                                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAoCAQAAAAiAqDbAAAAAXNSR0IArs4c6QAAAYdJREFUeNrt1j9Lw0AYBvDGqlBF7VAQRUFBoeDmIoL4b9Cp4CJO1g9QrHQVCnbo7mdwLNJvUJy6KSIFxaloQQpSaxqT3D1FHodWrTYZctUtT7Yc97sX7u5NAgE/fvw4h5o+J2IiYceNtecRaj2DuaC9DxP8fkShPtMTWQ7jthP8go+U662NQgdBlMxFDlKj1oiIZIu1s0osNZRAUKR+TjcncAOCYksBNXdAUB53j1RCMEDUL/q911kFcX/S5zRqrIKg2PaIvo2DoLHptqR8AGXeI2otgeDLmNu4nQFhetwsEQNBDriiByDoETXWQfBpyHXRlAKqz4OgseCKFkBce76eaILyzLmWRgQERcLzObWzIGgtO+59EUSzEvKMVofRBKHXprvINAiKQ6W731hpt49kLvgJmpO4ar+NKbaU1sEC8S7P7Yw4xV1nrzI2FNnXWVz+anymHZfRVo9VZqnJqEzLIuryUeatvdaFqE31yLp02zYro//AitQffxLLYWuXg/6vgR8/HfkA7NFWMofTE4wAAAAASUVORK5CYII=" class="_icon">
                                 주소 검색</span>
                         </button>
+                        <button th:if="${member != null}" class="readdress --obj-button --color-light-primary">배송지 변경</button>
                     </div>
                 </div>
             </div>
-            <button class="icon2" aria-label="찜하기" type="button"></button>
+            <button class="icon2" aria-label="찜하기" type="button" id="pick-button"></button>
             <div class="">
-                <button class="icon3"></button>
+                <button class="icon3" id="cart-button"></button>
             </div>
         </div>
     </div>
@@ -137,19 +142,24 @@
             <div class="icon-container">
                 <div class="icon1">
                     <div class="submenu">
-                        <p>
+                        <p th:if="${member == null}">
                             <strong class="highlight">배송지를 등록</strong> 하고 <br>
                             <span class="text">구매 가능한 상품을 확인하세요!</span>
+                        </p>
+                        <p th:if="${member != null}" class="re">
+                            <span class="text" th:text="${member.getAddress()}"></span> <br>
+                            <strong class="highlight">샛별배송</strong>
                         </p>
                         <div class="button-container">
                             <button th:if="${member == null}" class="signup --obj-button --color-light-primary">
                                 <a th:href="@{/member/login}" class="_text">로그인</a>
                             </button>
-                            <button class="address --obj-button --color-primary">
+                            <button th:if="${member == null}" class="address --obj-button --color-primary">
                             <span class="_text">
                                 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAoCAQAAAAiAqDbAAAAAXNSR0IArs4c6QAAAYdJREFUeNrt1j9Lw0AYBvDGqlBF7VAQRUFBoeDmIoL4b9Cp4CJO1g9QrHQVCnbo7mdwLNJvUJy6KSIFxaloQQpSaxqT3D1FHodWrTYZctUtT7Yc97sX7u5NAgE/fvw4h5o+J2IiYceNtecRaj2DuaC9DxP8fkShPtMTWQ7jthP8go+U662NQgdBlMxFDlKj1oiIZIu1s0osNZRAUKR+TjcncAOCYksBNXdAUB53j1RCMEDUL/q911kFcX/S5zRqrIKg2PaIvo2DoLHptqR8AGXeI2otgeDLmNu4nQFhetwsEQNBDriiByDoETXWQfBpyHXRlAKqz4OgseCKFkBce76eaILyzLmWRgQERcLzObWzIGgtO+59EUSzEvKMVofRBKHXprvINAiKQ6W731hpt49kLvgJmpO4ar+NKbaU1sEC8S7P7Yw4xV1nrzI2FNnXWVz+anymHZfRVo9VZqnJqEzLIuryUeatvdaFqE31yLp02zYro//AitQffxLLYWuXg/6vgR8/HfkA7NFWMofTE4wAAAAASUVORK5CYII=" class="_icon">
                                 주소 검색</span>
                             </button>
+                            <button th:if="${member != null}" class="readdress --obj-button --color-light-primary">배송지 변경</button>
                         </div>
                     </div>
                 </div>

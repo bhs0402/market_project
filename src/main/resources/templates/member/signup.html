@@ -14,6 +14,14 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script defer type="text/javascript" th:src="@{'/member/assets/scripts/signup.js'}"></script>
     <script defer type="text/javascript" th:src="@{'/assets/scripts/common.js'}"></script>
+    <script th:if="${session.member != null}">
+        alert('올바르지 않은 접근입니다.');
+        if(history.length > 1){
+            history.back();
+        } else {
+            window.close();
+        }
+    </script>
     <title>회원가입 - 컬리</title>
 </head>
 <body>

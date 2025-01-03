@@ -693,12 +693,18 @@ body {
         > p {
           margin: 0;
           font-weight: 400;
-          font-size: 1rem;
+          font-size: 0.9rem;
           color: rgb(51, 51, 51);
           line-height: 1.5rem;
           letter-spacing: 0.02rem;
 
+          &.re {
+            font-size: 1rem;
+            font-weight: 500;
+          }
+
           > .highlight {
+            font-size: 0.9rem;
             font-weight: 400;
             color: #5f0080;
           }
@@ -736,8 +742,6 @@ body {
             text-align: center;
             overflow: hidden;
             height: 2.25rem;
-            border-radius: 0.1875rem;
-            background-color: #5f0080;
             border: none;
 
             > ._text {
@@ -751,6 +755,12 @@ body {
                 vertical-align: -0.3125rem;
               }
             }
+          }
+
+          > .readdress {
+            font-size: 0.75rem;
+            width: 15rem;
+            height: 2.125rem;
           }
         }
 
