@@ -6,22 +6,21 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="shortcut icon" th:href="@{'/assets/images/favicon.ico'}">
+    <link rel="stylesheet" type="text/css" th:href="@{'/assets/styles/common.css'}">
     <link type="text/css" rel="stylesheet" th:href="@{'/cart/assets/styles/cart.css'}">
-    <script defer type="text/javascript" th:src="@{'/cart/assets/scripts/cart.js'}"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{'/assets/styles/common.css'}">
     <script defer type="text/javascript" th:src="@{'/assets/scripts/common.js'}"></script>
+    <script defer type="text/javascript" th:src="@{'/cart/assets/scripts/cart.js'}"></script>
+
     <title>컬리 - 마켓컬리</title>
 </head>
 <body>
-<div>
-    <div>
-        <div></div>
-        <div></div>
-        <div id="main">
+<div th:replace="~{/fragments/header :: headerFragment}"></div>
+
+<div id="main">
             <div class="cart-main">
                 <h2>
                     <span class="cart-font">장바구니</span>
@@ -75,7 +74,7 @@
                             </div>
                             <div class="item-container" id="item-container" th:if="${items != null and !#lists.isEmpty(items)}">
                                 <div class="item" th:each="item:${items}">
-                                    <input class="index" name="index" th:value="${item.index}" style="display: none">
+                                    <input class="index" name="index" th:value="${item.getIndex()}" style="display: none">
                                     <input class="id" name="itemId" th:value="${item.getItemId()}" style="display: none">
                                     <div class="status-cover" th:if="${item.getStatus() == 1}">
                                         <i class="status-icon" style="width: 20px; height: 20px">
@@ -217,7 +216,7 @@
                         <div class="pay-container">
                             <div class="delivery-box">
                                 <div class="delivery">
-                                    <i class="delivery-icon" style="width: 20px; height: 1px">
+                                    <i class="delivery-icon">
                                         <svg width="16.333333334" height="16.333333334" viewBox="0 0 20 24" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" clip-rule="evenodd"
@@ -235,8 +234,8 @@
                                     <div class="location">
                                         <div>
                                             <p class="_text">
-                                                "대구 중구 중앙대로 366"
-                                                "9층, 10층"
+                                                대구 중구 중앙대로 366
+                                                9층, 10층
                                             </p>
                                         </div>
                                         <button class="change-button" type="button">
@@ -271,8 +270,7 @@
                 </div>
             </div>
         </div>
-        <div class="bottom"></div>
-    </div>
-</div>
+
+<div th:replace="~{/fragments/footer :: footerFragment}"></div>
 </body>
 </html>

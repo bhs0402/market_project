@@ -28,7 +28,7 @@ $filterBox.forEach((x) => {
 });
 
 
-const $menuList = Array.from(document.querySelectorAll('#nav > .header-wrapper > ul > .item > a'));
+const $menuList = Array.from(document.querySelectorAll('#nav > .header-wrapper > ul > .item1 > a'));
 const $title = document.querySelector('.top > .title');
 $menuList.forEach((x) => {
     if($title.innerText === x.innerText){

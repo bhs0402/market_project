@@ -1,18 +1,19 @@
 @charset "UTF-8";
-
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
 @import "./cart-global";
 
 #main {
-  padding-bottom: 80px;
+  font-family: Pretendard, "Pretendard Variable", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  padding-bottom: 5rem;
   background-color: #F2F5F8;
 
   > .cart-main {
-    width: 1050px;
+    width: 65.625rem;
     margin: 0 auto;
 
 
     > h2 {
-      padding: 50px 0 48px;
+      padding: 3.125rem 0 3rem;
       text-align: center;
       font-size: 1.5em;
       font-weight: bold;
@@ -20,9 +21,9 @@
 
       > .cart-font {
         color: #333333;
-        line-height: 36px;
+        line-height: 2.25rem;
         font-weight: 600;
-        font-size: 28px;
+        font-size: 1.75rem;
       }
     }
 
@@ -30,19 +31,19 @@
       display: flex;
       -webkit-box-pack: center;
       justify-content: center;
-      letter-spacing: -0.5px;
+      letter-spacing: -0.031rem;
 
 
       > .cart-list-container {
         position: relative;
-        width: 565px;
-        margin-right: 20px;
+        width: 35.3125rem;
+        margin-right: 1.25rem;
 
 
         > .cart-check-box {
           overflow: hidden;
-          border-radius: 16px;
-          margin-bottom: 16px;
+          border-radius: 1rem;
+          margin-bottom: 1rem;
 
           > .cart-check {
             position: relative;
@@ -53,7 +54,7 @@
             align-items: center;
             background-color: #fff;
             pointer-events: auto;
-            padding: 16px;
+            padding: 1rem;
 
 
             > .text-container {
@@ -75,7 +76,7 @@
                 border-color: rgba(116, 116, 116, 0.3);
                 appearance: auto;
                 cursor: default;
-                margin: 3px 3px 3px 4px;
+                margin: 0.1875rem 0.1875rem 0.1875rem 0.25rem;
 
 
               }
@@ -89,8 +90,8 @@
                 -moz-appearance: none;
                 appearance: none;
                 position: absolute;
-                width: 1px;
-                height: 1px;
+                width: 0.0625rem;
+                height: 0.0625rem;
                 border: none;
                 opacity: 0;
                 overflow: hidden;
@@ -99,15 +100,15 @@
 
               > .checkbox:checked + .input-all-cover {
                 background-image: url("data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='20'%20height='20'%20viewBox='0%200%2020%2020'%20fill='none'%3e%3cpath%20d='M15.707%207.7071L8.68405%2014.7309L4.29272%2010.3389L5.70704%208.92483L8.68407%2011.9023L14.2927%206.29297L15.707%207.7071Z'%20fill='%23F2F5F8'/%3e%3c/svg%3e");
-                border-width: 2px;
+                border-width: 0.125rem;
                 border-style: solid;
-                width: 20px;
-                height: 20px;
+                width: 1.25rem;
+                height: 1.25rem;
                 box-sizing: border-box;
                 flex-shrink: 0;
                 background-repeat: no-repeat;
                 background-position: 50% 50%;
-                border-radius: 4px;
+                border-radius: 0.25rem;
 
                 background-color: #222;
                 border-color: #222;
@@ -116,24 +117,24 @@
 
               > .input-all-cover {
                 background-image: url("data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='20'%20height='20'%20viewBox='0%200%2020%2020'%20fill='none'%3e%3cpath%20d='M15.707%207.7071L8.68405%2014.7309L4.29272%2010.3389L5.70704%208.92483L8.68407%2011.9023L14.2927%206.29297L15.707%207.7071Z'%20fill='%23F2F5F8'/%3e%3c/svg%3e");
-                border-width: 2px;
+                border-width: 0.125rem;
                 border-style: solid;
-                width: 20px;
-                height: 20px;
+                width: 1.25rem;
+                height: 1.25rem;
                 box-sizing: border-box;
                 flex-shrink: 0;
                 background-repeat: no-repeat;
                 background-position: 50% 50%;
-                border-radius: 4px;
+                border-radius: 0.25rem;
                 border-color: #dfe4eb;
 
               }
 
               > ._text {
-                margin-left: 16px;
-                line-height: 22px;
+                margin-left: 1rem;
+                line-height: 1.375rem;
                 font-weight: 400;
-                font-size: 16px;
+                font-size: 1rem;
 
 
                 //color: #a7b2bc;
@@ -142,31 +143,31 @@
             }
 
             > .delete-button {
-              border-width: 1px;
+              border-width: 0.0625rem;
               border-style: solid;
               z-index: 1;
               overflow: hidden;
               transition: all .1s ease-out;
               display: flex;
               cursor: default;
-              border-radius: 6px;
-              padding-right: 12px;
-              padding-left: 12px;
-              height: 32px;
+              border-radius: 0.375rem;
+              padding-right: 0.75rem;
+              padding-left: 0.75rem;
+              height: 2rem;
               $background_color: #fff;
               background-color: $background_color;
               border-color: #dfe4eb;
               font-weight: 600;
-              font-size: 14px;
+              font-size: 0.875rem;
               align-items: center;
               box-sizing: border-box;
               color: #222;
 
-              &.no-deleteButton{
+              &.no-deleteButton {
                 color: #bcc4cc;
                 background-color: #fff;
                 cursor: default;
-                border-width: 1px;
+                border-width: 0.0625rem;
                 border-style: solid;
                 z-index: 1;
                 overflow: hidden;
@@ -174,25 +175,26 @@
                 display: flex;
                 align-items: center;
                 box-sizing: border-box;
-                border-radius: 6px;
-                padding-right: 12px;
-                padding-left: 12px;
-                height: 32px;
+                border-radius: 0.375rem;
+                padding-right: 0.75rem;
+                padding-left: 0.75rem;
+                height: 2rem;
                 border-color: #dfe4eb;
                 font-weight: 600;
-                font-size: 14px;
+                font-size: 0.875rem;
 
 
                 > ._no-text {
                   color: #bcc4cc;
-                  line-height: 20px;
+                  line-height: 1.25rem;
                   font-weight: 600;
-                  font-size: 14px;
+                  font-size: 0.875rem;
 
-                  &:hover{
+                  &:hover {
                     background: transparent;
                   }
-                  &:active{
+
+                  &:active {
                     background: transparent;
                   }
 
@@ -210,9 +212,9 @@
               }
 
               > ._text {
-                line-height: 20px;
+                line-height: 1.25rem;
                 font-weight: 600;
-                font-size: 14px;
+                font-size: 0.875rem;
 
               }
             }
@@ -224,9 +226,10 @@
 }
 
 #list {
-  &.no-items{
+  &.no-items {
     background-color: transparent;
   }
+
   > #no-list {
     display: flex;
     -webkit-box-pack: center;
@@ -235,17 +238,15 @@
     align-items: center;
     flex-direction: column;
     pointer-events: none;
-    margin-top: 16px;
+    margin-top: 1rem;
   }
 
-
-  // :: after
 
   overflow: hidden;
   position: relative;
   background-color: #fff;
-  border-radius: 16px;
-  padding: 20px 16px;
+  border-radius: 1rem;
+  padding: 1.25rem 1rem;
 
 
   > .kurlyDelivery {
@@ -330,13 +331,13 @@
 
   > .item-container {
     > .item {
-      border-top: 1px solid #eceff3;
+      border-top: 0.0625rem solid #eceff3;
 
       > .status-cover {
         display: flex;
         -webkit-box-align: center;
         align-items: center;
-        padding: 16px 0 12px;
+        padding: 1rem 0 0.75rem;
 
         > .status-icon {
           align-items: center;
@@ -345,11 +346,13 @@
         }
 
         > ._text {
-          margin-left: 4px;
+          margin-left: 0.25rem;
           color: #222;
-          line-height: 22px;
+          line-height: 1.375rem;
           font-weight: 600;
-          font-size: 16px;
+          font-size: 1rem;
+          margin-top: 0;
+          margin-bottom: 0;
         }
       }
 
@@ -456,8 +459,8 @@
               margin-right: 32px;
 
               > ._text {
-                margin-block-start: 1px;
-                margin-block-end: 1px;
+                margin-block-start: 0.0625rem;
+                margin-block-end: 0.0625rem;
 
                 color: #222;
                 display: -webkit-box;
@@ -617,14 +620,11 @@
               }
 
               > .quantity {
-
-                margin-right: -50px;
                 display: flex;
                 -webkit-box-align: center;
                 align-items: center;
                 width: 96px;
                 height: 36px;
-                padding: 10px 16px 10px 10px;
                 border-radius: 20px;
                 background-color: #eceff3;
 
@@ -648,20 +648,19 @@
                 }
 
                 > .num {
-                  padding: 10px 16px 10px 13px;
+                  padding: 0.625rem 1rem 0.625rem 0.8125rem;
                   text-align: center;
-                  min-height: 36px;
-                  margin: 0 2px;
-                  font-size: 18px;
+                  margin: 0 0.125rem;
+                  font-size: 1.125rem;
                   font-weight: 600;
-                  line-height: 26px;
+                  line-height: 1.625rem;
 
 
                 }
 
                 > .plus {
-                  width: 20px;
-                  height: 20px;
+                  width: 1.25rem;
+                  height: 1.25rem;
                   background-color: transparent;
                   border: none;
                   cursor: pointer;
@@ -721,7 +720,6 @@
   margin-top: 160px;
 
 
-
   > .no-items-icon {
     align-items: center;
     justify-content: center;
@@ -747,31 +745,32 @@
   }
 }
 
-
 #pay {
   position: relative;
-  width: 375px;
-  min-height: 545px;
+  width: 23.4375rem;
+  min-height: 34.0625rem;
 
   > .pay-container {
     position: sticky;
-    top: 110px;
+    top: 6.875rem;
     right: 0;
-    width: 375px;
+    width: 23.4375rem;
 
     > .delivery-box {
-      padding: 7px;
+      padding: 1.25rem 1.25rem 2.25rem 1.25rem;
       background-color: #fff;
-      border-radius: 16px;
-      margin-bottom: 16px;
+      border-radius: 1rem;
+      margin-bottom: 1rem;
 
       > .delivery {
         display: flex;
         -webkit-box-align: center;
         align-items: center;
-        margin-bottom: 1px;
+        margin-bottom: 1rem;
 
         > .delivery-icon {
+          width: 1.25rem;
+          height: 1.25rem;
           align-items: center;
           justify-content: center;
           display: inline-flex;
@@ -779,10 +778,13 @@
         }
 
         > ._text {
-          margin: 4px;
-          line-height: 26px;
+          margin-left: 0.25rem;
+          line-height: 1.625rem;
           font-weight: 600;
-          font-size: 18px;
+          font-size: 1.125rem;
+          margin-block-start: 0.0625rem;
+          margin-block-end: 0.0625rem;
+
         }
       }
 
@@ -792,10 +794,11 @@
 
         > ._text {
           color: #672091;
-          margin-bottom: 1px;
-          line-height: 18px;
+          margin-top: 0;
+          margin-bottom: 0.25rem !important;
+          line-height: 1.125rem;
           font-weight: 600;
-          font-size: 13px;
+          font-size: 0.8125rem;
         }
 
         > .location {
@@ -805,15 +808,17 @@
 
           > div > ._text {
             word-break: break-word;
-            line-height: 22px;
+            line-height: 1.375rem;
             font-weight: 400;
-            font-size: 16px;
+            font-size: 1rem;
+            margin-block: 0;
+            margin-inline: 0;
           }
 
           > .change-button {
             flex-shrink: 0;
-            margin-left: 24px;
-            border-width: 1px;
+            margin-left: 1.5rem;
+            border-width: 0.0625rem;
             border-style: solid;
             z-index: 1;
             overflow: hidden;
@@ -822,16 +827,16 @@
             justify-content: center;
             cursor: pointer;
             box-sizing: border-box;
-            border-radius: 6px;
-            padding-right: 12px;
-            padding-left: 12px;
-            height: 32px;
+            border-radius: 0.375rem;
+            padding-right: 0.75rem;
+            padding-left: 0.75rem;
+            height: 2rem;
             border-color: #dfe4db;
             $background_color: #fff;
             background-color: $background_color;
             color: #222;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 0.875rem;
 
             &:hover {
               background-color: darken($background_color, 5%);
@@ -852,34 +857,36 @@
     }
 
     > .pay-box {
-      padding: 7px 10px 7px 10px;
+      padding: 1.25rem;
       background-color: #fff;
-      border-radius: 16px;
-      margin-bottom: 16px;
+      border-radius: 1rem;
+      margin-bottom: 1rem;
 
 
       > ._text {
-        margin-bottom: 20px;
-        line-height: 26px;
+        margin-bottom: 1.25rem;
+        line-height: 1.625rem;
         font-weight: 600;
-        font-size: 18px;
+        font-size: 1.125rem;
       }
 
       > .pay {
+        margin-top: 0.75rem !important;
         display: flex;
         -webkit-box-pack: justify;
         justify-content: space-between;
 
-        > .text {
-          line-height: 1px;
+        > .text,
+        > ._text{
+          line-height: 0.0625rem;
           font-weight: 400;
-          font-size: 16px;
+          font-size: 1rem;
         }
 
         > .price {
-          line-height: 1px;
+          line-height: 0.0625rem;
           font-weight: 600;
-          font-size: 16px;
+          font-size: 1rem;
         }
 
         > .color {
@@ -888,43 +895,43 @@
       }
 
       > .total-pay {
+        margin-top: 0.75rem !important;
         display: flex;
         -webkit-box-pack: justify;
         justify-content: space-between;
         -webkit-box-align: center;
         align-items: center;
-        border-top: 1px solid #eceff3;
-        padding: 16px 0 4px;
+        border-top: 0.0625rem solid #eceff3;
+        padding: 1rem 0 0.25rem;
 
         > .text {
-          line-height: 1px;
+          line-height: 0.0625rem;
           font-weight: 400;
-          font-size: 16px;
+          font-size: 1rem;
         }
 
         > .price {
-          line-height: 1px;
-          font-weight: 600;
-          font-size: 16px;
+          line-height: 0.0625rem;
+          font-weight: 700;
+          font-size: 1.5rem;
         }
       }
 
 
       > .pay ~ div {
-        margin-top: 1px;
+        margin-top: 0.0625rem;
       }
 
       > .mileage {
         text-align: right;
-        line-height: 16px;
+        line-height: 1rem;
         font-weight: 400;
-        font-size: 12px;
+        font-size: 0.75rem;
       }
     }
 
     > .pay-button {
-      //$background_color: #e8dbf3;
-      //color: #c19edf;
+      display: flex;
       z-index: 1;
       overflow: hidden;
       transition: all .1s ease-out;
@@ -933,16 +940,14 @@
       cursor: pointer;
       border-width: 0;
       box-sizing: border-box;
-      border-radius: 12px;
-      height: 56px;
+      border-radius: 0.75rem;
+      height: 3.5rem;
       font-weight: 600;
-      font-size: 18px;
-      width: 375px;
-      padding: 24px;
-
+      font-size: 1.125rem;
+      width: 23.4375rem;
+      padding: 1.5rem;
       align-items: center;
 
-      // ::after
       $background_color: #672091;
       color: #fff;
       background-color: $background_color;
@@ -954,16 +959,17 @@
       &:active {
         background-color: darken($background_color, 10%);
       }
+
       &.disabled {
         background-color: #f0e0ff;
-        color: #c6a9a9;
+        color: #c19edf;
         cursor: default;
       }
     }
   }
 }
 
-.---dialog-cover {
+.---dialog-cover2 {
   > .--dialog {
     position: fixed;
     top: 0;
@@ -1078,6 +1084,7 @@
     }
   }
 }
+
 .input-cover.disabled {
   background-image: url("data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='20'%20height='20'%20viewBox='0%200%2020%2020'%20fill='none'%3e%3cpath%20d='M15.707%207.7071L8.68405%2014.7309L4.29272%2010.3389L5.70704%208.92483L8.68407%2011.9023L14.2927%206.29297L15.707%207.7071Z'%20fill='%23F2F5F8'/%3e%3c/svg%3e");
   border-width: 2px;

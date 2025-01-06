@@ -42,7 +42,6 @@ new Swiper('.swiper3', {
 const $cartBtn = document.querySelectorAll('.slide-container > .swiper-initialized > .swiper-wrapper > .swiper-slide > .link > div > button');
 
 $cartBtn.forEach((x) => x.onclick = () => {
-    alert('장바구니 담기');
-    //TODO 장바구니 담기 기능 구현
+
 });
 

@@ -21,10 +21,10 @@
                     <span class="toggle"></span>
                 </a>
                 <div class="menu member">
-                    <a th:href="@{/admin/}" th:if="${member.isAdmin()}" href="#" class="item">관리자페이지</a>
-                    <a href="#" class="item">주문내역</a>
-                    <a th:href="@{/mypage/info}" class="item">개인정보 수정</a>
-                    <a th:href="@{/member/logout}" class="item" id="logout">로그아웃</a>
+                    <a th:href="@{/admin/}" th:if="${member.isAdmin()}" href="#" class="item1">관리자페이지</a>
+                    <a href="#" class="item1">주문내역</a>
+                    <a th:href="@{/mypage/info}" class="item1">개인정보 수정</a>
+                    <a th:href="@{/member/logout}" class="item1" id="logout">로그아웃</a>
                 </div>
             </div>
             <div class="bar"></div>
@@ -34,10 +34,10 @@
                     <span class="toggle"></span>
                 </a>
                 <div class="menu">
-                    <a class="item">공지사항</a>
-                    <a class="item">자주하는 질문</a>
-                    <a class="item">1:1 문의</a>
-                    <a class="item">대량주문 문의</a>
+                    <a class="item1">공지사항</a>
+                    <a class="item1">자주하는 질문</a>
+                    <a class="item1">1:1 문의</a>
+                    <a class="item1">대량주문 문의</a>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
                 <a th:href="@{/main}" class="logo_text">마켓컬리</a>
                 <form id="search-form" action="/collection-groups/search" method="get">
                     <label class="search-box">
-                        <input id="gnb_search" placeholder="검색어를 입력해주세요" required="" class="keyword" name="keyword">
+                        <input autocomplete="false" id="gnb_search" placeholder="검색어를 입력해주세요" required="" class="keyword" name="keyword">
                         <button id="submit" aria-label="submit" class="submit"></button>
                     </label>
                 </form>
@@ -81,9 +81,9 @@
                 </div>
             </div>
             <button class="icon2" aria-label="찜하기" type="button" id="pick-button"></button>
-            <div class="">
+            <a th:href="@{/cart/in}" class="">
                 <button class="icon3" id="cart-button"></button>
-            </div>
+            </a>
         </div>
     </div>
     <nav class="header" id="nav">
@@ -94,7 +94,7 @@
                 <div class="category-container">
                     <div class="category-menu">
                         <ul class="menu">
-                            <li class="item">
+                            <li class="item1">
                                 <div class="img-cover">
                                     <img src="https://collection-image.kurly.com/site-category-groups/191/oBzWCoHWrTmTj0haIpcfv4w3sejpfz2LzPfwzS39.png" alt="홀리데이 마켓" class="image">
                                     <span class="category-name"></span>
@@ -113,16 +113,16 @@
                 </div>
             </div>
             <ul>
-                <li class="item">
+                <li class="item1">
                     <a th:href="@{/collection-groups/market-newproduct}" class="text">신상품</a>
                 </li>
-                <li class="item">
+                <li class="item1">
                     <a th:href="@{/collection-groups/market-best}" class="text">베스트</a>
                 </li>
-                <li class="item">
+                <li class="item1">
                     <a th:href="@{/collection-groups/market-sales}" class="text">알뜰쇼핑</a>
                 </li>
-                <li class="item">
+                <li class="item1">
                     <a th:href="@{/market-benefit}" class="text benefit">특가/혜택</a>
                 </li>
             </ul>
@@ -134,7 +134,7 @@
             <div class="fixed-search">
                 <form action="/collection-groups/search" method="get">
                     <label>
-                        <input id="fixed_search" placeholder="검색어를 입력해주세요" required="" class="fixed-input" name="keyword" value="">
+                        <input autocomplete="false" id="fixed_search" placeholder="검색어를 입력해주세요" required="" class="fixed-input" name="keyword" value="">
                         <button aria-label="submit" class="search-button"></button>
                     </label>
                 </form>
@@ -164,9 +164,9 @@
                     </div>
                 </div>
                 <button class="icon2" aria-label="찜하기" type="button"></button>
-                <div class="">
+                <a th:href="@{/cart/in}" class="">
                     <button class="icon3"></button>
-                </div>
+                </a>
             </div>
         </div>
     </nav>
