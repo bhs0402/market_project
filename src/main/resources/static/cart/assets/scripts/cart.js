@@ -21,8 +21,10 @@ document.querySelectorAll('.checkbox').forEach(checkbox => {
 function selectAll(selectAll) {
     const $checkboxes = document.getElementsByName('check');
     $checkboxes.forEach((checkbox) => {
-        checkbox.checked = selectAll.checked;
-        sendCheckboxStatus(checkbox);
+        if(checkbox.checked !== selectAll.checked) {
+            checkbox.checked = selectAll.checked;
+            sendCheckboxStatus(checkbox);
+        }
     });
     calculateTotal();
 }
@@ -206,15 +208,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             const response = JSON.parse(xhr.responseText);
+            const checkboxStatus = response['checkboxStatus'];
             const isAllChecked = response['isAllChecked'];
+            const isDeliveryChecked = response['isDeliveryChecked'];
 
-            // 초기 상태 설정
-            allSelectCheckbox.checked = isAllChecked;
-            deliveryCheckbox.checked = isAllChecked;
-
-            itemCheckboxes.forEach(checkbox => {
-                checkbox.checked = isAllChecked;
+            itemCheckboxes.forEach((checkbox, index) => {
+                checkbox.checked = checkboxStatus[index] || false;
             });
+
+            allSelectCheckbox.checked = isAllChecked;
+            deliveryCheckbox.checked = isDeliveryChecked;
 
             calculateTotal(); // 초기 총합 계산
         };

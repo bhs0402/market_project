@@ -136,7 +136,18 @@ public class CartController {
         JSONObject response = new JSONObject();
         List<CartEntity> items = this.cartService.getAllCarts();
         boolean isAllChecked = items.stream().allMatch(item -> item.getIsChecked() == 1);
+
+        //샛별배송 체크박스 상태 설정
+        boolean isDeliveryChecked = items.stream().allMatch(item -> item.getIsChecked() == 1);
+
+        //개별 체크박스 상태 리스트 생성
+        List<Boolean> checkboxStatus = items.stream()
+                .map(item -> item.getIsChecked() == 1)
+                .toList();
+
         response.put("isAllChecked", isAllChecked);
+        response.put("isDeliveryChecked", isDeliveryChecked);
+        response.put("checkboxStatus", checkboxStatus);
         return response.toString();
     }
 
