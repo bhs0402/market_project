@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/cart")
@@ -25,8 +27,15 @@ public class CartController {
     @RequestMapping(value = "/in", method = RequestMethod.GET, produces = MediaType.TEXT_HTML_VALUE)
     public ModelAndView getCartIndex(@SessionAttribute(value = "member", required = false) MemberEntity member) {
         ModelAndView mav = new ModelAndView();
+        // 로그인 상태가 아닐 때
+        if (member == null) {
+            mav.addObject("items", null);
+            mav.addObject("message", "장바구니에 담긴 상품이 없습니다.");
+            mav.setViewName("cart/cart-in");
+            return mav;
+        }
         // 장바구니 아이템 조회
-        List<CartEntity> items = this.cartService.getAllCarts();
+        List<CartEntity> items = this.cartService.getCartsByMemberId(member.getId());
         boolean hasUncheckedItems = items.stream().anyMatch(item -> item.getIsChecked() == 0);
         mav.addObject("member", member);
         mav.addObject("items", items);
@@ -134,20 +143,21 @@ public class CartController {
     @ResponseBody
     public String getCheckboxStatus() {
         JSONObject response = new JSONObject();
-        List<CartEntity> items = this.cartService.getAllCarts();
+        List<CartEntity> items = this.cartService.getAllCarts(); // 전체 선택 상태 확인
         boolean isAllChecked = items.stream().allMatch(item -> item.getIsChecked() == 1);
 
-        //샛별배송 체크박스 상태 설정
+        // 샛별배송 체크박스 상태 설정
         boolean isDeliveryChecked = items.stream().allMatch(item -> item.getIsChecked() == 1);
 
-        //개별 체크박스 상태 리스트 생성
-        List<Boolean> checkboxStatus = items.stream()
-                .map(item -> item.getIsChecked() == 1)
-                .toList();
+        // 개별 체크박스 상태를 index 기준으로 반환
+        Map<Integer, Boolean> checkboxStatus = items.stream()
+                .collect(Collectors.toMap(CartEntity::getIndex, item -> item.getIsChecked() == 1));
+
 
         response.put("isAllChecked", isAllChecked);
         response.put("isDeliveryChecked", isDeliveryChecked);
         response.put("checkboxStatus", checkboxStatus);
+
         return response.toString();
     }
 
