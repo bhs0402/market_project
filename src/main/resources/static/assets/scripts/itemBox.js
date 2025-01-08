@@ -51,6 +51,8 @@ $cartBtn.forEach((x) => x.onclick = (e) => {
     const $title = x.parentElement.parentElement.querySelector(':scope  > .product-info > .product-name');
     const $price = x.parentElement.parentElement.querySelector(':scope > .product-info > .content-row > .product-price > div > .dimmed-price > .price-number');
     const $salesPrice = x.parentElement.parentElement.querySelector(':scope > .product-info > .content-row > .product-price > .discount > .sales-price > .price-number');
+    const $itemId = x.parentElement.parentElement.querySelector(':scope  > .product-info > label > .item-id');
+    const $itemStatus = x.parentElement.parentElement.querySelector(':scope  > .product-info > label > .item-status');
 
     CartDialog.show({
         img: $img.src,
@@ -68,12 +70,29 @@ $cartBtn.forEach((x) => x.onclick = (e) => {
         }, {
             text: '장바구니 담기',
             onclick: ($dialog) => {
+                const count = document.querySelector('.---cartDialog > ._div2 > ._div20 > ._div23 > ._count');
+                const formData = new FormData();
+                formData.append('itemId', $itemId.value);
+                formData.append('itemStatus', $itemStatus.value);
+                formData.append('quantity', count.innerHTML);
+
+                const xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = () => {
+                    if (xhr.readyState !== XMLHttpRequest.DONE){
+                        return;
+                    }
+                    if (xhr.status < 200 || xhr.status >= 300) {
+                        alert('오류');
+                        return;
+                    }
+                };
+                xhr.open('POST', '/cart/in');
+                xhr.send(formData);
                 CartDialog.hide($dialog);
             }
         }]
     });
-    plusMinus();
-
+    CartDialog.plusMinus();
 });
 
 $cartBtn2.forEach((x) => x.onclick = (e) => {
@@ -82,6 +101,8 @@ $cartBtn2.forEach((x) => x.onclick = (e) => {
     const $title2 = x.parentElement.parentElement.querySelector(':scope  > .img-wrapper > .product-info2 > .content > .title');
     const $price2 = x.parentElement.parentElement.querySelector(':scope > .img-wrapper > .product-info2 > .content > .product-price > div > .dimmed-price > .price-number');
     const $salesPrice2 = x.parentElement.parentElement.querySelector(':scope > .img-wrapper > .product-info2 > .content > .product-price > .discount > .sales-price > .price-number');
+    const $itemId2 = x.parentElement.parentElement.querySelector(':scope  > .img-wrapper > .product-info2 > .content > label > .item-id');
+    const $itemStatus2 = x.parentElement.parentElement.querySelector(':scope  > .img-wrapper > .product-info2 > .content > label > .item-status');
 
     CartDialog.show({
         img: $img2.src,
@@ -99,44 +120,29 @@ $cartBtn2.forEach((x) => x.onclick = (e) => {
         }, {
             text: '장바구니 담기',
             onclick: ($dialog) => {
+                const count2 = document.querySelector('.---cartDialog > ._div2 > ._div20 > ._div23 > ._count');
+                const formData = new FormData();
+                formData.append('itemId', $itemId2.value);
+                formData.append('itemStatus', $itemStatus2.value);
+                formData.append('quantity', count2.innerHTML);
+
+                const xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = () => {
+                    if (xhr.readyState !== XMLHttpRequest.DONE){
+                        return;
+                    }
+                    if (xhr.status < 200 || xhr.status >= 300) {
+                        alert('오류');
+                        return;
+                    }
+                };
+                xhr.open('POST', '/cart/in');
+                xhr.send(formData);
                 CartDialog.hide($dialog);
             }
         }]
     });
 
-    plusMinus();
+    CartDialog.plusMinus();
 });
 
-
-const plusMinus = () => {
-    const $div23 = document.querySelector('.---cartDialog > ._div2 > ._div20 > ._div23');
-    const $minusButton = $div23.querySelector('._minus');
-    const $count = $div23.querySelector('._count');
-    const $plusButton = $div23.querySelector('._plus');
-    const $totalPrice = document.querySelector('.---cartDialog > ._div3 > ._totalPrice');
-    const $realPrice = document.querySelector('.---cartDialog > ._div2 > ._div20 > ._div22 > ._salesPrice');
-    let i = parseInt($count.innerText);
-    let j = parseInt($realPrice.innerText.replaceAll(',', ''));
-
-    $plusButton.onclick = () => {
-        i += 1;
-        $count.innerHTML = `${i}`;
-        $minusButton.style.backgroundImage = 'url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0yMCAxNHYySDEwdi0yeiIgZmlsbD0iIzMzMyIgZmlsbC1ydWxlPSJub256ZXJvIi8+Cjwvc3ZnPgo=)';
-        $minusButton.style.userSelect = 'pointer';
-        $minusButton.style.pointerEvents = 'all';
-        $totalPrice.innerHTML = (i*j).toLocaleString();
-    };
-
-    $minusButton.onclick = () => {
-        if(i > 1){
-            i -= 1;
-        }
-        $count.innerHTML = `${i}`;
-        if(i === 1) {
-            $minusButton.style.backgroundImage = 'url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0yMCAxNHYySDEwdi0yeiIgZmlsbD0iI0RERCIgZmlsbC1ydWxlPSJub256ZXJvIi8+Cjwvc3ZnPgo=)';
-            $minusButton.style.userSelect = 'none';
-            $minusButton.style.pointerEvents = 'none';
-        }
-        $totalPrice.innerHTML = (i*j).toLocaleString();
-    }
-};

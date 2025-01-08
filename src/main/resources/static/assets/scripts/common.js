@@ -320,6 +320,40 @@ class CartDialog {
         }, delay);
         return $dialog;
     }
+
+    // 수량증감
+    static plusMinus = () => {
+        const $div23 = document.querySelector('.---cartDialog > ._div2 > ._div20 > ._div23');
+        const $minusButton = $div23.querySelector('._minus');
+        const $count = $div23.querySelector('._count');
+        const $plusButton = $div23.querySelector('._plus');
+        const $totalPrice = document.querySelector('.---cartDialog > ._div3 > ._totalPrice');
+        const $realPrice = document.querySelector('.---cartDialog > ._div2 > ._div20 > ._div22 > ._salesPrice');
+        let i = parseInt($count.innerText);
+        let j = parseInt($realPrice.innerText.replaceAll(',', ''));
+
+        $plusButton.onclick = () => {
+            i += 1;
+            $count.innerHTML = `${i}`;
+            $minusButton.style.backgroundImage = 'url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0yMCAxNHYySDEwdi0yeiIgZmlsbD0iIzMzMyIgZmlsbC1ydWxlPSJub256ZXJvIi8+Cjwvc3ZnPgo=)';
+            $minusButton.style.userSelect = 'pointer';
+            $minusButton.style.pointerEvents = 'all';
+            $totalPrice.innerHTML = (i*j).toLocaleString();
+        };
+
+        $minusButton.onclick = () => {
+            if(i > 1){
+                i -= 1;
+            }
+            $count.innerHTML = `${i}`;
+            if(i === 1) {
+                $minusButton.style.backgroundImage = 'url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0yMCAxNHYySDEwdi0yeiIgZmlsbD0iI0RERCIgZmlsbC1ydWxlPSJub256ZXJvIi8+Cjwvc3ZnPgo=)';
+                $minusButton.style.userSelect = 'none';
+                $minusButton.style.pointerEvents = 'none';
+            }
+            $totalPrice.innerHTML = (i*j).toLocaleString();
+        }
+    };
 }
 //endregion
 
