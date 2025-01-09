@@ -26,11 +26,7 @@
 <body th:if="${member != null}">
 <div th:replace="~{/fragments/header :: headerFragment}"></div>
 
-<div>
-    <div>
-        <div style="z-index: 1;"></div>
-        <div></div>
-        <div id="main">
+<div id="main">
             <div class="pay-order">
                 <h2 class="_text">주문서</h2>
                 <div class="purchase-order">
@@ -235,9 +231,6 @@
                 </div>
             </div>
         </div>
-        <div class="bottom"></div>
-    </div>
-</div>
 
 <div th:replace="~{/fragments/footer :: footerFragment}"></div>
 </body>
