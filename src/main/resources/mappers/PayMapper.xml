@@ -7,7 +7,7 @@
         INSERT INTO `kurly`.`pay_record`
             (`cart_index`, `member_id`, `pay_item_id`, `pay_item_name`, `pay_item_price`, `pay_quantity`, `item_image`, `total_price`, `purchase_day`)
         VALUES
-            (#{cartIndex}, ${memberId}, #{payItemId}, #{payItemName}, #{payItemPrice}, #{payQuantity}, #{itemImage}, #{totalPrice}, #{purchaseDay});
+            (#{cartIndex}, #{memberId}, #{payItemId}, #{payItemName}, #{payItemPrice}, #{payQuantity}, #{itemImage}, #{totalPrice}, #{purchaseDay});
 
     </insert>
 

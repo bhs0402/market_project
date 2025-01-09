@@ -44,7 +44,9 @@
                                 <div>
                                     <div class="space"></div>
                                     <li class="item" th:each="item : ${items}">
-                                        <input class="id" name="itemId" th:value="${item.getItemId()}" style="display: none">
+                                        <label>
+                                            <input class="id" name="itemId" th:value="${item.getItemId()}" style="display: none">
+                                        </label>
                                         <div class="image-container">
                                             <span style="box-sizing: border-box; display: block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0; margin: 0; padding: 0; position: absolute; inset: 0;">
                                                 <img alt=""
@@ -171,14 +173,14 @@
                                             <span class="won">원</span>
                                         </div>
                                     </div>
-                                    <div class="item --price">
-                                        <div class="item --price-text">
+                                    <div class="--price">
+                                        <div class="--price-text">
                                             <svg width="16" height="20" viewBox="0 0 16 20" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" clip-rule="evenodd"
                                                       d="M1 5H0V10V11H1H6V10H1V5Z" fill="#ddd"></path>
                                             </svg>
-                                            <div class="item --price-total-text">상품금액</div>
+                                            <div class="--price-total-text">상품금액</div>
                                         </div>
                                         <div>
                                             <span class="total-price item-total-price">
