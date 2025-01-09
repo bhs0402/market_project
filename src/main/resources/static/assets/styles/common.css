@@ -268,11 +268,16 @@ body > .top > .top1 > .login-container > .logo-wrapper > .-spring {
   flex-grow: 1;
   flex-shrink: 1;
 }
+body > .top > .top1 > .login-container > .logo-wrapper > a > .logo {
+  width: 6.25rem;
+  filter: invert(14%) sepia(62%) saturate(5813%) hue-rotate(281deg) brightness(66%) contrast(114%);
+  padding-bottom: 0.25rem;
+}
 body > .top > .top1 > .login-container > .logo-wrapper > .logo_text {
   font-weight: 500;
   color: rgb(95, 0, 128);
   flex-shrink: 0;
-  margin-left: 1.25rem;
+  margin-left: 0.75rem;
   font-size: 1.125rem;
   line-height: 1.33;
   letter-spacing: normal;
