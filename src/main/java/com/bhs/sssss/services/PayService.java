@@ -1,6 +1,7 @@
 package com.bhs.sssss.services;
 
 import com.bhs.sssss.entities.CartEntity;
+import com.bhs.sssss.entities.MemberEntity;
 import com.bhs.sssss.entities.PayLoadEntity;
 import com.bhs.sssss.mappers.PayMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,12 +28,12 @@ public class PayService {
 
 
     // 전달받은 값을 db에 저장, 하기 전에 검사 진행
-    public boolean processPayment(List<PayLoadEntity> payload, int totalPrice) {
+    public boolean processPayment(List<PayLoadEntity> payload, int totalPrice, MemberEntity member) {
         int totalPriceSum = 0;
 
         for (PayLoadEntity item : payload) {
             CartEntity cartItem = this.payMapper.selectCartById(item.getPayItemId());
-            if (cartItem == null ||
+            if (cartItem == null || member == null ||
                     !cartItem.getItemName().equals(item.getPayItemName()) ||
                     cartItem.getItemPrice() * cartItem.getQuantity() != Integer.parseInt(item.getPayItemPrice()) ||
                     cartItem.getQuantity() != Integer.parseInt(item.getPayQuantity())) {
@@ -56,27 +57,22 @@ public class PayService {
             for (PayLoadEntity item : payload) {
                 item.setTotalPrice(totalPrice);
 
-                // 테스트를 위한
-                String testMemberId = "'test122'";
-                item.setMemberId(testMemberId);
-
-
+                item.setMemberId(member.getId());
                 item.setPurchaseDay(LocalDateTime.now());
 
 
                 this.payMapper.insertItemLoad(item);
             }
-
-
             return true;
         }
         return false;
     }
 
-
-    // Comparator :
+    // Comparator : getPurchaseDay(날짜) 기준으로 정렬
+    // Collectors : 받은 결제 내역을 리스트(List)나 맵(Map) 형태로 묶기 위해// Comparator :
     public List<PayLoadEntity> getAllPayByCartId() {
-        return this.payMapper.selectAllPayLoads().stream()
+        List<PayLoadEntity> payLoadList = this.payMapper.selectAllPayLoads();
+        return payLoadList.stream()
                 .sorted(Comparator.comparing(PayLoadEntity::getPurchaseDay))
                 .collect(Collectors.toList());
     }

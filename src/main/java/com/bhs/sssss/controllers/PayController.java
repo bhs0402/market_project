@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -42,7 +44,8 @@ public class PayController {
 
     @RequestMapping(value = "/submit", method = RequestMethod.POST,consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ResponseBody
-    public String submitPayment(@RequestParam Map<String, String> formData) {
+    public String submitPayment(@RequestParam Map<String, String> formData,
+                                @SessionAttribute(value = "member", required = false) MemberEntity member) {
         // 데이터 파싱
         List<PayLoadEntity> payLoad = new ArrayList<>();
         String totalPriceString = formData.get("totalPrice");
@@ -64,7 +67,7 @@ public class PayController {
             index++;
         }
 
-        boolean isValid = this.payService.processPayment(payLoad, totalPrice);
+        boolean isValid = this.payService.processPayment(payLoad, totalPrice, member);
 
         JSONObject response = new JSONObject();
         if (!isValid) {
@@ -81,8 +84,10 @@ public class PayController {
     @RequestMapping(value = "/record", method = RequestMethod.GET)
     public ModelAndView getRecord() {
         ModelAndView mav = new ModelAndView();
-        List<PayLoadEntity> items = this.payService.getAllPayByCartId();
-        mav.addObject("items", items);
+        Map<LocalDateTime, List<PayLoadEntity>> groupedItems = this.payService.getAllPayByCartId().stream()
+                .collect(Collectors.groupingBy(PayLoadEntity::getPurchaseDay));
+
+        mav.addObject("items", groupedItems);
         mav.setViewName("pay/pay-record");
         return mav;
 
