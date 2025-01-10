@@ -85,21 +85,7 @@
         SET is_checked = #{isChecked}
         WHERE `index` = #{index}
     </update>
-    <update id="deleteCartItem" parameterType="int">
-        UPDATE `kurly`.`carts`
-        SET `is_deleted` = 1
-        WHERE `index` = #{index}
-        LIMIT 1
-    </update>
-    <update id="updateDeletedStatusForItems" parameterType="list">
-        UPDATE `kurly`.`carts`
-        SET `is_deleted` = 1
-        WHERE `index` IN
-        <foreach item="index" collection="indices" open="(" separator="," close=")">
-            #{index}
-        </foreach>
-        AND `is_checked` = 1
-    </update>
+
 
     <update id="updateCartByQuantity" parameterType="com.bhs.sssss.entities.CartEntity">
         UPDATE `kurly`.`carts`
@@ -144,5 +130,19 @@
           AND `is_deleted` = 0
         LIMIT 1
     </select>
+
+    <delete id="deleteCartItem" parameterType="map">
+        DELETE FROM `kurly`.`carts`
+        WHERE `index` = #{index}
+    </delete>
+
+    <delete id="updateDeletedStatusForItems" parameterType="list">
+        DELETE FROM `kurly`.carts
+        WHERE `index` IN
+        <foreach item="index" collection="indices" open="(" separator="," close=")">
+            #{index}
+        </foreach>
+        AND `is_checked` = 1
+    </delete>
 
 </mapper>
