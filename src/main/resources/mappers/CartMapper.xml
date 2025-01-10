@@ -98,11 +98,14 @@
         SELECT COUNT(*)
         FROM `kurly`.`carts`
         WHERE `is_deleted` = 0
+          AND `member_id` = #{id}
     </select>
     <select id="countCheckedItems" resultType="_int">
         SELECT COUNT(*)
         FROM `kurly`.`carts`
-        WHERE `is_deleted` = 0 AND `is_checked` = 1
+        WHERE `is_deleted` = 0
+          AND `is_checked` = 1
+          AND `member_id` = #{id}
     </select>
     <select id="selectCountCartsByMemberId"
             resultType="_int">

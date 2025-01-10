@@ -12,6 +12,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -180,10 +181,10 @@ public class CartController {
     // 장바구니에서 결제주문서로 넘어가기 위한 메서드(item이  있는지, 체크된 item이 있는지)
     @RequestMapping(value = "/getCartStatus", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public String getCartStatus() {
+    public String getCartStatus(@SessionAttribute(value = "member", required = false) MemberEntity member) {
         JSONObject response = new JSONObject();
-        boolean hasItems = this.cartService.hasActiveItems();
-        boolean hasCheckedItems = this.cartService.hasCheckedItems();
+        boolean hasItems = this.cartService.hasActiveItems(member);
+        boolean hasCheckedItems = this.cartService.hasCheckedItems(member);
         response.put("hasItems", hasItems);
         response.put("hasCheckedItems", hasCheckedItems);
         return response.toString();

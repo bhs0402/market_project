@@ -128,12 +128,12 @@ public class CartService {
     }
 
 
-    public boolean hasActiveItems() {
-        return cartMapper.countActiveItems() > 0;
+    public boolean hasActiveItems(MemberEntity member) {
+        return cartMapper.countActiveItems(member.getId()) > 0;
     }
 
-    public boolean hasCheckedItems() {
-        return cartMapper.countCheckedItems() > 0;
+    public boolean hasCheckedItems(MemberEntity member) {
+        return cartMapper.countCheckedItems(member.getId()) > 0;
     }
 
     @Transactional
