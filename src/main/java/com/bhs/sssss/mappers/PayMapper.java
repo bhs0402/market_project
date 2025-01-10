@@ -16,7 +16,7 @@ public interface PayMapper {
 
     int insertItemLoad(PayLoadEntity payLoadEntity);
 
-    CartEntity selectCartById(int itemId);
+    CartEntity selectCartById(int itemId, @Param("id") String id);
 
     List<Integer> getPayIndexByCartIndex(@Param("payItemId") int payItemId);
 

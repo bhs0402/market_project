@@ -32,7 +32,7 @@ public class PayService {
         int totalPriceSum = 0;
 
         for (PayLoadEntity item : payload) {
-            CartEntity cartItem = this.payMapper.selectCartById(item.getPayItemId());
+            CartEntity cartItem = this.payMapper.selectCartById(item.getPayItemId(), member.getId());
             if (cartItem == null || member == null ||
                     !cartItem.getItemName().equals(item.getPayItemName()) ||
                     cartItem.getItemPrice() * cartItem.getQuantity() != Integer.parseInt(item.getPayItemPrice()) ||
@@ -55,7 +55,7 @@ public class PayService {
 
         if (totalPriceSum == totalPrice) {
             for (PayLoadEntity item : payload) {
-                CartEntity cartItem = this.payMapper.selectCartById(item.getPayItemId());
+                CartEntity cartItem = this.payMapper.selectCartById(item.getPayItemId(), member.getId());
                 item.setTotalPrice(totalPrice);
 
                 item.setMemberId(member.getId());

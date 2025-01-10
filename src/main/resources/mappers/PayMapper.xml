@@ -39,6 +39,7 @@
                `purchase_day`   AS `purchaseDay`
         FROM `kurly`.`pay_record`
         WHERE `member_id` = #{id}
+
     </select>
 
 
@@ -50,7 +51,8 @@
                `item_price` AS `itemPrice`,
                `quantity`   AS `quantity`
         FROM kurly.`carts`
-        WHERE item_id = #{itemId}
+        WHERE `item_id` = #{itemId}
+          AND `member_id` = #{id}
     </select>
 
     <select id="getPayIndexByCartIndex" resultType="java.lang.Integer">
