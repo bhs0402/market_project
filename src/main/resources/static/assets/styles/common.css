@@ -744,8 +744,9 @@ body > .top > .header > .header-wrapper > .icon-container.fixed {
   margin-left: -0.5625rem;
   vertical-align: -0.3125rem;
 }
-.icon-container > .icon1:hover > .submenu > .button-container > .readdress {
+.icon-container > .icon1:hover > .submenu > .button-container > a > .readdress {
   font-size: 0.75rem;
+  font-weight: 500;
   width: 15rem;
   height: 2.125rem;
 }

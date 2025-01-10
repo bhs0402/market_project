@@ -779,8 +779,9 @@ body {
             }
           }
 
-          > .readdress {
+          > a > .readdress {
             font-size: 0.75rem;
+            font-weight: 500;
             width: 15rem;
             height: 2.125rem;
           }
