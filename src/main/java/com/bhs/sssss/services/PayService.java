@@ -22,8 +22,8 @@ public class PayService {
     }
 
 
-    public List<CartEntity> getAllPay() {
-        return this.payMapper.selectAllCarts();
+    public List<CartEntity> getAllPay(MemberEntity member) {
+        return this.payMapper.selectAllCarts(member.getId());
     }
 
 

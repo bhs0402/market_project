@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 public interface PayMapper {
 
-    List<CartEntity> selectAllCarts();
+    List<CartEntity> selectAllCarts(@Param("id") String id);
 
     List<PayLoadEntity> selectAllPayLoads(@Param("id") String id);
 
