@@ -112,7 +112,7 @@
           AND `is_deleted` = 0
     </select>
 
-    <select id="selectCartById"
+    <select id="selectCartByIdAndMemberId"
             resultType="com.bhs.sssss.entities.CartEntity">
         SELECT `index`      AS `index`,
                `member_id`  AS `memberId`,
@@ -127,6 +127,7 @@
                `item_image` AS `itemImage`
         FROM `kurly`.`carts`
         WHERE `item_id` = #{itemId}
+          AND `member_id` = #{id}
           AND `is_deleted` = 0
         LIMIT 1
     </select>

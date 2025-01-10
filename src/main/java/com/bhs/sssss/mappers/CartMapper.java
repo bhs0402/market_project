@@ -31,7 +31,9 @@ public interface CartMapper {
 
     int selectCountCartsByMemberId(@Param("memberId") String memberId);
 
-    CartEntity selectCartById(@Param("itemId")int itemId);
+    CartEntity selectCartByIdAndMemberId(@Param("itemId")int itemId,
+                                         @Param("id") String id);
+
 
     int insertCart(CartEntity cart);
 

@@ -144,8 +144,8 @@ public class CartService {
         if(quantity <= 0) {
             quantity = 1;
         }
-        if(this.cartMapper.selectCartById(Integer.parseInt(itemId)) != null) {
-            CartEntity cart = this.cartMapper.selectCartById(Integer.parseInt(itemId));
+        if(this.cartMapper.selectCartByIdAndMemberId(Integer.parseInt(itemId), member.getId()) != null) {
+            CartEntity cart = this.cartMapper.selectCartByIdAndMemberId(Integer.parseInt(itemId), member.getId());
             cart.setQuantity(cart.getQuantity() + quantity);
             if(this.cartMapper.updateCartByQuantity(cart) == 0) {
                 throw new TransactionalException();
