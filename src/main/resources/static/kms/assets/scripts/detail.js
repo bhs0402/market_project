@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
                     }
                 };
-                xhr.open('DELETE', `/kurly/delete?index=${reviewIndex}`);
+                xhr.open('DELETE', `/goods/delete?index=${reviewIndex}`);
                 xhr.send();
             }
         });
@@ -161,3 +161,48 @@ function closeModal() {
     modal.style.display = 'none';
 }
 
+// 장바구니 담기 버튼
+const $cartButton3 = document.getElementById('cart-button3');
+$cartButton3.addEventListener('click', (e) => {
+    const $itemId = document.getElementById('itemId');
+    const $count = document.getElementById('quantity');
+    const $packaging = document.getElementById('packaging');
+    const formData = new FormData();
+    formData.append('itemId', $itemId.value);
+    formData.append('itemStatus', $packaging.innerHTML);
+    formData.append('quantity', $count.innerHTML);
+
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = () => {
+        if (xhr.readyState !== XMLHttpRequest.DONE){
+            return;
+        }
+        if (xhr.status < 200 || xhr.status >= 300) {
+            alert('오류');
+            return;
+        }
+        const response = JSON.parse(xhr.responseText);
+        if(response === 'success'){
+            const $result = '상품을 장바구니에 담았습니다.';
+            Dialog.show({
+                title: $result,
+                buttons: [{
+                    text: '확인',
+                    onclick: ($dialog) => Dialog.hide($dialog)
+                }]
+            });
+        } else {
+            const $result = `상품을 장바구니에 담지 못했습니다.<br>잠시 후 다시 시도해 주세요.`;
+            Dialog.show({
+                title: $result,
+                buttons: [{
+                    text: '확인',
+                    onclick: ($dialog) => Dialog.hide($dialog)
+                }]
+            });
+        }
+
+    };
+    xhr.open('POST', '/cart/in');
+    xhr.send(formData);
+});

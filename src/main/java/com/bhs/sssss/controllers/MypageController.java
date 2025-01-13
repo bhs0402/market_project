@@ -111,9 +111,11 @@ public class MypageController {
     @RequestMapping(value = "/pay-record", method = RequestMethod.GET)
     public ModelAndView getRecord(@SessionAttribute(value = "member", required = false) MemberEntity member) {
         ModelAndView mav = new ModelAndView();
-        Map<LocalDateTime, List<PayLoadEntity>> groupedItems = this.payService.getAllPayByCartId(member).stream()
-                .collect(Collectors.groupingBy(PayLoadEntity::getPurchaseDay));
-
+        if(member == null){
+            mav.setViewName("redirect:/member/login");
+            return mav;
+        }
+        Map<LocalDateTime, List<PayLoadEntity>> groupedItems = this.payService.getAllPayByCartId(member);
         mav.addObject("member", member);
         mav.addObject("items", groupedItems);
         mav.setViewName("/mypage/pay-record");

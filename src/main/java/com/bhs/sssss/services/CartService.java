@@ -166,8 +166,8 @@ public class CartService {
             cartItem.setQuantity(quantity);
             cartItem.setIsChecked(1);
             cartItem.setDeleted(false);
-            cartItem.setStatus(Integer.parseInt(item.getItemStatus()));
-            cartItem.setItemImage(item.getItemImage());
+            cartItem.setStatus(item.getPackaging());
+            cartItem.setItemImage(item.getImageUrl());
 
             if(this.cartMapper.insertCart(cartItem) == 0) {
                 throw new TransactionalException();

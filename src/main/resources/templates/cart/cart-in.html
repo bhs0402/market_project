@@ -76,7 +76,7 @@
                                 <div class="item" th:each="item:${items}">
                                     <input class="index" name="index" th:value="${item.getIndex()}" style="display: none">
                                     <input class="id" name="itemId" th:value="${item.getItemId()}" style="display: none">
-                                    <div class="status-cover" th:if="${item.getStatus() == 1}">
+                                    <div class="status-cover" th:if="${item.getStatus() == '냉장 (종이포장)'}">
                                         <i class="status-icon" style="width: 20px; height: 20px">
                                             <svg width="15" height="15" viewBox="0 0 12 18" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
@@ -87,7 +87,7 @@
                                         </i>
                                         <p class="_text">냉장식품</p>
                                     </div>
-                                    <div class="status-cover" th:if="${item.getStatus() == 2}">
+                                    <div class="status-cover" th:if="${item.getStatus() == '냉동 (종이포장)'}">
                                         <i class="status-icon" style="width: 20px; height: 20px">
                                             <svg width="16.666666666" height="16.666666666" viewBox="0 0 20 19"
                                                  fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -124,7 +124,7 @@
                                                        th:text="${item.getItemName()}"></p>
                                                 </div>
                                             </a>
-                                            <span class="--status" th:if="${item.getStatus() == 1}">
+                                            <span class="--status" th:if="${item.getStatus() == '냉장 (종이포장)'}">
                                                <p class="status-cover">
                                                    <i class="status-icon" style="width: 16px; height: 16px">
                                                        <svg width="12" height="12" viewBox="0 0 12 18" fill="none"
@@ -137,7 +137,7 @@
                                                    <span class="status-details">냉장</span>
                                                </p>
                                            </span>
-                                            <span class="--status" th:if="${item.getStatus() == 2}">
+                                            <span class="--status" th:if="${item.getStatus() == '냉동 (종이포장)'}">
                                                <p class="status-cover ice">
                                                    <i class="status-icon" style="width: 16px; height: 16px">
                                                       <svg width="13.3333333328" height="13.3333333328"
