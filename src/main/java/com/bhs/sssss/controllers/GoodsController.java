@@ -1,9 +1,6 @@
 package com.bhs.sssss.controllers;
 
-import com.bhs.sssss.entities.ImageEntity;
-import com.bhs.sssss.entities.InquiryEntity;
-import com.bhs.sssss.entities.ItemEntity;
-import com.bhs.sssss.entities.ReviewEntity;
+import com.bhs.sssss.entities.*;
 import com.bhs.sssss.results.CommonResult;
 import com.bhs.sssss.results.Result;
 import com.bhs.sssss.results.WriteResult;
@@ -72,7 +69,8 @@ public class GoodsController {
     public ModelAndView getInquiriesAndReviews(
             @RequestParam(value = "inquiryPage", required = false, defaultValue = "1") int inquiryPage,
             @RequestParam(value = "reviewPage", required = false, defaultValue = "1") int reviewPage,
-            @RequestParam(value = "itemId", required = false) String itemId) {
+            @RequestParam(value = "itemId", required = false) String itemId,
+            @SessionAttribute(value = "member", required = false) MemberEntity member) {
 
         // 문의 사항과 리뷰 목록 가져오기
         Pair<PageVo, List<InquiryEntity>> pairInquiries = this.inquiryService.getInquiriesByPage(inquiryPage);
@@ -101,6 +99,7 @@ public class GoodsController {
         modelAndView.addObject("inquiries", pairInquiries.getRight());
         modelAndView.addObject("reviews", pairReviews.getRight());
         modelAndView.addObject("totalReviews", totalReviews);
+        modelAndView.addObject("member", member);
 
         // 상품 정보를 모델에 추가 (productId가 있을 때만)
         if (item != null) {

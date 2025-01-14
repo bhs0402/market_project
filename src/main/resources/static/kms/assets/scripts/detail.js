@@ -163,7 +163,7 @@ function closeModal() {
 
 // 장바구니 담기 버튼
 const $cartButton3 = document.getElementById('cart-button3');
-$cartButton3.addEventListener('click', (e) => {
+$cartButton3.addEventListener('click', () => {
     const $itemId = document.getElementById('itemId');
     const $count = document.getElementById('quantity');
     const $packaging = document.getElementById('packaging');
@@ -182,10 +182,10 @@ $cartButton3.addEventListener('click', (e) => {
             return;
         }
         const response = JSON.parse(xhr.responseText);
-        if(response === 'success'){
+        if(response["result"] === 'success'){
             const $result = '상품을 장바구니에 담았습니다.';
             Dialog.show({
-                title: $result,
+                content: $result,
                 buttons: [{
                     text: '확인',
                     onclick: ($dialog) => Dialog.hide($dialog)
@@ -194,7 +194,7 @@ $cartButton3.addEventListener('click', (e) => {
         } else {
             const $result = `상품을 장바구니에 담지 못했습니다.<br>잠시 후 다시 시도해 주세요.`;
             Dialog.show({
-                title: $result,
+                content: $result,
                 buttons: [{
                     text: '확인',
                     onclick: ($dialog) => Dialog.hide($dialog)
