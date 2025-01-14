@@ -7,8 +7,25 @@
     padding: 0;
     border: 0;
     vertical-align: baseline;
+    box-sizing: border-box;
 }
 
+.top-right {
+
+    > a {
+        padding-top: 0.75rem;
+    }
+
+    > .bar {
+        margin: 0.75rem 0.75rem 0 0.75rem !important;
+    }
+}
+
+.notice {
+    > span {
+        display: inline;
+    }
+}
 
 body {
     line-height: 1;
@@ -2402,4 +2419,21 @@ svg:not(:root) {
 
 .review-delete-button {
     cursor: pointer;
+}
+
+.inquiry-container > .inquiry-box  > .text {
+    margin-top: 0.125rem;
+    color: rgb(153, 153, 153);
+    letter-spacing: -0.031rem;
+    line-height: 1.05rem;
+}
+
+.inquiry-container > .inquiry-box  > .text > svg {
+    width: unset;
+    height: unset;
+    margin: 0 0.375rem;
+}
+
+.container > .right > .info-box22 > span {
+    display: inline;
 }

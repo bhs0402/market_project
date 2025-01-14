@@ -56,6 +56,7 @@ public class CartController {
     public String PostCartIndex(@SessionAttribute(value = "member", required = false) MemberEntity member,
                                 @RequestParam(value = "quantity", required = false) int quantity,
                                 @RequestParam(value = "itemId", required = false) String itemId) {
+
         Result result = this.cartService.postCart(member, quantity, itemId);
         JSONObject response = new JSONObject();
         response.put(Result.NAME, result.nameToLower());
