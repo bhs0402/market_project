@@ -14,235 +14,116 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script defer type="text/javascript" th:src="@{'/member/assets/scripts/signup.js'}"></script>
     <script defer type="text/javascript" th:src="@{'/assets/scripts/common.js'}"></script>
-    <title>회원가입 - 컬리</title>
+    <script th:if="${session.member != null}">
+        alert('올바르지 않은 접근입니다.');
+        if(history.length > 1){
+            history.back();
+        } else {
+            window.close();
+        }
+    </script>
+    <title>회원가입 - 칼리</title>
 </head>
 <body>
-<div class="top">
-    <div class="top1">
-        <div class="top-right">
-            <a class="a -purple" th:if="${member == null}" th:href="@{/member/signup}">회원가입</a>
-            <div class="bar" th:if="${member == null}"></div>
-            <a class="a" th:if="${member == null}" th:href="@{/member/login}">로그인</a>
-            <div class="d" th:if="${member != null}">
-                <a class="a" th:text="|${member.getUserName()} 님|">
-                </a>
-                <a class="a">
-                    <span class="toggle"></span>
-                </a>
-                <div class="menu member">
-                    <a href="#" class="item">주문내역</a>
-                    <a class="item">개인정보 수정</a>
-                    <a class="item">로그아웃</a>
-                </div>
-            </div>
-            <div class="bar"></div>
-            <div class="d">
-                <a class="a">
-                    고객센터
-                    <span class="toggle"></span>
-                </a>
-                <div class="menu">
-                    <a class="item">공지사항</a>
-                    <a class="item">자주하는 질문</a>
-                    <a class="item">1:1 문의</a>
-                    <a class="item">대량주문 문의</a>
-                </div>
-            </div>
-        </div>
-        <div class="banner">
-            <div class="logo-wrapper">
-                <img class="logo"
-                     src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODIiIGhlaWdodD0iNDIiIHZpZXdCb3g9IjAgMCA4MiA0MiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxnIGZpbGwtcnVsZT0ibm9uemVybyIgZmlsbD0ibm9uZSI+CiAgICAgICAgPHBhdGggZD0iTTAgMGg4MnY0MkgweiIvPgogICAgICAgIDxwYXRoIGQ9Ik02Mi41Ljk2NWMxLjAyNi0uNTU3IDIuNDY2LS43MTggMy4zNTYuMTA3Ljg5LjgyNS42NzYgMi4wNDggMCAzLjk3MyAwIDAtMS41MDUgNC4wNjYtMy4wNTUgOC4yNjJsLS4zOTggMS4wOGMtMS40MTQgMy44My0yLjc2MiA3LjQ4Ny0yLjkyNyA3Ljk2My0xLjQ5OCA0LjI0NSAxLjk2NyA0LjEyMiA0LjAyNC0uMTUyIDEuMTU5LTIuMzk0IDIuNjQ0LTYuMzU3IDIuNjQ0LTYuMzU3LjUyNC0xLjU2My42ODItMi41MDQuMzU5LTIuODI4LS4xMDctLjExMy4wNDUtLjI1Mi4xOC0uMzIzIDIuMjY5LTEuMTQ5IDQuNjMtLjA3MiAzLjMzNiAzLjMxbC0uMDU0LjEzOGMtLjM4Ny45NzgtMi42OCA2LjczMy0yLjY4IDYuNzMzLS42NzYgMS42Ni0uNTk1IDMuMjM2LjQxOCAzLjIzNi42ODYtLjAwNCAxLjQ2LS4zODUgMi4zMDQtMS4wODggMS44MTgtMS41MDQgMy4yMjItNC4zMTIgMy43MjctNS40NTQuMjMtLjUwOCAxLjA4Ny0yLjQyIDEuNzY2LTQuMzYxLjIzNi0uNjY1LjM2OS0xLjM2LjM5NS0yLjA2NWEuNDQzLjQ0MyAwIDAgMSAuMTk0LS40NTkgMy41NzggMy41NzggMCAwIDEgMS42Ny0uNDIgMS44MDUgMS44MDUgMCAwIDEgMS40NjUuNzA1Yy40NDMuNTk4LjU2NiAxLjU3OS4xMDMgMi44MDgtLjEyLjMyLTMuNzc1IDkuOTU4LTMuNzc1IDkuOTU4di4wMjZjMi4wNDEtMS4yMjMgMy44Ny0xLjMxMyA0Ljk1My0uODU0bC0uMDAzLS4wMTNjMS40OTUuNjQ3IDEuOTkgMi40NC45MzggMy41NTktLjEwMy4xMS0uMzYyLjA4NC0uMzYyLS4wOS0uMDk0LTEuMjUzLTIuNTE3LTMuNDk1LTYuMTA5LTEuMDc1bC0uMTQ1LjM4NS0xLjA2OCAyLjgwOGMtMi42MiA3LjAxOC01LjQwMyAxMi4xMzYtOS40MTUgMTEtMi42ODgtLjc2LTIuMzc3LTQuNjA3LjUxNS03Ljc5YTU0LjkgNTQuOSAwIDAgMSA2LjQ5LTUuODk4Yy4wNjgtLjE4OC4xMy0uMzUuMTg4LS41MTEuMjc4LS43OC40OTEtMS40MzQuNzkyLTIuMjY1bC4xNTktLjUxOGMtLjE3OC4yLS40OTguNTczLS43MTIuODEyLS43MTIuOC0yLjQ5NCAyLjc1Ny01LjMyOSAyLjIwN2wtLjIzNC0uMDUyYy0yLjA1LS41MDgtMi42MDgtMS45ODYtMi42NTUtMy4yNzctMi4xNDIgMi42NTYtNC4zNTEgMy40MjYtNS44MDcgMy4zOS0xLjk0OC0uMDQ4LTMuMzc4LTEuNTE0LTIuNDI3LTQuMjkgMS4wNTgtMy4xMDYgNS41LTE1LjMzMiA2Ljc5NS0xOSAuNDg1LTEuNTguNjY2LTIuNTguMTg0LTIuOTc0LS4xMjMtLjEwMy4wNTItLjI2NS4yLS4zNDZ6bTguMzY0IDI4Ljc3OGMtMS4xMDMuODgtNS41MjYgNC41My02Ljc1MiA3LjQ0MS0uNTA1IDEuMTk3LS4zNzYgMi4xNDkuNDg4IDIuMjMzIDEuOTYuMTk0IDQuMDEyLTMuODE4IDYuMjI4LTkuNTEyek0xNi4wMjggNS4zNTJjLS4wODcuMzMyLTEuMzE5IDMuODYtMi43MDEgNy43NDlsLS4yMDkuNTg2LS4yMS41ODktLjIxNS42MDRjNC42OTEtMS4xMjMgMTMuMDY0LTYuNTcgMTQuMDM1LTEwLjA4NS4xMi0uMTYxLjI5LS4yMi41NjYtLjAzNS40OTUuMzMuNjg2IDEuMTU1LjQ5NSAxLjkxOC0uNzY0IDMuMDM4LTYuNDE2IDcuMzQxLTExLjM3OSA5LjU1NC42MTIgMS42MzcgMi42ODIgNi4yNjcgNC4yMDYgOS4xMTEgMS42NjMgMy4xMTkgMy40MiA0LjU3NSA2LjE0NyA0LjczNyAxLjQ2LjA4NSAzLjAxNC0uNDQ3IDMuODkzLTEuMjJsLjE0OC0uMTQtLjAxMy4wM2MuMTk0LS4yMDQuNTExLjA3Ny4zNjYuMzIzYTYuNSA2LjUgMCAwIDEtNC45OTIgMi44NjdjLTYuMzQ1LjQyNy04Ljc3NC0zLjg3LTEzLjMwNC0xNC40OTQtLjM2Ni4xMjYtLjgwOS4yODgtMS4yNTUuNDUtLjA3NS4xODctMi4wNyA1LjY0Mi0yLjEzIDUuODIzLS45NDQgMi44Ny0xLjAwNSA0LjQ0Mi0uMzU4IDQuODk1LjE0NS4wOS4wNzQuMzMzLS4xNzguNDE0LTIuNTI3Ljc5Ni00Ljg1My0uNjk2LTMuNTU5LTQuNDQyIDEuMTYxLTMuMzE2IDUuNjktMTYuMTggNi45MTQtMTkuNjI2LjQyNy0xLjI5NC4xOTctMi4xMjUtLjQ5Mi0yLjMwNkM4LjUwNiAxLjc4Ljg3NyA4Ljc0OSAxLjk3MSAxNS4xODRjLjE5IDEuMTIuOTggMS43NDcgMS4zNzggMS42NjNhLjEzMy4xMzMgMCAwIDEgLjE1Ni4xNTkgMS41MDggMS41MDggMCAwIDEtMS44NDUgMS4wMzJDLjQ5IDE3Ljc4Mi4xMDcgMTYuNTI3LjA0MyAxNS44OC0uNjAxIDkuMjIgNi4xNDggMS4yMyAxMi4zODkuNThjMi4zNzgtLjI1IDQuNjEuOTYgMy42NCA0Ljc3MnptMjQuMDQgOS45MTMtLjA2LjIwNy0yLjgzIDguMTZjLS4zMDQuODUtLjEgMS43MzcuNTAxIDEuOTAyIDEuNzU3LjQ4MiA0LjAyOC0yLjE0NSA1LjEzMS00LjczM2E2Ny43OTQgNjcuNzk0IDAgMCAwIDEuNDc2LTMuODE1Yy41ODItMS42NDMgMS4xMDYtMy4xODMuNzgzLTMuOTA4LS4wNzUtLjE2OC4wNDUtLjI1Ni4yMjMtLjM1LjUwNS0uMjU1IDIuMjI2LS44MjUgMy4xNDEuMDY4LjY5NS42NzQuNjA5IDEuNzcxLS4wMyAzLjQzN2wtLjA5Ni4yNDIuMjItLjI3M2MyLjcwMy0zLjMgNC43OTItNC4yOTIgNi41NjMtMy41OTdsLjE0Ny4wNjJjMi4zODEgMS4wNzQgMS4xNDYgNS4yMTUtMi4xMTYgNS40OC0uMi4wMTctLjM1Ni0uMTI2LS4xNTgtLjQwNy4zOTUtLjYwNS4zNTYtMS45MDktLjc5Ni0yLjAyMi0xLjE1Mi0uMTEzLTIuODMgMS4yMDctNC4wMzggMi44NDQtMS4wODQgMS40NS0yLjIgMy45MTEtMy4zMjIgNy4yNzMtLjI3Mi44MTgtLjE0MyAxLjAxMi0uMTEgMS4wNjdhLjEuMSAwIDAgMSAwIC4wOTRjLS4xNDMuMjcyLS45NjUuNTk2LTEuNzYuNTk2LTEuNjI1LS4wMDctMi4yOTEtLjk0NS0xLjk2Ny0yLjQzNy0xLjg0OCAxLjc2NC0zLjcxMSAyLjYxNC01LjM1NSAyLjQ2NmEyLjUyNCAyLjUyNCAwIDAgMS0yLjIzNi0zLjEwM2MtMS40MjYgMS44MDktMy41NDIgMy4yNjgtNS42OTcgMy4wNjctMi4xNTUtLjItMy41LTEuNjY2LTIuODAyLTQuNzg4LjU5LTIuNTk4IDEuNTkyLTUuMjkgMi4yMDctNy4wMjcuNTE0LTEuNDU2LjYxOC0yLjQwNy4yOTQtMi43NS0uMTAzLS4xMTQuMDU1LS4yNS4xOTQtLjMyNCAxLjY5LS44ODYgNC4zOTQtLjMxNCAzLjYzIDIuMDktLjgwMiAyLjUyNy0yLjI1NSA2LjQ5LTIuNTUgNy40LS43MzcgMi4yODctLjI5IDMuNTIzLjc1NSAzLjU4IDEuMDQ1LjA2IDIuNDMtLjk2IDMuNDItMi41MDMgMS43Ni0yLjUyNCAyLjU4MS01LjY4NSAzLjM3Ny03Ljg4Mi4yMDQtLjU2LjUyNy0xLjg2Ni4xODUtMi4zNTItLjA5MS0uMTIzLjA2Ny0uMjU4LjI3NS0uMzcyIDEuNTM3LS44NDkgNC4yODUtLjY0IDMuNDAyIDIuNjA4eiIgZmlsbD0iIzVGMDA4MCIvPgogICAgPC9nPgo8L3N2Zz4K"
-                     alt="마켓컬리 로고">
-                <button class="logo_text">마켓컬리</button>
-                <div class="search-box">
-                    <input id="gnb_search" placeholder="검색어를 입력해주세요" required="" class="input e1493ofl3" value="">
-                    <button id="submit" aria-label="submit" class="submit"></button>
-                </div>
-            </div>
-        </div>
-
-        <div class="icon-container">
-            <div class="icon1">
-                <div class="submenu">
-                    <p>
-                        <strong class="highlight">배송지를 등록</strong> 하고 <br>
-                        <span class="text">구매 가능한 상품을 확인하세요!</span>
-                    </p>
-                    <div class="button-container">
-                        <button class="signup --obj-button">
-                            <span class="_text">로그인</span>
-                        </button>
-                        <button class="address --obj-button --color-primary">
-                            <span class="_text">
-                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAoCAQAAAAiAqDbAAAAAXNSR0IArs4c6QAAAYdJREFUeNrt1j9Lw0AYBvDGqlBF7VAQRUFBoeDmIoL4b9Cp4CJO1g9QrHQVCnbo7mdwLNJvUJy6KSIFxaloQQpSaxqT3D1FHodWrTYZctUtT7Yc97sX7u5NAgE/fvw4h5o+J2IiYceNtecRaj2DuaC9DxP8fkShPtMTWQ7jthP8go+U662NQgdBlMxFDlKj1oiIZIu1s0osNZRAUKR+TjcncAOCYksBNXdAUB53j1RCMEDUL/q911kFcX/S5zRqrIKg2PaIvo2DoLHptqR8AGXeI2otgeDLmNu4nQFhetwsEQNBDriiByDoETXWQfBpyHXRlAKqz4OgseCKFkBce76eaILyzLmWRgQERcLzObWzIGgtO+59EUSzEvKMVofRBKHXprvINAiKQ6W731hpt49kLvgJmpO4ar+NKbaU1sEC8S7P7Yw4xV1nrzI2FNnXWVz+anymHZfRVo9VZqnJqEzLIuryUeatvdaFqE31yLp02zYro//AitQffxLLYWuXg/6vgR8/HfkA7NFWMofTE4wAAAAASUVORK5CYII=" class="_icon">
-                                주소 검색</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <button class="icon2" aria-label="찜하기" type="button"></button>
-            <div class="">
-                <button class="icon3"></button>
-            </div>
-        </div>
-    </div>
-    <nav class="header" id="nav">
-        <div class="header-wrapper">
-            <div class="category">
-                <span class="icon"></span>
-                <span class="">카테고리</span>
-            </div>
-            <ul>
-                <li class="item">
-                    <span class="text">신상품</span>
-                </li>
-                <li class="item">
-                    <span class="text">베스트</span>
-                </li>
-                <li class="item">
-                    <span class="text">알뜰쇼핑</span>
-                </li>
-                <li class="item">
-                    <span class="text">특가/혜택</span>
-                </li>
-            </ul>
-            <div>
-                <div class="notice">
-                    <span class="star">샛별·하루</span> 배송안내
-                </div>
-            </div>
-            <div class="fixed-search">
-                <label>
-                    <input id="fixed_search" placeholder="검색어를 입력해주세요" required="" class="fixed-input" value="">
-                    <button aria-label="submit" class="search-button"></button>
-                </label>
-            </div>
-            <div class="icon-container">
-                <div class="icon1">
-                    <div class="submenu">
-                        <p>
-                            <strong class="highlight">배송지를 등록</strong> 하고 <br>
-                            <span class="text">구매 가능한 상품을 확인하세요!</span>
-                        </p>
-                        <div class="button-container">
-                            <button class="signup --obj-button">
-                                <span class="_text">로그인</span>
-                            </button>
-                            <button class="address --obj-button --color-primary">
-                            <span class="_text">
-                                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAoCAQAAAAiAqDbAAAAAXNSR0IArs4c6QAAAYdJREFUeNrt1j9Lw0AYBvDGqlBF7VAQRUFBoeDmIoL4b9Cp4CJO1g9QrHQVCnbo7mdwLNJvUJy6KSIFxaloQQpSaxqT3D1FHodWrTYZctUtT7Yc97sX7u5NAgE/fvw4h5o+J2IiYceNtecRaj2DuaC9DxP8fkShPtMTWQ7jthP8go+U662NQgdBlMxFDlKj1oiIZIu1s0osNZRAUKR+TjcncAOCYksBNXdAUB53j1RCMEDUL/q911kFcX/S5zRqrIKg2PaIvo2DoLHptqR8AGXeI2otgeDLmNu4nQFhetwsEQNBDriiByDoETXWQfBpyHXRlAKqz4OgseCKFkBce76eaILyzLmWRgQERcLzObWzIGgtO+59EUSzEvKMVofRBKHXprvINAiKQ6W731hpt49kLvgJmpO4ar+NKbaU1sEC8S7P7Yw4xV1nrzI2FNnXWVz+anymHZfRVo9VZqnJqEzLIuryUeatvdaFqE31yLp02zYro//AitQffxLLYWuXg/6vgR8/HfkA7NFWMofTE4wAAAAASUVORK5CYII=" class="_icon">
-                                주소 검색</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <button class="icon2" aria-label="찜하기" type="button"></button>
-                <div class="">
-                    <button class="icon3"></button>
-                </div>
-            </div>
-        </div>
-    </nav>
-</div>
+<div th:replace="~{/fragments/header :: headerFragment}"></div>
 <main id="main">
     <div class="title">회원가입</div>
-    <form class="signup-form e15so55l1" id="signup-form">
-        <div class="tip e1yyjjij1">
-            <span class="asterisk e1yyjjij0">*</span>
+    <form class="signup-form" id="signup-form">
+        <div class="tip">
+            <span class="asterisk">*</span>
             필수입력사항
         </div>
-        <div class="signup-wrapper eo6ykj40" >
-            <div class="info-box e744wfw6">
-                <div class="text-box e744wfw5">
-                    <label class="text e744wfw4">아이디
-                        <span class="asterisk e744wfw0">*</span>
+        <div class="signup-wrapper" >
+            <div class="info-box">
+                <div class="text-box">
+                    <label class="text">아이디
+                        <span class="asterisk">*</span>
                     </label>
                 </div>
                 <div class="wrapper1 e744wfw3">
-                    <div class="wrapper2 e1uzxhvi6">
-                        <label class="wrapper3 e1uzxhvi3" data-id="memberId">
-                            <input data-testid="input-box" id="memberId" name="memberId" placeholder="아이디를 입력해주세요" type="text" class="input-box e1uzxhvi2" value="" maxlength="16">
+                    <div class="wrapper2">
+                        <label class="wrapper3" data-id="memberId">
+                            <input data-testid="input-box" id="memberId" name="memberId" placeholder="아이디를 입력해주세요" type="text" class="input-box" value="" maxlength="16">
                         </label>
                         <span class="-warning" rel="id"></span>
                         <span class="-isValid" rel="id"></span>
                     </div>
                 </div>
-                <div class="empty-box e744wfw2"></div>
+                <div class="empty-box"></div>
             </div>
-            <div class="info-box e744wfw6">
-                <div class="text-box e744wfw5">
-                    <label class="text e744wfw4">비밀번호
-                        <span class="asterisk e744wfw0">*</span>
+            <div class="info-box">
+                <div class="text-box">
+                    <label class="text">비밀번호
+                        <span class="asterisk">*</span>
                     </label>
                 </div>
-                <div class="wrapper1 e744wfw3">
-                    <div class="wrapper2 e1uzxhvi6">
-                        <label class="wrapper3 e1uzxhvi3" data-id="password">
-                            <input data-testid="input-box" id="password" name="password" placeholder="비밀번호를 입력해주세요" type="password" autocomplete="off" class="input-box e1uzxhvi2" value="" maxlength="16">
+                <div class="wrapper1">
+                    <div class="wrapper2">
+                        <label class="wrapper3" data-id="password">
+                            <input data-testid="input-box" id="password" name="password" placeholder="비밀번호를 입력해주세요" type="password" autocomplete="off" class="input-box" value="" maxlength="16">
                         </label>
                         <span class="-warning" rel="pw"></span>
                         <span class="-isValid" rel="pw"></span>
                     </div>
                 </div>
-                <div class="empty-box e744wfw2"></div>
+                <div class="empty-box"></div>
             </div>
-            <div class="info-box e744wfw6">
-                <div class="text-box e744wfw5">
-                    <label class="text e744wfw4">비밀번호확인
-                        <span class="asterisk e744wfw0">*</span>
+            <div class="info-box">
+                <div class="text-box">
+                    <label class="text">비밀번호확인
+                        <span class="asterisk">*</span>
                     </label>
                 </div>
-                <div class="wrapper1 e744wfw3">
-                    <div class="wrapper2 e1uzxhvi6">
-                        <label class="wrapper3 e1uzxhvi3">
-                            <input data-testid="input-box" id="passwordConfirm" name="passwordConfirm" placeholder="비밀번호를 한번 더 입력해주세요" type="password" autocomplete="off" class="input-box e1uzxhvi2" value="" maxlength="16">
+                <div class="wrapper1">
+                    <div class="wrapper2">
+                        <label class="wrapper3">
+                            <input data-testid="input-box" id="passwordConfirm" name="passwordConfirm" placeholder="비밀번호를 한번 더 입력해주세요" type="password" autocomplete="off" class="input-box" value="" maxlength="16">
                         </label>
                         <span class="-warning" rel="pw-check"></span>
                         <span class="-isValid" rel="pw-check"></span>
                     </div>
                 </div>
-                <div class="empty-box e744wfw2"></div>
+                <div class="empty-box"></div>
             </div>
-            <div class="info-box e744wfw6">
-                <div class="text-box e744wfw5">
-                    <label class="text e744wfw4">이름
-                        <span class="asterisk e744wfw0">*</span>
+            <div class="info-box">
+                <div class="text-box">
+                    <label class="text">이름
+                        <span class="asterisk">*</span>
                     </label>
                 </div>
-                <div class="wrapper1 e744wfw3">
-                    <div class="wrapper2 e1uzxhvi6">
-                        <label class="wrapper3 e1uzxhvi3">
-                            <input data-testid="input-box" id="name" name="name" placeholder="이름을 입력해 주세요" type="text" class="input-box e1uzxhvi2" value="">
+                <div class="wrapper1">
+                    <div class="wrapper2">
+                        <label class="wrapper3">
+                            <input data-testid="input-box" id="name" name="name" placeholder="이름을 입력해 주세요" type="text" class="input-box" value="">
                         </label>
                         <span class="-warning" rel="name"></span>
                         <span class="-isValid" rel="name"></span>
                     </div>
                 </div>
-                <div class="empty-box e744wfw2"></div>
+                <div class="empty-box"></div>
             </div>
-            <div class="info-box e744wfw6">
-                <div class="text-box e744wfw5">
-                    <label class="text e744wfw4">이메일
-                        <span class="asterisk e744wfw0">*</span>
+            <div class="info-box">
+                <div class="text-box">
+                    <label class="text">이메일
+                        <span class="asterisk">*</span>
                     </label>
                 </div>
-                <div class="wrapper1 e744wfw3">
-                    <div class="wrapper2 esmqp4w8">
-                        <label class="email-wrapper esmqp4w5" id="email-wrapper">
+                <div class="wrapper1">
+                    <div class="wrapper2">
+                        <label class="email-wrapper" id="email-wrapper">
                             <input id="email" type="hidden" name="email" value="">
-                            <input id="emailId" name="emailId" placeholder="예: marketkurly" type="text" class="emailId esmqp4w4" value="">
-                            <div class="at esmqp4w3">@</div>
-                            <div class="pc choice esmqp4w2" id="email-choice">
+                            <input id="emailId" name="emailId" placeholder="예: marketkurly" type="text" class="emailId" value="">
+                            <div class="at">@</div>
+                            <div class="pc choice" id="email-choice">
                                 <button type="button" class="btn-text empty" rel="email">선택하기</button>
                                 <label class="input-text">
-                                    <input id="emailDomain" name="emailDomain" type="text" placeholder="직접 입력" class="text esmqp4w4" value="">
+                                    <input id="emailDomain" name="emailDomain" type="text" placeholder="직접 입력" class="text" value="">
                                 </label>
                                 <button type="button" class="btn-select" rel="email">
                                     <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNDgiIHZpZXdCb3g9IjAgMCA0OCA0OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgaWQ9ImljX2Fycm93X2Rvd25fNDgiPgo8cGF0aCBpZD0iU2hhcGUiIGQ9Ik0yNC4wNzc2IDI2LjczMDFMMjcuODI3NiAyMi4yMzAxQzI4LjIzNDcgMjEuNzQxNiAyNy44ODczIDIxIDI3LjI1MTQgMjFIMTkuNzUxNEMxOS4xMTU2IDIxIDE4Ljc2ODIgMjEuNzQxNiAxOS4xNzUzIDIyLjIzMDFMMjIuOTI1MyAyNi43MzAxQzIzLjIyNTEgMjcuMDkgMjMuNzc3OCAyNy4wOSAyNC4wNzc2IDI2LjczMDFaIiBmaWxsPSIjMzMzMzMzIi8+CjwvZz4KPC9zdmc+Cg=="
                                         alt="arrow-down">
                                 </button>
-                                <div class="list-container esmqp4w0">
+                                <div class="list-container">
                                     <button type="button" class="dropdown__item">naver.com
                                     </button>
                                     <button type="button" class="dropdown__item">gmail.com
@@ -265,138 +146,138 @@
                         <span class="-isValid" rel="name"></span>
                     </div>
                 </div>
-                <div class="empty-box e744wfw2">
+                <div class="empty-box">
                     <button class="email-button --obj-button --color-light-primary" type="button" id="email-button">
-                        <span class="text e4nu7ef1">
+                        <span class="text">
                             인증하기
                         </span>
                     </button>
                 </div>
             </div>
-            <div class="info-box e744wfw6">
-                <div class="text-box e744wfw5"><label class="text e744wfw4">휴대폰<span
-                        class="asterisk e744wfw0">*</span></label></div>
-                <div class="wrapper1 e744wfw3">
-                    <div class="wrapper2 e1uzxhvi6">
-                        <label class="wrapper3 e1uzxhvi3">
-                            <input data-testid="input-box" id="mobileNumber" name="contact" placeholder="숫자만 입력해주세요." type="tel" class="input-box e1uzxhvi2" value="" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="11">
+            <div class="info-box">
+                <div class="text-box"><label class="text e744wfw4">휴대폰<span
+                        class="asterisk">*</span></label></div>
+                <div class="wrapper1">
+                    <div class="wrapper2">
+                        <label class="wrapper3">
+                            <input data-testid="input-box" id="mobileNumber" name="contact" placeholder="숫자만 입력해주세요." type="tel" class="input-box" value="" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="11">
                         </label>
                         <span class="-warning" rel="name"></span>
                         <span class="-isValid" rel="name"></span>
                     </div>
                 </div>
-                <div class="empty-box e744wfw2"></div>
+                <div class="empty-box"></div>
             </div>
             <div class="info-box address">
-                <div class="text-box e744wfw5">
-                    <label class="text e744wfw4">주소
-                        <span class="asterisk e744wfw0">*</span>
+                <div class="text-box">
+                    <label class="text">주소
+                        <span class="asterisk">*</span>
                     </label>
                 </div>
-                <div class="wrapper1 e744wfw3">
-                    <button class="find-button --obj-button --color-light-primary e4nu7ef3" type="button">
+                <div class="wrapper1">
+                    <button class="find-button --obj-button --color-light-primary" type="button">
                         <span class="_text e4nu7ef1">
-                            <img src="https://res.kurly.com/pc/service/cart/2007/ico_search.svg" alt="" class="image e4nu7ef0">
+                            <img src="https://res.kurly.com/pc/service/cart/2007/ico_search.svg" alt="" class="image">
                             주소 검색
                         </span>
                     </button>
                     <div class="address-box">
-                        <label class="address-box2 e1uzxhvi3">
-                            <input data-testid="input-box" id="address" name="address" placeholder="주소를 검색해 주세요" type="text" readonly="" class="address e1uzxhvi2" value="">
+                        <label class="address-box2">
+                            <input data-testid="input-box" id="address" name="address" placeholder="주소를 검색해 주세요" type="text" readonly="" class="address" value="">
                         </label>
                     </div>
                     <div class="address-box">
-                        <label class="address-box2 e1uzxhvi3">
-                            <input data-testid="input-box" id="subAddress" name="subAddress" placeholder="나머지 주소를 입력해주세요" type="text" class="sub-address e1uzxhvi2" value="">
+                        <label class="address-box2">
+                            <input data-testid="input-box" id="subAddress" name="subAddress" placeholder="나머지 주소를 입력해주세요" type="text" class="sub-address" value="">
                         </label>
                     </div>
-                    <span class="desc eq6ygzw0">배송지에 따라 상품 정보가 달라질 수 있습니다.</span>
+                    <span class="desc">배송지에 따라 상품 정보가 달라질 수 있습니다.</span>
                 </div>
-                <div class="empty-box e744wfw2">
+                <div class="empty-box">
                     <button class="research-button --obj-button --color-light-primary" type="button">
-                        <span class="text e4nu7ef1">
-                            <img src="https://res.kurly.com/pc/service/cart/2007/ico_search.svg" alt="" class="img e4nu7ef0">
+                        <span class="text">
+                            <img src="https://res.kurly.com/pc/service/cart/2007/ico_search.svg" alt="" class="img">
                             재검색
                         </span>
                     </button>
                 </div>
             </div>
-            <div class="info-box e744wfw6">
-                <div class="text-box e744wfw5">
-                    <label class="text e744wfw4">성별</label>
+            <div class="info-box">
+                <div class="text-box">
+                    <label class="text">성별</label>
                 </div>
-                <div class="wrapper1 e744wfw3">
-                    <div class="gender-container es1pbny0">
-                        <label class="label et8nqc33" for="gender-man">
+                <div class="wrapper1">
+                    <div class="gender-container">
+                        <label class="label" for="gender-man">
                             <input data-testid="radio-MALE" id="gender-man" name="gender" type="radio" class="input et8nqc32" value="M">
-                            <span class="radio-check e2sqze61">
-                                <div class="middle e2sqze60"></div>
+                            <span class="radio-check">
+                                <div class="middle"></div>
                             </span>
                             <span aria-labelledby="gender-man" class="gender-text et8nqc31">남자</span>
                         </label>
-                        <label class="label et8nqc33" for="gender-woman">
+                        <label class="label" for="gender-woman">
                             <input data-testid="radio-FEMALE" id="gender-woman" name="gender"
-                                   type="radio" class="input et8nqc32" value="F">
-                            <span class="radio-check e2sqze61">
-                                <div class="middle e2sqze60"></div>
+                                   type="radio" class="input" value="F">
+                            <span class="radio-check">
+                                <div class="middle"></div>
                             </span>
-                            <span aria-labelledby="gender-woman" class="gender-text et8nqc31">여자</span>
+                            <span aria-labelledby="gender-woman" class="gender-text">여자</span>
                         </label>
-                        <label class="label et8nqc33" for="gender-none">
-                            <input data-testid="radio-NONE" id="gender-none" name="gender" type="radio" class="input et8nqc32" value="N" checked="">
-                            <span class="radio-check e2sqze61">
-                                <div class="middle e2sqze60"></div>
+                        <label class="label" for="gender-none">
+                            <input data-testid="radio-NONE" id="gender-none" name="gender" type="radio" class="input" value="N" checked="">
+                            <span class="radio-check">
+                                <div class="middle"></div>
                             </span>
-                            <span aria-labelledby="gender-none" class="gender-text et8nqc31">선택안함</span>
+                            <span aria-labelledby="gender-none" class="gender-text">선택안함</span>
                         </label>
                     </div>
                 </div>
-                <div class="empty-box e744wfw2"></div>
+                <div class="empty-box"></div>
             </div>
-            <div class="info-box e744wfw6">
-                <div class="text-box e744wfw5">
-                    <label class="text e744wfw4">생년월일</label>
+            <div class="info-box">
+                <div class="text-box">
+                    <label class="text">생년월일</label>
                 </div>
-                <div class="wrapper1 e744wfw3">
+                <div class="wrapper1">
                     <div class="birth-box">
                         <div class="box">
                             <label class="label">
-                                <input data-testid="input-box" name="birthYear" placeholder="YYYY" type="text" class="input e1uzxhvi2" value="" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="4">
+                                <input data-testid="input-box" name="birthYear" placeholder="YYYY" type="text" class="input" value="" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="4">
                             </label>
                         </div>
-                        <span class="slash e1ke3ehm0"></span>
-                        <div class="box e1uzxhvi6">
-                            <label class="label e1uzxhvi3">
-                                <input data-testid="input-box" name="birthMonth" placeholder="MM" type="text" class="input e1uzxhvi2" value="" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="2">
+                        <span class="slash"></span>
+                        <div class="box">
+                            <label class="label">
+                                <input data-testid="input-box" name="birthMonth" placeholder="MM" type="text" class="input" value="" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="2">
                             </label>
                         </div>
-                        <span class="slash e1ke3ehm0"></span>
-                        <label class="box e1uzxhvi6">
-                            <div class="label e1uzxhvi3">
-                                <input data-testid="input-box" name="birthDay" placeholder="DD" type="text" class="input e1uzxhvi2" value="" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="2">
+                        <span class="slash"></span>
+                        <label class="box">
+                            <div class="label">
+                                <input data-testid="input-box" name="birthDay" placeholder="DD" type="text" class="input" value="" onkeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="2">
                             </div>
                         </label>
                     </div>
                     <span class="-warning" rel="birth"></span>
                 </div>
-                <div class="empty-box e744wfw2"></div>
+                <div class="empty-box"></div>
             </div>
         </div>
 
-        <div class="line e1j7jtti0"></div>
+        <div class="line"></div>
 
-        <div class="agree-form e1k9oeg10" id="agree-form">
-            <div class="text-wrapper e744wfw6">
-                <div class="text-box e744wfw5">
+        <div class="agree-form" id="agree-form">
+            <div class="text-wrapper">
+                <div class="text-box">
                     <label class="text e744wfw4">이용약관동의
                         <span class="asterisk e744wfw0">*</span>
                     </label>
                 </div>
-                <div class="wrapper1 e744wfw3">
-                    <div class="agree-box e1sjmfnv6">
-                        <label class="agreeAll-label e1dcessg3" for="TermsAgreeAll">
-                            <input id="TermsAgreeAll" type="checkbox" class="input e1dcessg2">
-                            <div class="check-box e1dcessg1">
+                <div class="wrapper1">
+                    <div class="agree-box">
+                        <label class="agreeAll-label" for="TermsAgreeAll">
+                            <input id="TermsAgreeAll" type="checkbox" class="input">
+                            <div class="check-box">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                  xmlns="http://www.w3.org/2000/svg">
                                 <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
@@ -407,13 +288,13 @@
                             </div>
                             <span>전체 동의합니다.</span>
                         </label>
-                        <p class="desc e1sjmfnv5">선택항목에 동의하지 않은 경우도 회원가입 및 일반적인 서비스를 이용할 수 있습니다.</p>
+                        <p class="desc">선택항목에 동의하지 않은 경우도 회원가입 및 일반적인 서비스를 이용할 수 있습니다.</p>
                     </div>
-                    <div class="agree-box e1sjmfnv6">
-                        <div class="content-box e1sjmfnv3">
-                            <label class="content-label e1dcessg3" for="RequiredTermsCondition">
-                                <input id="RequiredTermsCondition" type="checkbox" class="input e1dcessg2">
-                                <div class="check-box e1dcessg1">
+                    <div class="agree-box">
+                        <div class="content-box">
+                            <label class="content-label" for="RequiredTermsCondition">
+                                <input id="RequiredTermsCondition" type="checkbox" class="input">
+                                <div class="check-box">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                         <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
@@ -424,15 +305,15 @@
                                 </div>
                                 <span>이용약관 동의</span>
                             </label>
-                            <span class="option e1sjmfnv4">(필수)</span>
+                            <span class="option">(필수)</span>
                         </div>
-                        <a class="terms-link e1sjmfnv2">약관보기</a>
+                        <a class="terms-link">약관보기</a>
                     </div>
-                    <div class="agree-box e1sjmfnv6">
-                        <div class="content-box e1sjmfnv3">
-                            <label class="content-label e1dcessg3" for="RequiredTermsOfPrivacy">
-                                <input id="RequiredTermsOfPrivacy" type="checkbox" class="input e1dcessg2">
-                            <div class="check-box e1dcessg1">
+                    <div class="agree-box">
+                        <div class="content-box">
+                            <label class="content-label" for="RequiredTermsOfPrivacy">
+                                <input id="RequiredTermsOfPrivacy" type="checkbox" class="input">
+                            <div class="check-box">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
@@ -443,15 +324,15 @@
                             </div>
                             <span>개인정보 수집∙이용 동의</span>
                             </label>
-                            <span class="option e1sjmfnv4">(필수)</span>
+                            <span class="option">(필수)</span>
                         </div>
-                        <a class="terms-link e1sjmfnv2">약관보기</a>
+                        <a class="terms-link">약관보기</a>
                     </div>
-                    <div class="agree-box e1sjmfnv6">
-                        <div class="content-box e1sjmfnv3">
-                            <label class="content-label e1dcessg3" for="OptionalTermsOfPrivacy">
-                                <input id="OptionalTermsOfPrivacy" type="checkbox" class="input e1dcessg2">
-                            <div class="check-box e1dcessg1">
+                    <div class="agree-box">
+                        <div class="content-box">
+                            <label class="content-label" for="OptionalTermsOfPrivacy">
+                                <input id="OptionalTermsOfPrivacy" type="checkbox" class="input">
+                            <div class="check-box">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
@@ -462,15 +343,15 @@
                             </div>
                             <span>개인정보 수집∙이용 동의</span>
                             </label>
-                            <span class="option e1sjmfnv4">(선택)</span>
+                            <span class="option">(선택)</span>
                         </div>
-                        <a class="terms-link e1sjmfnv2">약관보기</a>
+                        <a class="terms-link">약관보기</a>
                     </div>
-                    <div class="reception-agree-box e1sjmfnv6">
-                        <div class="content-box e1sjmfnv3">
-                            <label class="content-label e1dcessg3" for="SignupEventAll">
-                                <input id="SignupEventAll" type="checkbox" class="input e1dcessg2">
-                                <div class="check-box e1dcessg1">
+                    <div class="reception-agree-box">
+                        <div class="content-box">
+                            <label class="content-label" for="SignupEventAll">
+                                <input id="SignupEventAll" type="checkbox" class="input">
+                                <div class="check-box">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                         <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
@@ -481,12 +362,12 @@
                                 </div>
                                 <span>무료배송, 할인쿠폰 등 혜택/정보 수신 동의</span>
                             </label>
-                            <span class="option e1sjmfnv4">(선택)</span>
+                            <span class="option">(선택)</span>
                         </div>
-                        <div class="contact-box e1sjmfnv1">
-                            <label class="contact-label e1dcessg3" for="OptionalTermsOfSms">
-                                <input id="OptionalTermsOfSms" type="checkbox" class="input e1dcessg2">
-                                <div class="check-box e1dcessg1">
+                        <div class="contact-box">
+                            <label class="contact-label" for="OptionalTermsOfSms">
+                                <input id="OptionalTermsOfSms" type="checkbox" class="input">
+                                <div class="check-box">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                         <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
@@ -497,9 +378,9 @@
                                 </div>
                                 <span>SMS</span>
                             </label>
-                            <label class="contact-label e1dcessg3" for="OptionalTermsOfMailing">
-                                <input id="OptionalTermsOfMailing" type="checkbox" class="input e1dcessg2">
-                            <div class="check-box e1dcessg1">
+                            <label class="contact-label" for="OptionalTermsOfMailing">
+                                <input id="OptionalTermsOfMailing" type="checkbox" class="input">
+                            <div class="check-box">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                      xmlns="http://www.w3.org/2000/svg">
                                     <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z"
@@ -512,11 +393,11 @@
                             </label>
                         </div>
                     </div>
-                    <div class="agree-box e1sjmfnv6">
-                        <div class="content-box e1sjmfnv3">
-                            <label class="content-label e1dcessg3" for="RequiredSignupAge">
-                                <input id="RequiredSignupAge" type="checkbox" class="input e1dcessg2">
-                                <div class="check-box e1dcessg1">
+                    <div class="agree-box">
+                        <div class="content-box">
+                            <label class="content-label" for="RequiredSignupAge">
+                                <input id="RequiredSignupAge" type="checkbox" class="input">
+                                <div class="check-box">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M23.5 12C23.5 18.3513 18.3513 23.5 12 23.5C5.64873 23.5 0.5 18.3513 0.5 12C0.5 5.64873 5.64873 0.5 12 0.5C18.3513 0.5 23.5 5.64873 23.5 12Z" stroke="#ddd" fill="#fff"></path>
                                         <path d="M7 12.6667L10.3846 16L18 8.5" stroke="#ddd" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -524,21 +405,19 @@
                                 </div>
                                 <span>본인은 만 14세 이상입니다.</span>
                             </label>
-                            <span class="option e1sjmfnv4">(필수)</span>
+                            <span class="option">(필수)</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="button-container e1utgeno0">
-            <button class="signup-button --obj-button --color-primary e4nu7ef3" type="submit">
-                <span class="text e4nu7ef1">가입하기</span>
+        <div class="button-container">
+            <button class="signup-button --obj-button --color-primary" type="submit">
+                <span class="text">가입하기</span>
             </button>
         </div>
     </form>
 </main>
-<footer>
-
-</footer>
+<div th:replace="~{/fragments/footer :: footerFragment}"></div>
 </body>
 </html>

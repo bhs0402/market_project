@@ -15,10 +15,11 @@ import com.bhs.sssss.utils.CryptoUtils;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,7 @@ import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import java.time.LocalDateTime;
 
+@Slf4j
 @Service
 public class MemberService {
     private final MemberMapper memberMapper;
@@ -283,6 +285,55 @@ public class MemberService {
         return CommonResult.SUCCESS;
     }
 
+    public Result passwordCheck(MemberEntity member, String password){
+        if(member == null || password == null || password.length() < 10 || password.length() > 16) {return CommonResult.FAILURE;}
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if(!BCrypt.checkpw(password, member.getPassword())) {
+
+            return CommonResult.FAILURE;
+        }
+        return CommonResult.SUCCESS;
+    }
+
+    @Transactional
+    public Result updateInfoModify(MemberEntity member){
+        if(member == null ||
+           member.getId() == null || member.getId().length() < 6 || member.getId().length() > 16 ||
+           member.getPassword() == null || member.getPassword().length() < 10 || member.getPassword().length() > 16 || member.getUserName() == null ||
+           member.getEmail() == null || member.getEmail().length() < 8 || member.getEmail().length() > 50) {
+            return CommonResult.FAILURE;
+        }
+
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        MemberEntity dbMember = this.memberMapper.selectUserByEmail(member.getEmail());
+        dbMember.setPassword(encoder.encode(member.getPassword()));
+        dbMember.setUserName(member.getUserName());
+        dbMember.setAddress(member.getAddress());
+        dbMember.setUpdatedAt(LocalDateTime.now());
+        if(this.memberMapper.updateMember(dbMember) == 0) {
+            throw new TransactionalException();
+        }
+
+        return CommonResult.SUCCESS;
+    }
+
+    @Transactional
+    public Result leaveMember(MemberEntity member, String password){
+        if(member == null || password == null || password.length() < 10 || password.length() > 16) {
+            return CommonResult.FAILURE;
+        }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        if(!BCrypt.checkpw(password, member.getPassword())) {
+            return CommonResult.FAILURE;
+        }
+        member.setDeletedAt(LocalDateTime.now());
+        if(this.memberMapper.updateMember(member) == 0) {
+            throw new TransactionalException();
+        }
+
+        return CommonResult.SUCCESS;
+    }
 }
 
 

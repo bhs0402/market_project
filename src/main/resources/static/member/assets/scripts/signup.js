@@ -163,7 +163,7 @@ function findAddress() {
     }).open({
         left: (window.screen.width / 2) - (width / 2),
         top: (window.screen.height / 2) - (height / 2),
-        popupTitle: '컬리 - 마켓컬리',
+        popupTitle: '칼리 - 마켓칼리',
         popupKey: 'popup1',
     });
 }
@@ -290,11 +290,11 @@ const checkBirth = () => {
         $birthWarn.style.display = 'block';
     } else {
         if (birthMonth < '01' || birthMonth > '12') {
-            $birthWarn.innerText = '태워난 월을 정확히 입력해 주세요.';
+            $birthWarn.innerText = '태어난 월을 정확히 입력해 주세요.';
             $birthWarn.style.display = 'block';
         } else {
             if (birthDay < '01' || birthDay > '31') {
-                $birthWarn.innerText = '태워난 일을 정확히 입력해 주세요.';
+                $birthWarn.innerText = '태어난 일을 정확히 입력해 주세요.';
                 $birthWarn.style.display = 'block';
             } else {
                 $birthWarn.style.display = 'none';
