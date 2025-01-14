@@ -153,6 +153,7 @@ public class CartService {
         } else {
             ItemEntity item = this.itemMapper.selectItemByItemId(itemId);
             int price = Integer.parseInt(item.getSalesPrice().replaceAll(",", ""));
+            int costPrice = Integer.parseInt(item.getPrice().replaceAll(",", ""));
             MemberEntity dbMember = this.memberMapper.selectUserById(member.getId());
 
             CartEntity cartItem = new CartEntity();
@@ -160,6 +161,7 @@ public class CartService {
             cartItem.setCartId(dbMember.getCartId());
             cartItem.setItemId(item.getItemId());
             cartItem.setItemName(item.getItemTitle());
+            cartItem.setCostPrice(costPrice);
             cartItem.setItemPrice(price);
             cartItem.setQuantity(quantity);
             cartItem.setIsChecked(1);
