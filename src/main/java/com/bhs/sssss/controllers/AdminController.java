@@ -74,4 +74,14 @@ public class AdminController {
         response.put(Result.NAME, result.nameToLower());
         return response.toString();
     }
+
+    @RequestMapping(value = "/modify-suspended", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String patchModifySuspended(@RequestParam(value = "id", required = false) String id,
+                                       @RequestParam(value = "isSuspended", required = false) String isSuspended) {
+        Result result = this.adminService.modifySuspended(id, isSuspended);
+        JSONObject response = new JSONObject();
+        response.put(Result.NAME, result.nameToLower());
+        return response.toString();
+    }
 }

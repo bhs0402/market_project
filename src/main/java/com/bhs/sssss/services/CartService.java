@@ -155,8 +155,6 @@ public class CartService {
             int price = Integer.parseInt(item.getSalesPrice().replaceAll(",", ""));
             MemberEntity dbMember = this.memberMapper.selectUserById(member.getId());
 
-            System.out.println(dbMember.getCartId());
-
             CartEntity cartItem = new CartEntity();
             cartItem.setMemberId(dbMember.getId());
             cartItem.setCartId(dbMember.getCartId());
