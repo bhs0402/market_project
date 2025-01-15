@@ -182,7 +182,7 @@ public class MemberService {
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
         mimeMessageHelper.setFrom("ghdtjq0118@gmail.com");
         mimeMessageHelper.setTo(emailToken.getUserEmail());
-        mimeMessageHelper.setSubject("[마켓칼리] 이메일 인증 링크");
+        mimeMessageHelper.setSubject("[마켓컬리] 이메일 인증 링크");
         mimeMessageHelper.setText(mailText, true);
         this.mailSender.send(mimeMessage);
         return CommonResult.SUCCESS;
@@ -250,7 +250,7 @@ public class MemberService {
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage);
         mimeMessageHelper.setFrom("ghdtjq0118@gmail.com");
         mimeMessageHelper.setTo(emailToken.getUserEmail());
-        mimeMessageHelper.setSubject("[마켓칼리] 비밀번호 재설정 링크");
+        mimeMessageHelper.setSubject("[마켓컬리] 비밀번호 재설정 링크");
         mimeMessageHelper.setText(mailText, true);
         this.mailSender.send(mimeMessage);
         return CommonResult.SUCCESS;
