@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>칼리 - 마켓칼리</title>
     <link rel="shortcut icon" th:href="@{'/assets/images/favicon.ico'}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,7 @@
     <script defer src="/kms/assets/scripts/detail.js" type="text/javascript"></script>
 </head>
 <body>
-<div th:replace="~{/fragments/header :: headerFragment}"></div>
+<div th:replace="~{fragments/header :: headerFragment}"></div>
 
 <div class="detail-page"> <!-- 상세 페이지 -->
     <main class="detail-main" th:if="${item != null}">
@@ -831,6 +831,6 @@
     <div></div> <!-- 페이지 제일 하단 상품 선택 라벨 -->
     <span></span> <!-- 페이지 제일 하단 위로 가기 아이콘 -->
 </div>
-<div th:replace="~{/fragments/footer :: footerFragment}"></div>
+<div th:replace="~{fragments/footer :: footerFragment}"></div>
 </body>
 </html>
