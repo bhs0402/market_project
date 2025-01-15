@@ -24,10 +24,10 @@
     </script>
 </head>
 <body>
-<div th:replace="~{/fragments/header :: headerFragment}"></div>
+<div th:replace="~{fragments/header :: headerFragment}"></div>
 
 <main id="main">
-    <div th:replace="~{/fragments/mypage-left :: leftFragment}"></div>
+    <div th:replace="~{fragments/mypage-left :: leftFragment}"></div>
 
     <div class="right">
         <div id="pay-record" th:if="${member != null}">
@@ -97,6 +97,6 @@
 
 
 
-<div th:replace="~{/fragments/footer :: footerFragment}"></div>
+<div th:replace="~{fragments/footer :: footerFragment}"></div>
 </body>
 </html>
