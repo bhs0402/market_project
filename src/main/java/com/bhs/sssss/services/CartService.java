@@ -10,6 +10,7 @@ import com.bhs.sssss.mappers.MemberMapper;
 import com.bhs.sssss.results.CommonResult;
 import com.bhs.sssss.results.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -109,6 +110,35 @@ public class CartService {
         return totalPrice;
     }
 
+    public int calculateTotalCostPrice(List<Integer> indices, List<Integer> costPrices) {
+        if (indices == null || costPrices == null || indices.size() != costPrices.size()) {
+            throw new IllegalArgumentException("Invalid input data: itemIds or itemPrices is null or mismatched");
+        }
+
+        int costPrice = 0;
+        for (int i = 0; i < indices.size(); i++) {
+            costPrice += costPrices.get(i); // costPrice 합산
+        }
+        return costPrice;
+    }
+
+    public int calculateTotalDiscountPrice(List<Integer> indices ,List<Integer> costPrices, List<Integer> itemPrices) {
+        if (itemPrices == null || costPrices == null || indices.size() != costPrices.size()) {
+            throw new IllegalArgumentException("Invalid input data: itemIds or itemPrices is null or mismatched");
+        }
+
+        int costPrice1 = 0;
+        int totalPrice2 = 0;
+        int discountPrice = 0;
+        for (int i = 0; i < indices.size(); i++) {
+            costPrice1 += costPrices.get(i); // costPrice 합산
+            totalPrice2 += itemPrices.get(i); // itemPrice 합산
+            discountPrice = totalPrice2 - costPrice1;
+
+        }
+        return discountPrice;
+    }
+
 
     public void deleteItem(int index) {
         CartEntity cartItem = this.cartMapper.selectCartByIndex(index);
@@ -155,9 +185,9 @@ public class CartService {
             MemberEntity dbMember = this.memberMapper.selectUserById(member.getId());
 
             CartEntity cartItem = new CartEntity();
-            if(item.getPrice() == null || item.getPrice().isBlank()) {
+            if (item.getPrice() == null || item.getPrice().isBlank()){
                 cartItem.setCostPrice(price);
-            } else {
+            }else {
                 int costPrice = Integer.parseInt(item.getPrice().replaceAll(",", ""));
                 cartItem.setCostPrice(costPrice);
             }
