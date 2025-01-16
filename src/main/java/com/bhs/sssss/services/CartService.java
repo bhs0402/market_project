@@ -10,7 +10,6 @@ import com.bhs.sssss.mappers.MemberMapper;
 import com.bhs.sssss.results.CommonResult;
 import com.bhs.sssss.results.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
