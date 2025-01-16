@@ -1,0 +1,12 @@
+서버, 로컬에 각각 추가
+
+CREATE TABLE `kurly`.`login_attempts`
+(
+    `index`       INT UNSIGNED  NOT NULL AUTO_INCREMENT,
+    `client_ip`   VARCHAR(50)   NOT NULL,
+    `client_id`   VARCHAR(16)   NOT NULL,
+    `client_ua`   VARCHAR(1000) NOT NULL,
+    `result`      VARCHAR(50)   NOT NULL,
+    `created_at`  DATETIME      NOT NULL DEFAULT NOW(),
+    CONSTRAINT PRIMARY KEY (`index`)
+);
